@@ -1,6 +1,5 @@
 from .db import db
 from .user import User
-# from .assignment import Assignment
 from datetime import datetime
 
 class Task(db.Model):

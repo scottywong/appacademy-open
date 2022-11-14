@@ -1,6 +1,6 @@
 from .db import db
-# from .task import Task
-# from .course import Course
+from .task import Task
+from .course import Course
 # from .progress import Progress
 
 from datetime import datetime
@@ -19,11 +19,22 @@ class Assignment(db.Model):
     progresses = db.relationship('Progress',back_populates='assignment')
 
 
+    def get_coursetitle(self):
+        course = Course.query.filter(Course.id == self.courseId).first()
+        return course.title
+
+    def get_tasktitle(self):
+        task = Task.query.filter(Task.id == self.taskId).first()
+        return task.title
+
+
     def to_dict(self):
         return {
             'id': self.id,
             'courseId': self.courseId,
+            'course_title':self.get_coursetitle(),
             'taskId': self.taskId,
+            'task_title': self.get_tasktitle(),
             'created_on': self.created_on,
             'updated_on': self.updated_on
         }
