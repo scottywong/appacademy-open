@@ -1,0 +1,17 @@
+.ali-student-container{
+
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+.ali-student-item{
+    display:flex;
+    justify-content: space-between;
+
+}
+
+.ali-student-item:hover{
+
+    cursor:pointer;
+    background: #f7f7f7;
+}

@@ -1,10 +1,19 @@
 import AssignmentListItemStudent from '../../Assignment/AssignmentListItemStudent'
 
-function AssignmentSideBar(){
+function AssignmentSideBar({assignments}){
 
 
     return (
-        <AssignmentListItemStudent/>
+        <div className="AssignmentSideBar-container">
+
+            {assignments && assignments.map(
+                
+                assignment => {
+                return <AssignmentListItemStudent assignment={assignment}/>
+                }
+            )}
+
+        </div>
         );
 
 
