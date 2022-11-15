@@ -12,6 +12,7 @@ import LearnNavBar from './components/Navigation/LearnNavBar';
 import LearnHomePage from './components/HomePage/LearnHomePage';
 import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
 import Footer from './components/Footer';
+import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +55,7 @@ function App() {
           <EnrollmentHomePage />
         </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'>  
+          <EnrollmentDetailPage/>
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>

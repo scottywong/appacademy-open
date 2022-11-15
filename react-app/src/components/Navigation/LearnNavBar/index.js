@@ -8,7 +8,7 @@ function LearnNavBar(){
     return (
         <div className='LearnNavBar-container'>
         <div className='LearnNavBar-menu'>
-            <i class="fa-solid fa-bars fa-2xl"></i>
+            <i className="fa-solid fa-bars fa-2xl"></i>
         </div>
         <div className='LearnNavBar-links'>
             <div className='LearnNavBar-linkitem'>
@@ -16,7 +16,7 @@ function LearnNavBar(){
             </div>
             <div className='LearnNavBar-linkitem'>
                 <NavLink to="/forum">
-                    <i class="fa-solid fa-question"></i>
+                    <i className="fa-solid fa-question"></i>
                 </NavLink>
             </div>
             <div className='LearnNavBar-linkitem'>
