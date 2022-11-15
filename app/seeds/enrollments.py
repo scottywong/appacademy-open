@@ -47,7 +47,7 @@ def seed_enrollments():
         userId=2 ,courseId=7, notes='OOP'
     )
     enrollment2_8 = Enrollment(
-        userId=1 ,courseId=8, notes='Context and TDD'
+        userId=2 ,courseId=8, notes='Context and TDD'
     )
     enrollment3_1 = Enrollment(
         userId=3 ,courseId=1, notes='Intro to Javascript'

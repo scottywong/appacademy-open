@@ -1,0 +1,17 @@
+.eli-student-container{
+
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+.eli-student-item{
+    display:flex;
+    justify-content: space-between;
+
+}
+
+.eli-student-item:hover{
+
+    cursor:pointer;
+    background: #f7f7f7;
+}

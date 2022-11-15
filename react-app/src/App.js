@@ -8,6 +8,10 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import LearnNavBar from './components/Navigation/LearnNavBar';
+import LearnHomePage from './components/HomePage/LearnHomePage';
+import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +31,9 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <ProtectedRoute path='/learn'>
+          <LearnNavBar/>
+      </ProtectedRoute>
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -40,10 +47,19 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+        <ProtectedRoute path='/learn/home'>
+          <LearnHomePage/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
+          <EnrollmentHomePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'>  
+        </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

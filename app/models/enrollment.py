@@ -20,7 +20,7 @@ class Enrollment(db.Model):
 
     def get_user(self):
         user = User.query.filter(User.id == self.userId).first()
-        return user.username
+        return user
 
     def get_coursetitle(self):
         course = Course.query.filter(Course.id == self.courseId).first()
@@ -30,6 +30,7 @@ class Enrollment(db.Model):
         return {
             'id': self.id,
             'userId': self.userId,
+            'username': self.get_user().username,
             'courseId': self.courseId,
             'course_title': self.get_coursetitle(),
             'notes': self.notes,

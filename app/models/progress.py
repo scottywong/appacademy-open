@@ -1,5 +1,5 @@
 from .db import db
-# from .enrollment import Enrollment
+from .enrollment import Enrollment
 # from .assignment import Assignment
 from datetime import datetime
 
@@ -18,10 +18,16 @@ class Progress(db.Model):
     assignment = db.relationship('Assignment', back_populates='progresses')
 
 
+    def get_enrollment(self):
+        enrollment = Enrollment.query.filter(Enrollment.id == self.enrollmentId).first()
+        return enrollment
+
     def to_dict(self):
         return {
             'id': self.id,
             'enrollmentId': self.enrollmentId,
+            'userId': self.get_enrollment().get_user().id,
+            'username': self.get_enrollment().get_user().username,
             'assignmentId': self.assignmentId,
             'completion_status': self.completion_status,
             'created_on': self.created_on,
