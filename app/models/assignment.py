@@ -23,9 +23,9 @@ class Assignment(db.Model):
         course = Course.query.filter(Course.id == self.courseId).first()
         return course.title
 
-    def get_tasktitle(self):
+    def get_task(self):
         task = Task.query.filter(Task.id == self.taskId).first()
-        return task.title
+        return task
 
 
     def to_dict(self):
@@ -34,7 +34,7 @@ class Assignment(db.Model):
             'courseId': self.courseId,
             'course_title':self.get_coursetitle(),
             'taskId': self.taskId,
-            'task_title': self.get_tasktitle(),
+            'Task': self.get_task().to_dict(),
             'created_on': self.created_on,
             'updated_on': self.updated_on
         }

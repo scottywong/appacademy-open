@@ -9,6 +9,9 @@ from .models import db, User, Course, Task, Assignment, Enrollment, Progress
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.course_routes import course_routes
+from .api.enrollment_routes import enrollment_routes
+from .api.assignment_routes import assignment_routes
+from .api.task_routes import task_routes
 
 from .seeds import seed_commands
 
@@ -33,6 +36,9 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(course_routes, url_prefix='/api/courses')
+app.register_blueprint(enrollment_routes, url_prefix='/api/enrollments')
+app.register_blueprint(assignment_routes, url_prefix='/api/assignments')
+app.register_blueprint(task_routes, url_prefix='/api/tasks')
 db.init_app(app)
 Migrate(app, db)
 

@@ -63,7 +63,13 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route path="*">
+        <main style={{ padding: "1rem" }}>
+            <p>Sorry, the page couldn't be found.</p>
+          </main>
+        </Route>
       </Switch>
+
       <Footer/>
     </BrowserRouter>
   );

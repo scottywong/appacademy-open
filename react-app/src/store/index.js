@@ -3,11 +3,17 @@ import thunk from 'redux-thunk';
 import session from './session';
 import userReducer from './user';
 import courseReducer from './course';
+import enrollmentReducer from './enrollment';
+import assignmentReducer from './assignment';
+import taskReducer from './task';
 
 const rootReducer = combineReducers({
   session,
   user: userReducer,
-  course: courseReducer
+  course: courseReducer,
+  enrollment: enrollmentReducer,
+  assignment: assignmentReducer,
+  task: taskReducer
 });
 
 

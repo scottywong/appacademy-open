@@ -1,0 +1,11 @@
+.EnrollmentDetailPage-container{
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.EnrollmentDetailPage-items{
+    display: flex;
+    flex-direction: row;
+}

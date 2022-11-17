@@ -24,7 +24,8 @@ class Task(db.Model):
             'id': self.id,
             'userId': self.userId,
             'username': self.get_user(),
-            'body': self.body,
+            'title': self.title,
+            'detail': self.task_detail,
             'created_on': self.created_on,
             'updated_on': self.updated_on
         }

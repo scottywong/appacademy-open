@@ -3,3 +3,9 @@
     flex-direction: row;
 
 }
+
+
+.EnrollmentHomePage-item{
+    display: flex;
+    flex-direction: row;
+}

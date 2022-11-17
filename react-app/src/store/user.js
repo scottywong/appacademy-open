@@ -1,6 +1,6 @@
 // ******** User Constraints ********
-const GET_USERENROLLMENTS = 'user/GET_enrollments';
-const GET_USERPROGRESSES = 'user/GET_progresses';
+const GET_USERENROLLMENTS = 'user/GET_user_enrollments';
+const GET_USERPROGRESSES = 'user/GET_user_progresses';
 
 // ******** User Actions ********
 

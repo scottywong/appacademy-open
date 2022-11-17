@@ -2,9 +2,7 @@ import './HomePage.css';
 
 function HomePage(){
 
-    return (
-
-    )
+    return 
 }
 
 export default HomePage;

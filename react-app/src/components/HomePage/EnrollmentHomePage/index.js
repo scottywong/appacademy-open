@@ -6,28 +6,38 @@ import { useEffect } from "react";
 import { fetchUserEnrollments } from "../../../store/user";
 import { fetchGetCourseById } from "../../../store/course";
 import './EnrollmentHomePage.css';
+import { fetchGetEnrollmentById } from "../../../store/enrollment";
 
 function EnrollmentHomePage(){
 
     const dispatch = useDispatch();
-    const {enrollmentId,assignmentId} = useParams();
-    console.log(enrollmentId);
-    console.log(assignmentId);
-    const myEnrollments = Object.values(useSelector(state=>state.user?.enrollments ? state.user.enrollments : state.user));
-    const assignments = Object.values(useSelector(state=>state.course?.Assignments? state.course?.Assignments : state.course));
+    const {enrollmentId} = useParams();
+    const myEnrollments = useSelector(state=>state.user?.enrollments ? state.user.enrollments : state.user);
+    const enrollment = useSelector(state=>state.enrollment);
+
+    console.log('EnrollmentHomePage - enrollment: ', enrollment);
+    const assignments = Object.values(useSelector(state=>state.enrollment?.Assignments? state.enrollment?.Assignments : state.enrollment));
+
 
     useEffect(()=> {
 
-        dispatch(fetchUserEnrollments());
-        dispatch(fetchGetCourseById(enrollmentId));
+        dispatch(fetchUserEnrollments())
+        .then(dispatch(fetchGetEnrollmentById(enrollmentId)));
 
     },[dispatch])
     return (
+    
         <div className='EnrollmentHomePage-container'>
-            <AssignmentSideBar assignments={assignments}/>
-            <EnrollmentDefaultPage/>
+           {myEnrollments && myEnrollments[enrollment.id] && 
+            <div className='EnrollmentHomePage-items'>
+                <AssignmentSideBar assignments={assignments}/>
+                <EnrollmentDefaultPage/>
+            </div>
+            }
+          
         </div>
-        );
+    
+        )
 }
 
 export default EnrollmentHomePage;

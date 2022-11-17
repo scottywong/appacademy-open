@@ -1,5 +1,6 @@
 from .db import db
 from .course import Course
+from .assignment import Assignment
 from .user import User
 from datetime import datetime
 
@@ -26,6 +27,10 @@ class Enrollment(db.Model):
         course = Course.query.filter(Course.id == self.courseId).first()
         return course.title
 
+    def get_assignments(self):
+        assignments = Assignment.query.filter(Assignment.courseId == self.courseId).all()
+        return assignments
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -35,6 +40,7 @@ class Enrollment(db.Model):
             'course_title': self.get_coursetitle(),
             'notes': self.notes,
             'created_on': self.created_on,
-            'updated_on': self.updated_on
+            'updated_on': self.updated_on,
+            'Assignments': [assignment.to_dict() for assignment in self.get_assignments()]
         }
     

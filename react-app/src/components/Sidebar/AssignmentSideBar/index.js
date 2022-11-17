@@ -1,7 +1,9 @@
-import AssignmentListItemStudent from '../../Assignment/AssignmentListItemStudent'
+import AssignmentListItemStudent from '../../Assignment/AssignmentListItemStudent';
+import './AssignmentSideBar.css';
 
 function AssignmentSideBar({assignments}){
 
+    console.log('AssignmentSideBar: ', assignments)
 
     return (
         <div className="AssignmentSideBar-container">
