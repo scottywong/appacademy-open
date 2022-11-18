@@ -12,6 +12,7 @@ from .api.course_routes import course_routes
 from .api.enrollment_routes import enrollment_routes
 from .api.assignment_routes import assignment_routes
 from .api.task_routes import task_routes
+from .api.progress_routes import progress_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(course_routes, url_prefix='/api/courses')
 app.register_blueprint(enrollment_routes, url_prefix='/api/enrollments')
 app.register_blueprint(assignment_routes, url_prefix='/api/assignments')
 app.register_blueprint(task_routes, url_prefix='/api/tasks')
+app.register_blueprint(progress_routes, url_prefix='/api/progresses')
 db.init_app(app)
 Migrate(app, db)
 

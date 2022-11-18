@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchGetAssignmentById} from '../../../store/assignment';
 
 import './AssignmentDetailStudent.css';
+import { fetchUserProgresses, fetchUpdateProgress } from '../../../store/user';
+// import { fetchUpdateProgress } from '../../../store/progress';
 
 function AssignmentDetailStudent(){
 
@@ -11,25 +13,43 @@ function AssignmentDetailStudent(){
     const dispatch = useDispatch();
 
     const assignment = useSelector(state => state.assignment);
+    const myProgresses = useSelector(state => state.user.progresses);
 
-    console.log('adS: ', assignment);
+    console.log('adS-assignment: ', assignment);
+    console.log('adS-progresses: ', myProgresses);
+    let adsProgress;
+
+    if(myProgresses){
+        adsProgress = myProgresses[assignmentId];
+    }
     
     useEffect(()=> {
 
         dispatch(fetchGetAssignmentById(assignmentId));
+        dispatch(fetchUserProgresses());
 
     },[dispatch])
 
-    const handleComplete = () => {
+    const handleIncomplete = async (e) => {
 
+        e.preventDefault();
+        dispatch(fetchUpdateProgress(adsProgress.id,0));
+    }
+
+    const handleComplete = async (e) => {
+        e.preventDefault();
+        dispatch(fetchUpdateProgress(adsProgress.id,1));
 
     }
+
+
 
     return (
 
         <div className='ads-container'>
             <p>{assignment.Task?.detail}</p>
             <button onClick={handleComplete}> Complete Task</button>
+            <button onClick={handleIncomplete}> Mark Incomplete</button>
        </div>
     )
 

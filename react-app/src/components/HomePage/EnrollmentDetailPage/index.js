@@ -4,7 +4,7 @@ import EnrollmentDefaultPage from "../../DefaultPage/EnrollmentDefaultPage";
 import AssignmentSideBar from "../../Sidebar/AssignmentSideBar";
 import AssignmentDetailStudent from "../../Assignment/AssignmentDetailStudent";
 import { useEffect, useState } from "react";
-import { fetchUserEnrollments } from "../../../store/user";
+import { fetchUserEnrollments, fetchUserProgresses } from "../../../store/user";
 import { fetchGetEnrollmentById } from "../../../store/enrollment";
 import './EnrollmentDetailPage.css';
 
@@ -17,9 +17,12 @@ function EnrollmentDetailPage(){
     const enrollment = useSelector(state=>state.enrollment);
     const assignments = Object.values(useSelector(state=>state.enrollment?.Assignments? state.enrollment?.Assignments : state.enrollment));
     
-    console.log('line 18 assignments: ', assignments);
     let enrolled = false;
 
+    // const refreshUserProgress = () => {
+
+    //     dispatch(fetchUserProgresses());
+    // }
     useEffect(() => {
         dispatch(fetchUserEnrollments())
         .then(dispatch(fetchGetEnrollmentById(enrollmentId)))

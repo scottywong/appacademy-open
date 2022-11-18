@@ -6,6 +6,7 @@ import courseReducer from './course';
 import enrollmentReducer from './enrollment';
 import assignmentReducer from './assignment';
 import taskReducer from './task';
+import progressReducer from './progress';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   course: courseReducer,
   enrollment: enrollmentReducer,
   assignment: assignmentReducer,
-  task: taskReducer
+  task: taskReducer,
+  progress:progressReducer
 });
 
 
