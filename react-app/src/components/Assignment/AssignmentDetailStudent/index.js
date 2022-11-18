@@ -48,8 +48,8 @@ function AssignmentDetailStudent(){
 
         <div className='ads-container'>
             <p>{assignment.Task?.detail}</p>
-            <button onClick={handleComplete}> Complete Task</button>
-            <button onClick={handleIncomplete}> Mark Incomplete</button>
+            <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
+            <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
        </div>
     )
 

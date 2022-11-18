@@ -1,16 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router";
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useState, useEffect } from "react";
 
 import './AssignmentListItemStudent.css';
-import { fetchUserProgresses } from "../../../store/user";
 
 function AssignmentListItemStudent({assignment}){
     const history = useHistory();
     const {enrollmentId} = useParams();
-    const dispatch = useDispatch();
-
     const [isChecked,setIsChecked] = useState(false);
 
     const myProgresses = useSelector(state => state.user.progresses);
@@ -29,8 +26,8 @@ function AssignmentListItemStudent({assignment}){
         <div className="ali-student-container">
         { assignment && 
             <div onClick={()=> history.push(`/learn/enrollments/${enrollmentId}/assignments/${assignment.id}`)} className='ali-student-item'>
-                {isChecked && <i class="fa-solid fa-circle-check"></i>}
-                {!isChecked && <i class="fa-regular fa-circle"></i>}
+                {isChecked && <i className="fa-solid fa-circle-check"></i>}
+                {!isChecked && <i className="fa-regular fa-circle"></i>}
                 <NavLink className="ali-student-link" to={`/learn/enrollments/${enrollmentId}/assignments/${assignment.id}`}>{assignment.Task?.title}</NavLink>
                 <i className="fa-solid fa-arrow-right"></i>
             </div>

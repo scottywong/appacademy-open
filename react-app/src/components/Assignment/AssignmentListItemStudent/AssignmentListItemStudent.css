@@ -15,3 +15,12 @@
     cursor:pointer;
     background: #f7f7f7;
 }
+
+.fa-circle-check{
+
+    color:green;
+}
+
+.fa-circle{
+    color:gray;
+}

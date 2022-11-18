@@ -31,7 +31,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <Route path='/' exact={true}>
+          <NavBar />
+      </Route>
       <ProtectedRoute path='/learn'>
           <LearnNavBar/>
       </ProtectedRoute>

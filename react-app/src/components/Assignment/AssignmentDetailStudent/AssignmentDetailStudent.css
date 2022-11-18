@@ -1,0 +1,16 @@
+.ads-CompleteBtn{
+
+    color:white;
+    background-color:#1464cb;
+
+}
+
+.ads-IncompleteBtn{
+    color:black;
+    color:gray;
+}
+
+
+.ads-CompleteBtn:hover,.ads-IncompleteBtn:hover{
+    cursor: pointer;
+}
