@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile = db.Column(db.String(255), nullable=False, default='Student')
+    profile = db.Column(db.String(255), default='Student',nullable=False)
 
     enrollments = db.relationship('Enrollment', back_populates='user')
     tasks = db.relationship('Task', back_populates='user')
