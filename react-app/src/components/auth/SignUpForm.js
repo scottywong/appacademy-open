@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import aaLogo from "../../assets/aa-logo.svg";
+import './SignUpForm.css';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -43,7 +45,8 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form className='signUpForm' onSubmit={onSignUp}>
+      <img className="app-academy-logo-signup" src={aaLogo}></img>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -86,7 +89,7 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button className='signup-btn' type='submit'>Sign Up</button>
     </form>
   );
 };

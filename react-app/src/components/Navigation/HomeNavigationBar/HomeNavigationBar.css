@@ -1,0 +1,39 @@
+.app-academy-logo{
+    width: 160px;
+    height: auto;
+    min-height: auto;
+    min-width: auto;
+}
+
+.HomeNavigationBar-container{
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 3%;
+    padding-left: 3%;
+    width: 100%;
+    max-width: 1250px;
+    min-height: 90px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.HomeNavigationBar-items{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.HomeNavigationBar-items > li {
+
+    list-style: none;
+    margin-left: 20px;
+
+}
+

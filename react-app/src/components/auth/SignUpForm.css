@@ -1,0 +1,17 @@
+.signUpForm{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.signup-btn{
+    background-color: #d0021b;
+    color:white;
+}
+
+.app-academy-logo-signup{
+
+    width: 400px;
+    height: 200px;
+}

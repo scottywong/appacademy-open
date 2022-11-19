@@ -13,6 +13,8 @@ import LearnHomePage from './components/HomePage/LearnHomePage';
 import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
 import Footer from './components/Footer';
 import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
+import HomeNavigationBar from './components/Navigation/HomeNavigationBar';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,17 +33,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Route path='/' exact={true}>
-          <NavBar />
-      </Route>
       <ProtectedRoute path='/learn'>
           <LearnNavBar/>
       </ProtectedRoute>
       <Switch>
+        <Route path='/' exact={true}>
+          <HomeNavigationBar/>
+          <HomePage/>
+        </Route>
         <Route path='/login' exact={true}>
+          <HomeNavigationBar/>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
+          <HomeNavigationBar/>
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
@@ -63,7 +68,6 @@ function App() {
           <EnrollmentDetailPage/>
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
         </ProtectedRoute>
         <Route path="*">
         <main style={{ padding: "1rem" }}>
