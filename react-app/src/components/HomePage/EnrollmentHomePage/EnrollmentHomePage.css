@@ -5,7 +5,7 @@
 }
 
 
-.EnrollmentHomePage-item{
+.EnrollmentHomePage-items{
     display: flex;
     flex-direction: row;
 }

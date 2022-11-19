@@ -1,0 +1,54 @@
+.ProfileBar-container{
+
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.ProfileBar-info{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ProfileBar-info > *{
+
+    margin-right:10px;
+}
+.ProfileBar-circle{
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(77, 201, 129);
+    /* margin: 0px 10px; */
+}
+
+.ProfileBar-btns{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+
+}
+
+.ProfileBar-btns > *{
+
+    margin-left: 20px;
+}
+
+.Profile-content{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin: auto;
+}

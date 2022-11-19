@@ -1,4 +1,20 @@
 .AssignmentSideBar-container{
     
+    display: flex;
+    flex-direction: column;
+    
     width:400px;
+
+}
+
+.AssignmentSideBar-Enrollment-header{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    cursor: pointer;
+}
+
+.AssignmentSideBar-Enrollment-header > * {
+
+    margin:auto;
 }

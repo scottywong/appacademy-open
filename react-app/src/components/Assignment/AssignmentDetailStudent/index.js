@@ -47,6 +47,7 @@ function AssignmentDetailStudent(){
     return (
 
         <div className='ads-container'>
+            <h1> {assignment.Task?.title}</h1>
             <p>{assignment.Task?.detail}</p>
             <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
             <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>

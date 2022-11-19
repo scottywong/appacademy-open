@@ -19,10 +19,6 @@ function EnrollmentDetailPage(){
     
     let enrolled = false;
 
-    // const refreshUserProgress = () => {
-
-    //     dispatch(fetchUserProgresses());
-    // }
     useEffect(() => {
         dispatch(fetchUserEnrollments())
         .then(dispatch(fetchGetEnrollmentById(enrollmentId)))
@@ -34,7 +30,7 @@ function EnrollmentDetailPage(){
         <div className='EnrollmentDetailPage-container'>
             {enrolled  && 
             <div className='EnrollmentDetailPage-items'>
-                    <AssignmentSideBar assignments={assignments}/>
+                    <AssignmentSideBar assignments={assignments} enrollment={enrollment}/>
                     <AssignmentDetailStudent assignmentId={assignmentId}/>
             </div>
             }

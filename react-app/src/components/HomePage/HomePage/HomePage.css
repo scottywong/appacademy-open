@@ -39,6 +39,11 @@
     font-weight: 400;
 }
 
+.HomePage-cta-btns > *{
+
+    margin-top: 20px;
+}
+
 #HomePage-signup-btn{
    
     border: 2px solid #d0021b;

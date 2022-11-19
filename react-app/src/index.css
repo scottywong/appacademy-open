@@ -8,3 +8,26 @@ html, body, #root {
     display: flex;
     flex-direction: column;
 }
+
+.green-btn{
+        background-color: #4dc981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgb(255, 255, 255);
+        font-size: 12px;
+        letter-spacing: 1px;
+        background: #4dc981;
+        border: none rgb(77, 201, 129);
+        border-radius: 5px;
+        position: relative;
+        padding: 15px 20px;
+        filter: none;
+        outline-width: thin;
+        transition: background 0.2s ease 0s;
+        min-width: 100px;
+        max-height: 30px;
+        cursor: pointer;
+        font-weight: 700;
+        outline-color: rgb(77, 201, 129);
+}

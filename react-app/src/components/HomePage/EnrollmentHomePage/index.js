@@ -30,7 +30,7 @@ function EnrollmentHomePage(){
         <div className='EnrollmentHomePage-container'>
            {myEnrollments && myEnrollments[enrollment.id] && 
             <div className='EnrollmentHomePage-items'>
-                <AssignmentSideBar assignments={assignments}/>
+                <AssignmentSideBar assignments={assignments} enrollment={enrollment}/>
                 <EnrollmentDefaultPage/>
             </div>
             }

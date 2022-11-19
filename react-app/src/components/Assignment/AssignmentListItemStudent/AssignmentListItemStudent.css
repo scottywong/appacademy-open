@@ -2,12 +2,19 @@
 
     font-size: 0.875rem;
     width: 100%;
+    margin: auto;
 }
 
 .ali-student-item{
     display:flex;
     justify-content: space-between;
+    min-height: 30px;
+    margin: auto;
 
+}
+
+.ali-student-item > *{
+    margin: auto;
 }
 
 .ali-student-item:hover{
@@ -19,8 +26,11 @@
 .fa-circle-check{
 
     color:green;
+
+
 }
 
 .fa-circle{
     color:gray;
+
 }

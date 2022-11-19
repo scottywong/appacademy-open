@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
 import HomeNavigationBar from './components/Navigation/HomeNavigationBar';
 import HomePage from './components/HomePage/HomePage';
+import Profile from './components/Profile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +50,9 @@ function App() {
           <HomeNavigationBar/>
           <SignUpForm />
         </Route>
+        <ProtectedRoute path='/learn/profile' exact={true} >
+          <Profile />
+        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
