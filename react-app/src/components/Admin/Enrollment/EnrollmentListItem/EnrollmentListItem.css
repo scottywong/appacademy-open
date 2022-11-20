@@ -1,0 +1,18 @@
+.EnrollmentListItem-container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.EnrollmentListItem-name{
+
+    cursor: pointer;
+
+}
+
+
+.EnrollmentListItem-name:hover{
+
+    color: #4dc981;
+}

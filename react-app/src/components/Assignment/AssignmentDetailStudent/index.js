@@ -43,7 +43,6 @@ function AssignmentDetailStudent(){
     }
 
 
-
     return (
 
         <div className='ads-container'>

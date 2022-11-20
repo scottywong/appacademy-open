@@ -1,0 +1,17 @@
+.CourseDetail-container{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin:auto;
+}
+
+.CourseDetail-btns{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.CourseDetail-lists{
+    display: block;
+}

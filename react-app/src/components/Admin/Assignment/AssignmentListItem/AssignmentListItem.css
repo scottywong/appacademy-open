@@ -1,0 +1,18 @@
+.AssignmentListItem-container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.AssignmentListItem-name{
+
+    cursor: pointer;
+
+}
+
+
+.AssignmentListItem-name:hover{
+
+    color: #4dc981;
+}

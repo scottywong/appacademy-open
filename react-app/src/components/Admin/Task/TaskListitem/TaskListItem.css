@@ -1,0 +1,17 @@
+.TaskListItem-container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.TaskListItem-name{
+
+    cursor: pointer;
+
+}
+
+.TaskListItem-name:hover{
+
+    color: #4dc981;
+}

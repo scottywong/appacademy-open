@@ -1,0 +1,18 @@
+.CourseListItem-container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CourseListItem-name{
+
+    cursor: pointer;
+
+}
+
+
+.CourseListItem-name:hover{
+
+    color: #4dc981;
+}

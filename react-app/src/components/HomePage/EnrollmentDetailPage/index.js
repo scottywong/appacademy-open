@@ -4,7 +4,7 @@ import EnrollmentDefaultPage from "../../DefaultPage/EnrollmentDefaultPage";
 import AssignmentSideBar from "../../Sidebar/AssignmentSideBar";
 import AssignmentDetailStudent from "../../Assignment/AssignmentDetailStudent";
 import { useEffect, useState } from "react";
-import { fetchUserEnrollments, fetchUserProgresses } from "../../../store/user";
+import { fetchUserEnrollments } from "../../../store/user";
 import { fetchGetEnrollmentById } from "../../../store/enrollment";
 import './EnrollmentDetailPage.css';
 
@@ -14,9 +14,12 @@ function EnrollmentDetailPage(){
     const {enrollmentId,assignmentId} = useParams();
 
     const myEnrollments = useSelector(state=>state.user?.enrollments)
-    const enrollment = useSelector(state=>state.enrollment);
-    const assignments = Object.values(useSelector(state=>state.enrollment?.Assignments? state.enrollment?.Assignments : state.enrollment));
+    console.log(myEnrollments)
+    const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
+    const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment?.one_enrollment?.Assignments : state.enrollment));
     
+    // console.log('EnrollmentDefaultPage - enrollment: ', enrollment);
+
     let enrolled = false;
 
     useEffect(() => {

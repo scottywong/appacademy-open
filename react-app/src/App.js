@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -16,6 +15,8 @@ import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
 import HomeNavigationBar from './components/Navigation/HomeNavigationBar';
 import HomePage from './components/HomePage/HomePage';
 import Profile from './components/Profile';
+import AdminDetail from './components/Admin/AdminDetail';
+import CourseDetail from './components/Admin/Course/CourseDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,9 +51,6 @@ function App() {
           <HomeNavigationBar/>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/learn/profile' exact={true} >
-          <Profile />
-        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -65,11 +63,20 @@ function App() {
         <ProtectedRoute path='/learn/home'>
           <LearnHomePage/>
         </ProtectedRoute>
+        <ProtectedRoute path='/learn/profile' exact={true} >
+          <Profile />
+        </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
           <EnrollmentHomePage />
         </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'>  
           <EnrollmentDetailPage/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/learn/admin' exact={true} >
+          <AdminDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/learn/admin/courses/:courseId' exact={true} >
+          <CourseDetail />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
         </ProtectedRoute>

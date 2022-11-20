@@ -13,10 +13,10 @@ function EnrollmentHomePage(){
     const dispatch = useDispatch();
     const {enrollmentId} = useParams();
     const myEnrollments = useSelector(state=>state.user?.enrollments ? state.user.enrollments : state.user);
-    const enrollment = useSelector(state=>state.enrollment);
+    const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
 
-    console.log('EnrollmentHomePage - enrollment: ', enrollment);
-    const assignments = Object.values(useSelector(state=>state.enrollment?.Assignments? state.enrollment?.Assignments : state.enrollment));
+    // console.log('EnrollmentHomePage - enrollment: ', enrollment);
+    const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment.one_enrollment?.Assignments : state.enrollment));
 
 
     useEffect(()=> {

@@ -6,7 +6,8 @@ import './LearnNavBar.css';
 
 function LearnNavBar(){
 
-    const sessionUserProfile = useSelector(state => state.session.profile);
+    const sessionUserProfile = useSelector(state => state.session.user.profile);
+    
     return (
         <div className='LearnNavBar-container'>
         <div className='LearnNavBar-menu'>
@@ -19,9 +20,9 @@ function LearnNavBar(){
             <div className='LearnNavBar-linkitem'>
                 <NavLink to="/learn/profile"> Profile </NavLink>
             </div>
-            <div className='LearnNavBar-linkitem'>
+            {sessionUserProfile ==='Admin' && <div className='LearnNavBar-linkitem'>
                 <NavLink to='/learn/admin'> Admin </NavLink>
-            </div>
+            </div>}
             <div className='LearnNavBar-linkitem'>
                 <NavLink to="/forum">
                     <i className="fa-solid fa-question"></i>
