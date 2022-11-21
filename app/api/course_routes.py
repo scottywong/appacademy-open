@@ -1,20 +1,56 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
-from app.models import Course,Enrollment,Assignment
+from app.forms import CourseForm
+from app.models import db,Course,Enrollment,Assignment
+from app.api.auth_routes import validation_errors_to_error_messages
 
 course_routes = Blueprint('courses', __name__)
 
-@course_routes.route('/<int:id>')
+@course_routes.route('/',methods=['POST'])
 @login_required
-def course(id):
-    course = Course.query.get(id)
-    return course.to_dict()
+def create_course():
+    form = CourseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+
+        course = Course(
+            userId=current_user.id,
+            title=form.data['title'],
+            body=form.data['body']
+        )
+
+        db.session.add(course)
+        db.session.commit()
+        return course.to_dict(), 200
+
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 @course_routes.route('/')
 @login_required
 def all_courses():
     courses = Course.query.all()
     return {'Courses' : [course.to_dict() for course in courses]}
+
+@course_routes.route('/<int:id>',methods=['DELETE'])
+@login_required
+def delete_course(id):
+    course = Course.query.get(id)
+    if course is None:
+        return {'errors': ["This course was not found!"]}, 404
+    if current_user.profile != 'Admin':
+        return {'errors': ["Only admins can perform this action!"]}, 401
+
+    db.session.delete(course)
+    db.session.commit()
+
+    return {'Message': "You've successfully delete this course!"}, 200
+
+@course_routes.route('/<int:id>')
+@login_required
+def course(id):
+    course = Course.query.get(id)
+    return course.to_dict()
 
 @course_routes.route('/<int:id>/enrollments')
 @login_required

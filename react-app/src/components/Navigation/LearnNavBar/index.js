@@ -15,7 +15,10 @@ function LearnNavBar(){
         </div>
         <div className='LearnNavBar-links'>
             <div className='LearnNavBar-linkitem'>
-            <NavLink to='/'> Home </NavLink>
+                <NavLink to='/'> Home </NavLink>
+            </div>
+            <div className='LearnNavBar-linkitem'>
+                <NavLink to='/learn/home'> Learn </NavLink>
             </div>
             <div className='LearnNavBar-linkitem'>
                 <NavLink to="/learn/profile"> Profile </NavLink>

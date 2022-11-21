@@ -10,9 +10,14 @@ function CourseList(){
     const dispatch = useDispatch();
     console.log('courses: ', courses)
 
-    useEffect (() => {
+
+    const refreshCourseList = () => {
 
         dispatch(fetchGetCourses());
+    }
+    useEffect (() => {
+
+        refreshCourseList();
 
     },[dispatch])
 
@@ -21,7 +26,7 @@ function CourseList(){
 
         <div className="CourseList-container"> 
         <h1> Course List </h1>
-            {courses?.map( course =>  <CourseListItem course={course} /> )}
+            {courses?.map( course =>  <CourseListItem course={course} refreshCourseList={refreshCourseList}/> )}
         </div>
     )
 }
