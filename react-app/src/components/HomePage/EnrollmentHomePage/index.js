@@ -15,7 +15,7 @@ function EnrollmentHomePage(){
     const myEnrollments = useSelector(state=>state.user?.enrollments ? state.user.enrollments : state.user);
     const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
 
-    // console.log('EnrollmentHomePage - enrollment: ', enrollment);
+    console.log('EnrollmentHomePage - enrollment: ', enrollment);
     const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment.one_enrollment?.Assignments : state.enrollment));
 
 
@@ -28,7 +28,7 @@ function EnrollmentHomePage(){
     return (
     
         <div className='EnrollmentHomePage-container'>
-           {myEnrollments && myEnrollments[enrollment.id] && 
+           {myEnrollments && myEnrollments[enrollment?.id] && 
             <div className='EnrollmentHomePage-items'>
                 <AssignmentSideBar assignments={assignments} enrollment={enrollment}/>
                 <EnrollmentDefaultPage/>

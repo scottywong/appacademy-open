@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { authenticate } from './store/session';
+
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
-import { authenticate } from './store/session';
-import LearnNavBar from './components/Navigation/LearnNavBar';
-import LearnHomePage from './components/HomePage/LearnHomePage';
-import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
-import Footer from './components/Footer';
-import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
+import ProtectedRouteAdmin from './components/auth/ProjectedRouteAdmin';
+
 import HomeNavigationBar from './components/Navigation/HomeNavigationBar';
+import LearnNavBar from './components/Navigation/LearnNavBar';
 import HomePage from './components/HomePage/HomePage';
 import Profile from './components/Profile';
+import Footer from './components/Footer';
+import UsersList from './components/UsersList';
+import User from './components/User';
+
+import LearnHomePage from './components/HomePage/LearnHomePage';
+import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
+import EnrollmentDetailPage from './components/HomePage/EnrollmentDetailPage';
+
 import AdminDetail from './components/Admin/AdminDetail';
 import CourseDetail from './components/Admin/Course/CourseDetail';
+import TaskDetail from './components/Admin/Task/TaskDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,11 +80,21 @@ function App() {
           <EnrollmentDetailPage/>
         </ProtectedRoute>
         <ProtectedRoute path='/learn/admin' exact={true} >
-          <AdminDetail />
+          <ProtectedRouteAdmin>
+            <AdminDetail />
+          </ProtectedRouteAdmin>
         </ProtectedRoute>
         <ProtectedRoute path='/learn/admin/courses/:courseId' exact={true} >
-          <CourseDetail />
+          <ProtectedRouteAdmin>
+            <CourseDetail />
+          </ProtectedRouteAdmin>
         </ProtectedRoute>
+        <ProtectedRoute path='/learn/admin/tasks/:taskId' exact={true} >
+          <ProtectedRouteAdmin >
+            <TaskDetail />
+          </ProtectedRouteAdmin>
+        </ProtectedRoute>
+
         <ProtectedRoute path='/' exact={true} >
         </ProtectedRoute>
         <Route path="*">

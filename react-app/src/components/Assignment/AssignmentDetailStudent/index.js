@@ -12,7 +12,7 @@ function AssignmentDetailStudent(){
     const {assignmentId} = useParams();
     const dispatch = useDispatch();
 
-    const assignment = useSelector(state => state.assignment);
+    const assignment = useSelector(state => state.assignment?.one_assignment);
     const myProgresses = useSelector(state => state.user.progresses);
 
     console.log('adS-assignment: ', assignment);

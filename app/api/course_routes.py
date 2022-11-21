@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required,current_user
-from app.models import Course,Enrollment
+from app.models import Course,Enrollment,Assignment
 
 course_routes = Blueprint('courses', __name__)
 
@@ -21,3 +21,9 @@ def all_courses():
 def enrollments(id):
     enrollments = Enrollment.query.filter(Enrollment.courseId==id).all()
     return {'Enrollments' : [enrollment.to_dict() for enrollment in enrollments]}
+
+@course_routes.route('/<int:id>/assignments')
+@login_required
+def assignments(id):
+    assignments = Assignment.query.filter(Assignment.courseId==id).all()
+    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
