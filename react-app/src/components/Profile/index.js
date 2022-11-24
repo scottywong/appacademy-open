@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import LogoutButton from '../auth/LogoutButton';
 import './Profile.css';
 
 const Profile = () => {
@@ -15,8 +16,11 @@ const Profile = () => {
                     <h3> Profile: </h3> {sessionUser.profile}
                 </div>
                 <div className='ProfileBar-btns'>
-                    <button className='green-btn'> Other Stuff </button>
-                    <button onClick={() => window.location.replace('https://docs.google.com/forms/d/e/1FAIpQLSdUkPFK7mkhRQ9dGfyewQa7gIlZW3RrSKTdn5Rp8nWEggP0jw/viewform') }className='green-btn'> Feedback </button>
+                <a onClick={() => window.location.replace('https://docs.google.com/forms/d/e/1FAIpQLSdUkPFK7mkhRQ9dGfyewQa7gIlZW3RrSKTdn5Rp8nWEggP0jw/viewform') } className="button green">
+                    <span className="button-inner"> Feedback</span>
+                    <span className="button-bg green"></span>
+                </a>
+                    <LogoutButton/>
                 </div>
             </div>
             <div className='Profile-content'>

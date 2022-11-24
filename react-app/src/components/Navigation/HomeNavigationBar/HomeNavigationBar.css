@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 
 
@@ -34,6 +35,21 @@
 
     list-style: none;
     margin-left: 20px;
+    
 
+}
+
+.nav-item{
+    color: #353640;
+    font-style: normal;
+    text-decoration: none;
+    font-weight: 500;
+
+
+}
+
+.nav-item:hover {
+
+    color: #d0021b;
 }
 

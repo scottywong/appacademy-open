@@ -8,7 +8,12 @@ function EnrollmentListItem({enrollment}){
    
         <div className='EnrollmentListItem-name'>{enrollment?.username}</div>
             <div className='EnrollmentListItem-btns'>
-                <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Enrollment </button>
+                
+                <a onClick={()=> window.confirm('Are you sure you want to delete this item?')} className="button green">
+                    <span className="button-inner"> Delete Enrollment</span>
+                    <span className="button-bg green"></span>
+                </a>
+                {/* <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Enrollment </button> */}
             </div>
         </div>
         

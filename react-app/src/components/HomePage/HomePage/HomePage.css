@@ -30,6 +30,7 @@
     font-size: 54px;
     line-height: 60px;
     font-weight: 400;
+
 }
 
 .HomePage-cta-subheader{
@@ -66,7 +67,31 @@
     opacity: .75;
 }
 
+.text-span-7{
+    background-image: url("https://assets-global.website-files.com/5dcc7f8c449e597ed83356b8/5f403ac2a033e86bcecf7ec1_Artboardunderline.webp");
+    background-position: 50% 80%;
+    background-size: 95px;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    font-style: italic;
+    font-weight: 400;
+    text-decoration: none;
+    white-space: normal;
+    background-clip: border-box;
+    -webkit-text-fill-color: inherit;
+}
 
+.login-cta{
+    color: #353640;
+    font-style: normal;
+    /* text-decoration: none; */
+    font-weight: 500;
+}
+
+.login-cta:hover {
+
+    color: #d0021b;
+}
 @media screen and (max-width: 500px){
 
     .HomePage-hero{

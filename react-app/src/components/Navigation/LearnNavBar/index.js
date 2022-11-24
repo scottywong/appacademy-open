@@ -34,9 +34,6 @@ function LearnNavBar(){
             <div className='LearnNavBar-linkitem'>
                 <NavLink to="/search"> Search </NavLink>
             </div>
-            <div className='LearnNavBar-linkitem'>
-                <LogoutButton/>
-            </div>
         </div>
 
         </div>);

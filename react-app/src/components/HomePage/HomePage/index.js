@@ -12,15 +12,18 @@ function HomePage(){
 
             <div className='HomePage-cta'>
                 <div className='HomePage-cta-header'>
-                Learn to code online for free
+                Learn to code online for <span class="text-span-7">free</span>
                 </div>
                 <div className='HomePage-cta-subheader'>
                 Get access to App Academy’s entire online full-stack curriculum for free. No catch, no strings attached.
                 </div>
                 <div className='HomePage-cta-btns'>
-                    <button onClick={() => history.push('/sign-up')} id='HomePage-signup-btn'>Sign up for a free account</button>
+                <a onClick={() => history.push('/sign-up')} className="button">
+                    <span className="button-inner"> Sign up for a free account</span>
+                    <span className="button-bg"></span>
+                </a>
                     <div>
-                        Already have an account? <a href='/login'>Login here</a>
+                        Already have an account? <a className='login-cta' href='/login'>Login here</a>
                     </div>
                 </div>         
             </div>

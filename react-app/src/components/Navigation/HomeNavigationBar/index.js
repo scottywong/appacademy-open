@@ -15,17 +15,17 @@ function HomeNavigationBar(){
         <div className='HomeNavigationBar-items'>
 
             <li>
-                <NavLink to='/' exact={true} activeClassName='active'>
+                <NavLink className='nav-item' to='/' exact={true} activeClassName='active'>
                     Home
                 </NavLink>
             </li>
             <li>
-                <NavLink to='/login' exact={true} activeClassName='active'>
+                <NavLink className='nav-item' to='/login' exact={true} activeClassName='active'>
                     Login
                 </NavLink>
             </li>
             <li>
-                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                <NavLink className='nav-item' to='/sign-up' exact={true} activeClassName='active'>
                     Sign Up
                 </NavLink>
             </li>

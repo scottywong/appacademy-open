@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
 }
 
 .CourseListItem-name{
@@ -15,4 +18,16 @@
 .CourseListItem-name:hover{
 
     color: #4dc981;
+}
+
+.CourseListItem-btns{
+
+    display:flex;
+    flex-direction: row;
+    margin-left:20px;
+}
+.course-btns{
+    width: 200px;
+    text-align: center;
+    margin-right: 20px;
 }

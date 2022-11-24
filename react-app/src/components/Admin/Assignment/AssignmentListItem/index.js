@@ -13,7 +13,12 @@ function AssignmentListItem({assignment}){
         <div className='AssignmentListItem-container'>
             <div onClick={()=> history.push(`/learn/admin/tasks/${assignment?.Task?.id}`)} className='AssignmentListItem-name'>{assignment?.Task?.title}</div>
             <div className='AssignmentListItem-btns'>
-                <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Assignment </button>
+                
+            <a onClick={()=> window.confirm('Are you sure you want to delete this item?')} className="button green">
+                <span className="button-inner"> Delete Assignment</span>
+                <span className="button-bg green"></span>
+            </a>
+                {/* <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Assignment </button> */}
             </div>
         </div>
 
