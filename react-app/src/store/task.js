@@ -1,6 +1,9 @@
 // ******** Task Constraints ********
 const GET_TASK = 'task/GET_TASK';
 const GET_TASKS = 'admin/GET_TASKS';
+const CREATE_TASK = 'admin/CREATE_TASK';
+const UPDATE_TASK = 'admin/UPDATE_TASK';
+const DELETE_TASK = 'admin/DELETE_TASK';
 // ******** Task Actions ********
 
 const getTaskById = (task) => ({
@@ -13,6 +16,19 @@ const getTaskById = (task) => ({
     payload: tasks
   });
 
+const createTask = (task) => ({
+    type: CREATE_TASK,
+    payload: task
+})
+
+const updateTask = (task) => ({
+    type: UPDATE_TASK,
+    payload: task
+})
+const deleteTask = (taskId) => ({
+    type: DELETE_TASK,
+    payload: taskId
+})
 
 // ******** Task THUNKs ********
 export const fetchGetTasks = () => async (dispatch) => {
@@ -37,6 +53,60 @@ export const fetchGetTaskById = (taskId) => async (dispatch) => {
     return res;
 };
 
+export const fetchCreateTask = (task) => async (dispatch) => {
+        
+    const res = await fetch(`/api/tasks/`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(task)
+      }
+    );
+
+    if (res.ok){
+        const task = await res.json();
+        dispatch(createTask(task));
+        return task;
+    };
+    
+}
+
+export const fetchUpdateTask = (task, taskId) => async (dispatch) => {
+
+    console.log('this the payload: ', task);
+    
+const res = await fetch(`/api/tasks/${taskId}`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify(task)
+  }
+);
+
+if (res.ok){
+    const task = await res.json();
+    dispatch(updateTask(task));
+    return task;
+};
+
+}
+export const fetchDeleteTask = (taskId) => async (dispatch) => {
+
+    const res = await fetch(`/api/tasks/${taskId}`,{
+        method: 'DELETE'
+    });
+        
+    if(res.ok){
+        const task = await res.json();
+        dispatch(deleteTask(task));
+        return task;
+    }
+
+    return res;
+}
+
 // ******** REDUCER ********
 const initialState = {};
 
@@ -50,6 +120,20 @@ const taskReducer = (state = initialState, action) => {
             newState.all_tasks = {};
             action.payload['Tasks'].forEach(task => newState.all_tasks[task.id] = task);
             return newState;
+        case CREATE_TASK:
+            newState.created_task = action.payload;
+            newState.all_tasks[action.payload.id] = action.payload;
+            return {...newState};
+        case DELETE_TASK:
+            if(newState.all_tasks){
+                delete newState.all_tasks[action.payload];
+            }
+            return {...newState,
+                all_tasks: {
+                    ...newState.all_tasks
+                }
+            
+            };
         default:
             return newState;
     }
