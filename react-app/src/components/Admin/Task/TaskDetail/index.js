@@ -7,6 +7,8 @@ import { Modal } from '../../../../context/Modal';
 import TaskDeleteForm from '../../Forms/TaskDeleteForm';
 import TaskEditForm from '../../Forms/TaskEditForm';
 import './TaskDetail.css';
+import { fetchGetAssignmentsByCourseId } from '../../../../store/assignment';
+import AssignmentCreateForm from '../../Forms/AssignmentCreateForm';
 
 function TaskDetail(){
     
@@ -20,18 +22,22 @@ function TaskDetail(){
     const task = useSelector(state => state.task?.one_task);
     const [showEditTaskModal,setShowEditTaskModal] = useState(false);
     const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
-    
-    const refreshTaskList = () => {
+    const [showAssignmentModal,setShowAssignmentModal] = useState(false);
+    const [showDeleteAssignmentModal,setShowDeleteAssignmentModal] = useState(false);
 
+    const refreshTaskList = () => {
         dispatch(fetchGetTasks());
     }
     const refreshOneTask = () => {
-
         dispatch(fetchGetTaskById(taskId));
+    }
+    const refreshAssignmentList = () => {
+        dispatch(fetchGetAssignmentsByCourseId(task?.courseId));
     }
 
     useEffect(()=> {
-        refreshOneTask();
+        dispatch(fetchGetTaskById(taskId))
+        .then( dispatch(fetchGetAssignmentsByCourseId(task?.courseId)))
     },[dispatch]);
 
     return (
@@ -53,16 +59,21 @@ function TaskDetail(){
                     <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} refreshTaskList={refreshTaskList} />
                 </Modal>
                 )}
-                <a className="button green">
+                <a onClick={()=>setShowAssignmentModal(true)} className="button green">
                     <span className="button-inner">Add Assignment</span>
                     <span className="button-bg green"></span>
                 </a>
+                {showAssignmentModal && (
+                <Modal onClose={() => setShowAssignmentModal(false)}>
+                    <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                </Modal>
+                )}
             </div>
             <div className='TaskDetail-detail-container'>
             {location.pathname.includes('/edit') && <TaskEditForm task={task} refreshOneTask={refreshOneTask} /> }
             {!location.pathname.includes('/edit') && <div className='TaskDetail-detail'> {task?.detail} </div>}
                 <div className='TaskDetail-lists'>
-                    <AssignmentList taskId={taskId}/>
+                    <AssignmentList taskId={taskId} refreshAssignmentList={refreshAssignmentList} />
                 </div>
             </div>
         </div>

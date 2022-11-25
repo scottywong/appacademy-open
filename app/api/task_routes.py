@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required,current_user
 from app.forms import TaskForm
-from app.models import db,Task
+from app.models import db,Task,Assignment
 task_routes = Blueprint('tasks', __name__)
 
 @task_routes.route('/<int:id>')
@@ -67,3 +67,9 @@ def delete_task(id):
     db.session.commit()
 
     return {'Message': "You've successfully delete this task!"}, 200
+
+@task_routes.route('/<int:id>/assignments')
+@login_required
+def assignments(id):
+    assignments = Assignment.query.filter(Assignment.taskId==id).all()
+    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
