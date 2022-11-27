@@ -6,6 +6,13 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 course_routes = Blueprint('courses', __name__)
 
+@course_routes.route('/')
+@login_required
+def all_courses():
+    courses = Course.query.all()
+    return {'Courses' : [course.to_dict() for course in courses]}
+
+
 @course_routes.route('/',methods=['POST'])
 @login_required
 def create_course():
@@ -26,11 +33,26 @@ def create_course():
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
-@course_routes.route('/')
+
+@course_routes.route('/<int:id>',methods=['POST'])
 @login_required
-def all_courses():
-    courses = Course.query.all()
-    return {'Courses' : [course.to_dict() for course in courses]}
+def update_course(id):
+    course = Course.query.get(id)
+    if course is None:
+        return {'errors': ["This course cannot be found!"]}, 404
+    if course.userId != current_user.id:
+        return {'errors': ["This isn't your course!"]}, 401
+
+    form = CourseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        course.title=form.data['title']
+        course.body=form.data['body']
+        db.session.commit()
+        return course.to_dict(), 200
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @course_routes.route('/<int:id>',methods=['DELETE'])
 @login_required

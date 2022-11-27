@@ -84,7 +84,7 @@ function App() {
             <AdminDetail />
           </ProtectedRouteAdmin>
         </ProtectedRoute>
-        <ProtectedRoute path='/learn/admin/courses/:courseId' exact={true} >
+        <ProtectedRoute path='/learn/admin/courses/:courseId' >
           <ProtectedRouteAdmin>
             <CourseDetail />
           </ProtectedRouteAdmin>

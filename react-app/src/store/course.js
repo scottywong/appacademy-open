@@ -3,7 +3,7 @@ const GET_COURSE = 'user/GET_COURSE';
 const GET_COURSES = 'admin/GET_COURSES';
 const CREATE_COURSE = 'admin/CREATE_COURSE';
 const DELETE_COURSE = 'admin/DELETE_COURSE';
-
+const UPDATE_COURSE = 'admin/UPDATE_COURSE';
 // ******** Course Actions ********
 
 const getCourses = (courses) =>({
@@ -18,6 +18,11 @@ const getCourseById = (course) => ({
 
 const createCourse = (course) => ({
     type: CREATE_COURSE,
+    payload: course
+})
+
+const updateCourse = (course) => ({
+    type: UPDATE_COURSE,
     payload: course
 })
 
@@ -64,6 +69,25 @@ export const fetchCreateCourse = (course) => async (dispatch) => {
     if (res.ok){
         const course = await res.json();
         dispatch(createCourse(course));
+        return course;
+    };
+    
+}
+
+export const fetchUpdateCourse = (course,courseId) => async (dispatch) => {
+
+    const res = await fetch(`/api/courses/${courseId}`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(course)
+      }
+    );
+
+    if (res.ok){
+        const course = await res.json();
+        dispatch(updateCourse(course));
         return course;
     };
     

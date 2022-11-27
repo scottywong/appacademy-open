@@ -14,8 +14,8 @@ class Course(db.Model):
     updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     user = db.relationship('User', back_populates='courses')
-    assignments = db.relationship('Assignment', back_populates='course')
-    enrollments = db.relationship('Enrollment', back_populates='course')
+    assignments = db.relationship('Assignment', back_populates='course', cascade="all, delete-orphan")
+    enrollments = db.relationship('Enrollment', back_populates='course', cascade="all, delete-orphan")
 
     def get_user(self):
         user = User.query.filter(User.id == self.userId).first()
