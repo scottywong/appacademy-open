@@ -10,6 +10,12 @@ def assignments(id):
     assignment = Assignment.query.get(id)
     return assignment.to_dict()
 
+@assignment_routes.route('/')
+@login_required
+def all_assignments():
+    assignments = Assignment.query.all()
+    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
+
 @assignment_routes.route('/',methods=['POST'])
 @login_required
 def create_assignment():
@@ -30,11 +36,7 @@ def create_assignment():
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
-@assignment_routes.route('/')
-@login_required
-def all_assignments():
-    assignments = Assignment.query.all()
-    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
+
 
 @assignment_routes.route('/<int:id>',methods=['DELETE'])
 @login_required

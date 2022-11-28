@@ -11,10 +11,10 @@ class Enrollment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     courseId = db.Column(db.Integer, db.ForeignKey('courses.id'))
-    notes =  db.Column(db.String(2000), nullable=False)
+    notes =  db.Column(db.String(2000), nullable=True)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
-
+    
     user = db.relationship('User', back_populates='enrollments')
     course = db.relationship('Course', back_populates='enrollments')
     progresses = db.relationship('Progress',back_populates='enrollment')

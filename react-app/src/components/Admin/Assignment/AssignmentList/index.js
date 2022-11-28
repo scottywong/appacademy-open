@@ -2,19 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetAssignmentsByCourseId, fetchGetAssignmentsByTaskId } from '../../../../store/assignment';
 import AssignmentListItem from '../AssignmentListItem';
+import { useLocation } from 'react-router';
 import './AssignmentList.css';
 
 function AssignmentList({courseId,taskId,refreshAssignmentList}){
 
     const dispatch = useDispatch();
-    const assignments = Object.values(useSelector(state=>state.assignment?.assignments ? state.assignment?.assignments :state.assignment));
-    
-    console.log('AssignmentList - assignments: ', Object.values(assignments)[0])
+    const location = useLocation();
+    const assignmentsTask = Object.values(useSelector(state=>state.assignment?.assignmentsByTaskId ? state.assignment?.assignmentsByTaskId : {}));
+    const assignmentsCourse = Object.values(useSelector(state=>state.assignment?.assignmentsByCourseId ? state.assignment?.assignmentsByCourseId : {}));
+    console.log('AssignmentList - tasks: ', assignmentsTask)
+    console.log('AssignmentList - courses: ', assignmentsCourse)
 
-    const refreshAssignmentListTask = () => {
-
-        dispatch(fetchGetAssignmentsByTaskId(taskId));
-    }
     useEffect(()=> {
         dispatch(fetchGetAssignmentsByCourseId(courseId));
         dispatch(fetchGetAssignmentsByTaskId(taskId));
@@ -24,7 +23,9 @@ function AssignmentList({courseId,taskId,refreshAssignmentList}){
 
         <div className="AssignmentList-container"> 
         <h1> Assignment List </h1>
-            {assignments?.map( assignment =>  <AssignmentListItem assignment={Object.values(assignment)[0]} refreshAssignmentList={refreshAssignmentList}/> )}
+            {location.pathname.includes('tasks') && assignmentsTask?.map( assignment =>  <AssignmentListItem assignment={assignment} refreshAssignmentList={refreshAssignmentList}/> )}
+            {location.pathname.includes('courses') && assignmentsCourse?.map( assignment =>  <AssignmentListItem assignment={assignment} refreshAssignmentList={refreshAssignmentList}/> )}
+            {assignmentsTask?.length === 0 && assignmentsCourse?.length === 0 && <p>No assignments to display.</p>}
         </div>
     )
 }

@@ -4,3 +4,4 @@ from .progress_form import ProgressForm
 from .course_form import CourseForm
 from .task_form import TaskForm
 from .assignment_form import AssignmentForm
+from .enrollment_form import EnrollmentForm

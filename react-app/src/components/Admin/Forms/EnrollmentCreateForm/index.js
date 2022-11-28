@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {fetchCreateAssignment} from '../../../../store/assignment';
-import './AssignmentCreateForm.css';
+import {fetchCreateEnrollment} from '../../../../store/enrollment';
+import { useLocation } from 'react-router';
+import './EnrollmentCreateForm.css';
 
-function AssignmentCreateForm({setShowAssignmentModal,refreshAssignmentList}){
+function EnrollmentCreateForm({id,setShowEnrollmentModal,refreshEnrollmentList}){
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [courseId,setCourseId] = useState('');
-    const [taskId,setTaskId] = useState('');
+    const [courseId,setCourseId] = useState(id);
+    const [userId,setUserId] = useState('');
     const [errors, setErrors] = useState([]);
     const [query, setQuery] = useState("");
 
@@ -18,23 +19,23 @@ function AssignmentCreateForm({setShowAssignmentModal,refreshAssignmentList}){
         e.preventDefault();
 
         const payload = {
-            courseId,
-            taskId
+            userId,
+            courseId
         };
 
-        return dispatch(fetchCreateAssignment(payload))
-        .then(refreshAssignmentList())
-        .then(refreshAssignmentList())
+        return dispatch(fetchCreateEnrollment(payload))
+        .then(refreshEnrollmentList())
+        .then(refreshEnrollmentList())
         .then(
-            (res) => history.push(`/learn/admin/tasks/${res.id}`)
+            (res) => history.push(`/learn/admin/courses/${courseId}`)
         );
     }    
 
     return(
        
-    <div className='AssignmentCreateForm-container'>
+    <div className='EnrollmentCreateForm-container'>
         <form className='modal-container' onSubmit={onSubmit}>
-            <h2 className='modal-form-title'>Create Assignment</h2>
+            <h2 className='modal-form-title'>Create Enrollment</h2>
 
             <input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
         {
@@ -62,9 +63,9 @@ function AssignmentCreateForm({setShowAssignmentModal,refreshAssignmentList}){
             <input
             className='modal-input-title'
             type='text'
-            value={taskId}
-            onChange={(e) => setTaskId(e.target.value)}
-            placeholder='Enter taskId'
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            placeholder='Enter userId'
             required
             />
 
@@ -80,7 +81,7 @@ function AssignmentCreateForm({setShowAssignmentModal,refreshAssignmentList}){
             <button className='modal-btn modal-submit-btn'>Submit</button>
             <button
             className='modal-btn modal-cancel-btn'
-            onClick={() => setShowAssignmentModal(false)}
+            onClick={() => setShowEnrollmentModal(false)}
             >
             Cancel
             </button>
@@ -92,4 +93,4 @@ function AssignmentCreateForm({setShowAssignmentModal,refreshAssignmentList}){
     )
 }
 
-export default AssignmentCreateForm;
+export default EnrollmentCreateForm;

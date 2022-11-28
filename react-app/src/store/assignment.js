@@ -21,7 +21,7 @@ const getAssignmentById = (assignment) => ({
     payload: assignment
   });
 
-  const createAssignment = (assignment) => ({
+const createAssignment = (assignment) => ({
     type: CREATE_ASSIGNMENT,
     payload: assignment
 })

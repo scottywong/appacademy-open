@@ -11,12 +11,13 @@ function EnrollmentList({courseId}){
     useEffect (() => {
         dispatch(fetchGetEnrollmentsByCourseId(courseId));
     },[dispatch])
-    
+
     return  (
 
         <div className="EnrollmentList-container"> 
         <h1> Enrollment List </h1>
             {enrollments?.map( enrollment =>  <EnrollmentListItem enrollment={enrollment} /> )}
+            {enrollments?.length === 0 && <p>No enrollments to display.</p>}
         </div>
     )
 }

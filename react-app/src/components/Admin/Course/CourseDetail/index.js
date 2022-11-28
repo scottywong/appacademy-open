@@ -9,6 +9,10 @@ import { fetchGetCourses, fetchGetCourseById } from '../../../../store/course';
 import CourseDeleteForm from '../../Forms/CourseDeleteForm';
 import { Modal} from '../../../../context/Modal';
 import CourseEditForm from '../../Forms/CourseEditForm';
+import AssignmentCreateForm from '../../Forms/AssignmentCreateForm';
+import EnrollmentCreateForm from '../../Forms/EnrollmentCreateForm';
+import { fetchGetAssignmentsByCourseId } from '../../../../store/assignment';
+import { fetchGetEnrollmentsByCourseId } from '../../../../store/enrollment';
 
 function CourseDetail(){
 
@@ -18,12 +22,22 @@ function CourseDetail(){
     const location = useLocation();
     const course = useSelector(state => state.course?.one_course);
     const [showDeleteCourseModal,setShowDeleteCourseModal] = useState(false);
+    const [showAssignmentModal,setShowAssignmentModal] = useState(false);
+    const [showEnrollmentModal,setShowEnrollmentModal] = useState(false);
     const refreshCourseList = () => {
         dispatch(fetchGetCourses());
     };
 
     const refreshOneCourse = () => {
         dispatch(fetchGetCourseById(courseId));
+    }
+
+    const refreshAssignmentList = () => {
+        dispatch(fetchGetAssignmentsByCourseId(courseId));
+    }
+
+    const refreshEnrollmentList = () => {
+        dispatch(fetchGetEnrollmentsByCourseId(courseId))
     }
 
     useEffect(()=> {
@@ -43,7 +57,7 @@ function CourseDetail(){
                 </a>
             
             
-            <a onClick={()=> setShowDeleteCourseModal(true)} className="button  green">
+            <a onClick={()=> setShowDeleteCourseModal(true)} className="button green">
                 <span className="button-inner">Delete Course</span>
                 <span className="button-bg green"></span>
             </a>
@@ -52,18 +66,29 @@ function CourseDetail(){
                     <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal} refreshCourseList={refreshCourseList} />
                 </Modal>
                 )}
-            <a className="button green">
+            <a onClick={()=> setShowAssignmentModal(true)} className="button green">
                 <span className="button-inner">Add Assignment</span>
                 <span className="button-bg green"></span>
             </a>
-            <a className="button green">
+            {showAssignmentModal && (
+                <Modal onClose={() => setShowDeleteCourseModal(false)}>
+                    <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                </Modal>
+                )}
+            <a onClick={()=> setShowEnrollmentModal(true)} className="button green">
                 <span className="button-inner"> Add Enrollment</span>
                 <span className="button-bg green"></span>
             </a>
+            {showEnrollmentModal && (
+                <Modal onClose={() => setShowEnrollmentModal(false)}>
+                    <EnrollmentCreateForm courseId={courseId} setShowEnrollmentModal={setShowEnrollmentModal} refreshEnrollmentList={refreshEnrollmentList} />
+                </Modal>
+                )}
             </div>
             <div className='CourseDetail-lists'>
                 <AssignmentList courseId={courseId}/>
-                <EnrollmentList courseId={courseId}/>
+                
+                <EnrollmentList id={courseId}/>
             </div>
         </div>
     );

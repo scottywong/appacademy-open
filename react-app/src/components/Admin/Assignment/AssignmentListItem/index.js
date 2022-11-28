@@ -17,6 +17,7 @@ function AssignmentListItem({assignment,refreshAssignmentList}){
     return (
         <div className='AssignmentListItem-container'>
             <div onClick={()=> history.push(`/learn/admin/tasks/${assignment?.Task?.id}`)} className='AssignmentListItem-name'>{assignment?.Task?.title}</div>
+           
             <div className='AssignmentListItem-btns'>
                 
             <a onClick={()=> setShowDeleteAssignmentModal(true)} className="button green">
