@@ -17,8 +17,8 @@ function AssignmentListItemStudent({assignment}){
     // console.log('ALIStudent-MyOneProgress', myOneProgress.completion_status)
     useEffect( ()=> {
 
-        if(myProgresses && myProgresses[assignment?.id].completion_status===1) setIsChecked(true)
-        if(myProgresses && myProgresses[assignment?.id].completion_status===0) setIsChecked(false)
+        if(myProgresses &&  myProgresses[assignment?.id] && myProgresses[assignment?.id].completion_status===1) setIsChecked(true)
+        if(myProgresses &&  myProgresses[assignment?.id] && myProgresses[assignment?.id].completion_status===0) setIsChecked(false)
 
     },[myProgresses])
     return (

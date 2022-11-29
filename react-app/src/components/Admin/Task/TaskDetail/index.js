@@ -43,38 +43,46 @@ function TaskDetail(){
     return (
 
         <div className='TaskDetail-container'>
-            <h1 className='TaskDetail-title'> {task?.title} </h1>
-            <div className='TaskDetail-btns'>
-                <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}/edit`)} className="button green">
-                    <span className="button-inner">Edit Task</span>
-                    <span className="button-bg green"></span>
-                </a>
+            <div className='TaskDetail-left-container'>
+                <div className='TaskDetail-left'>
+                    <h1 className='TaskDetail-title'> {task?.title} </h1>
+                    <div className='TaskDetail-btns'>
+                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}/edit`)} className="button green">
+                            <span className="button-inner">Edit Task</span>
+                            <span className="button-bg green"></span>
+                        </a>
 
-                <a onClick={() => setShowDeleteTaskModal(true)} className="button green">
-                    <span className="button-inner">Delete Task</span>
-                    <span className="button-bg green"></span>
-                </a>
-                {showDeleteTaskModal && (
-                <Modal onClose={() => setShowDeleteTaskModal(false)}>
-                    <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} refreshTaskList={refreshTaskList} />
-                </Modal>
-                )}
-                <a onClick={()=>setShowAssignmentModal(true)} className="button green">
-                    <span className="button-inner">Add Assignment</span>
-                    <span className="button-bg green"></span>
-                </a>
-                {showAssignmentModal && (
-                <Modal onClose={() => setShowAssignmentModal(false)}>
-                    <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
-                </Modal>
-                )}
-            </div>
-            <div className='TaskDetail-detail-container'>
-            {location.pathname.includes('/edit') && <TaskEditForm task={task} refreshOneTask={refreshOneTask} /> }
-            {!location.pathname.includes('/edit') && <div className='TaskDetail-detail'> {task?.detail} </div>}
-                <div className='TaskDetail-lists'>
-                    <AssignmentList taskId={taskId} refreshAssignmentList={refreshAssignmentList} />
+                        <a onClick={() => setShowDeleteTaskModal(true)} className="button green">
+                            <span className="button-inner">Delete Task</span>
+                            <span className="button-bg green"></span>
+                        </a>
+                        {showDeleteTaskModal && (
+                        <Modal onClose={() => setShowDeleteTaskModal(false)}>
+                            <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} refreshTaskList={refreshTaskList} />
+                        </Modal>
+                        )}
+                        <a onClick={()=>setShowAssignmentModal(true)} className="button green">
+                            <span className="button-inner">Add Assignment</span>
+                            <span className="button-bg green"></span>
+                        </a>
+                        {showAssignmentModal && (
+                        <Modal onClose={() => setShowAssignmentModal(false)}>
+                            <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                        </Modal>
+                        )}
+                    </div>
                 </div>
+                <div className='TaskDetail-lists'>
+                <AssignmentList taskId={taskId} refreshAssignmentList={refreshAssignmentList} />
+                </div>
+            </div>
+
+            <div className='TaskDetail-detail-container'>
+
+                {location.pathname.includes('/edit') && <div className='TaskDetail'> <TaskEditForm task={task} refreshOneTask={refreshOneTask} /> </div> }
+                {/* {!location.pathname.includes('/edit') && <div className='TaskDetail-detail'> {task?.detail} </div>} */}
+                {!location.pathname.includes('/edit') && <div className='TaskDetail' dangerouslySetInnerHTML={{__html: task?.detail}}></div> }
+              
             </div>
         </div>
     );

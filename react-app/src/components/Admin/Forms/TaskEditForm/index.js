@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchUpdateTask} from '../../../../store/task';
+import QuillEditor from '../../../QuillEditor';
 import './TaskEditForm.css';
 
 function TaskEditForm({task,refreshOneTask}){
@@ -13,6 +14,7 @@ function TaskEditForm({task,refreshOneTask}){
     const [title,setTitle] = useState(task?.title);
     const [task_detail,setTaskDetail] = useState(task?.detail);
     const [errors, setErrors] = useState([]);
+    const [value, setValue] =  useState("");
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -30,44 +32,55 @@ function TaskEditForm({task,refreshOneTask}){
         );
     }    
 
+    const onCancel = async (e) => {
+        e.preventDefault();
+        history.push(`/learn/admin/tasks/${task?.id}`)
+    }
+
     return (
+        <div className='TaskEditForm-container'>
+            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
+            <div className='TaskEditForm-btns'>
+                <button onClick={onSubmit}>Save</button>
+                <button onClick={onCancel}>Cancel</button>
+            </div>
+        </div>
+    //     <form className='taskEdit-container' onSubmit={onSubmit}>
+    //     <h2 className='taskEdit-form-title'>Add Task</h2>
+    //     <input
+    //     className='taskEdit-input-title'
+    //     type='text'
+    //     value={title}
+    //     onChange={(e) => setTitle(e.target.value)}
+    //     placeholder='Enter Title'
+    //     required
+    //     />
+    //     <textarea
+    //     className='taskEdit-input-title'
+    //     type='text'
+    //     value={task_detail}
+    //     onChange={(e) => setTaskDetail(e.target.value)}
+    //     placeholder='Enter Detail'
+    //     required
+    //     />
 
-        <form className='taskEdit-container' onSubmit={onSubmit}>
-        <h2 className='taskEdit-form-title'>Add Task</h2>
-        <input
-        className='taskEdit-input-title'
-        type='text'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder='Enter Title'
-        required
-        />
-        <textarea
-        className='taskEdit-input-title'
-        type='text'
-        value={task_detail}
-        onChange={(e) => setTaskDetail(e.target.value)}
-        placeholder='Enter Detail'
-        required
-        />
+    //     <ul className='errorMsg'>
+    //     {errors.map((error, idx) => (
+    //         <li className='errors' key={idx}>
+    //         {error}
+    //         </li>
+    //     ))}
+    //     </ul>
 
-        <ul className='errorMsg'>
-        {errors.map((error, idx) => (
-            <li className='errors' key={idx}>
-            {error}
-            </li>
-        ))}
-        </ul>
-
-        <div>
-        <button className='taskEdit-btn taskEdit-submit-btn'>Submit</button>
-        <button
-        className='taskEdit-btn taskEdit-cancel-btn'
-        >
-        Cancel
-        </button>
-    </div>
-    </form>
+    //     <div>
+    //     <button className='taskEdit-btn taskEdit-submit-btn'>Submit</button>
+    //     <button
+    //     className='taskEdit-btn taskEdit-cancel-btn'
+    //     >
+    //     Cancel
+    //     </button>
+    // </div>
+    // </form>
 
 
     )

@@ -1,17 +1,29 @@
 .TaskDetail-container{
+    display: grid;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    height: 100%;
+    grid-template-columns: 40% 60%;
+    
+}
+
+.TaskDetail-left-container{
+
     display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content:start;
-    max-width: 1400px;
-    margin: auto;
+    flex-direction: column;
+    align-items:left;
+    border-right: 1px ridge;
+}
+
+
+.TaskDetail-left{
+    margin:50px;
 }
 
 .TaskDetail-btns{
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
+    
 }
 .TaskDetail-detail{
     max-width: 800px;
@@ -20,10 +32,27 @@
     overflow-y: scroll;
 }
 .TaskDetail-lists{
-    display: block;
+    margin:50px;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 50px;
+    
+    
 }
 
 .TaskDetail-detail-container{
-    display:grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display:flex;
+    flex-direction: row;
+    margin-top:100px;
+    justify-content: flex-start;
+    /* display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); */
 }
+.TaskDetail{
+    width:100%;
+    
+    /* border: 1px gray solid; */
+    /* margin-right: 50px; */
+
+}
+
