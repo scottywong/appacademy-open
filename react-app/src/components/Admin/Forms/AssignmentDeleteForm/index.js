@@ -8,15 +8,18 @@ import './AssignmentDeleteForm.css';
 function AssignmentDeleteForm({  assignmentId, setShowDeleteAssignmentModal, refreshAssignmentList }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    // const location = useLocation();
 
     const [errors, setErrors] = useState([]);
+    const goAdminHome = () => {
+        history.push('/learn/admin')
+    }
 
     const onDelete = () => {
         dispatch(fetchDeleteAssignment(assignmentId))
           .then(() => setShowDeleteAssignmentModal(false))
           .then(refreshAssignmentList() )
           .then(refreshAssignmentList() )
-          .then(history.push('/learn/admin'))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);

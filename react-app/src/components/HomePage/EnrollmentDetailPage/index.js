@@ -6,6 +6,7 @@ import AssignmentDetailStudent from "../../Assignment/AssignmentDetailStudent";
 import { useEffect, useState } from "react";
 import { fetchUserEnrollments } from "../../../store/user";
 import { fetchGetEnrollmentById } from "../../../store/enrollment";
+import { fetchGetAssignmentById } from "../../../store/assignment";
 import './EnrollmentDetailPage.css';
 
 function EnrollmentDetailPage(){
@@ -18,14 +19,15 @@ function EnrollmentDetailPage(){
     const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
     const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment?.one_enrollment?.Assignments : state.enrollment));
     
-    // console.log('EnrollmentDefaultPage - enrollment: ', enrollment);
+    console.log('EnrollmentDefaultPage - enrollment: ', enrollment);
+    console.log('EnrollmentDefaultPage - assignmentId: ', assignmentId);
 
     let enrolled = false;
 
     useEffect(() => {
         dispatch(fetchUserEnrollments())
         .then(dispatch(fetchGetEnrollmentById(enrollmentId)))
-    },[dispatch]);
+    },[dispatch,assignmentId]);
     
     if(myEnrollments && myEnrollments[enrollment.id]) enrolled = true;
 
@@ -34,7 +36,7 @@ function EnrollmentDetailPage(){
             {enrolled  && 
             <div className='EnrollmentDetailPage-items'>
                     <AssignmentSideBar assignments={assignments} enrollment={enrollment}/>
-                    <AssignmentDetailStudent assignmentId={assignmentId}/>
+                    <AssignmentDetailStudent  assignmentId={assignmentId}/>
             </div>
             }
             {!enrolled &&

@@ -90,6 +90,7 @@
   
   .modal-btn:hover {
       background-color: white;
+      cursor: pointer;
       transition: 0.7s;
       color: black;
   }

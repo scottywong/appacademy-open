@@ -1,20 +1,43 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchUpdateTask} from '../../../../store/task';
 import QuillEditor from '../../../QuillEditor';
 import './TaskEditForm.css';
+import { useParams } from 'react-router';
+import { fetchGetTaskById } from '../../../../store/task';
+import { useEffect } from 'react';
 
-function TaskEditForm({task,refreshOneTask}){
+
+function TaskEditForm(){
     
     const dispatch = useDispatch();
     const history = useHistory();
+    const {taskId} = useParams();
 
-    console.log('this the task: ', task);
+    const refreshOneTask = () => {
+        dispatch(fetchGetTaskById(taskId));
+    }
+
+    const task = useSelector(state => state.task?.one_task);
     const [title,setTitle] = useState(task?.title);
     const [task_detail,setTaskDetail] = useState(task?.detail);
     const [errors, setErrors] = useState([]);
     const [value, setValue] =  useState("");
+
+    console.log(task_detail)
+
+    useEffect( ()=> {
+
+        if(task){
+            setTitle(task?.title);
+            setTaskDetail(task?.detail);
+        } else {
+            refreshOneTask();
+        }
+        
+    },[task])
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -39,49 +62,20 @@ function TaskEditForm({task,refreshOneTask}){
 
     return (
         <div className='TaskEditForm-container'>
-            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
+            <input
+            className='modal-input-title'
+            type='text'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='Enter Title'
+            required
+            />
+            {task_detail && <QuillEditor value={task_detail} setValue={setTaskDetail}/>}
             <div className='TaskEditForm-btns'>
-                <button onClick={onSubmit}>Save</button>
-                <button onClick={onCancel}>Cancel</button>
+                <button className='modal-btn modal-submit-btn' onClick={onSubmit}>Save</button>
+                <button className='modal-btn modal-cancel-btn' onClick={onCancel}>Cancel</button>
             </div>
         </div>
-    //     <form className='taskEdit-container' onSubmit={onSubmit}>
-    //     <h2 className='taskEdit-form-title'>Add Task</h2>
-    //     <input
-    //     className='taskEdit-input-title'
-    //     type='text'
-    //     value={title}
-    //     onChange={(e) => setTitle(e.target.value)}
-    //     placeholder='Enter Title'
-    //     required
-    //     />
-    //     <textarea
-    //     className='taskEdit-input-title'
-    //     type='text'
-    //     value={task_detail}
-    //     onChange={(e) => setTaskDetail(e.target.value)}
-    //     placeholder='Enter Detail'
-    //     required
-    //     />
-
-    //     <ul className='errorMsg'>
-    //     {errors.map((error, idx) => (
-    //         <li className='errors' key={idx}>
-    //         {error}
-    //         </li>
-    //     ))}
-    //     </ul>
-
-    //     <div>
-    //     <button className='taskEdit-btn taskEdit-submit-btn'>Submit</button>
-    //     <button
-    //     className='taskEdit-btn taskEdit-cancel-btn'
-    //     >
-    //     Cancel
-    //     </button>
-    // </div>
-    // </form>
-
 
     )
 }

@@ -86,7 +86,7 @@ function CourseDetail(){
                 )}
             </div>
             <div className='CourseDetail-lists'>
-                <AssignmentList courseId={courseId}/>
+                <AssignmentList refreshAssignmentList={refreshAssignmentList} courseId={courseId}/>
                 
                 <EnrollmentList id={courseId}/>
             </div>

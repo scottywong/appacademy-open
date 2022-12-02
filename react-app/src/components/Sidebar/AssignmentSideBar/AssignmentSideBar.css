@@ -18,3 +18,9 @@
 
     margin:auto;
 }
+
+.AssignmentSideBar-Enrollment{
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
