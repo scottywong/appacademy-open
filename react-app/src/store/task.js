@@ -99,16 +99,16 @@ export const fetchDeleteTask = (taskId) => async (dispatch) => {
     });
         
     if(res.ok){
-        const task = await res.json();
-        dispatch(deleteTask(task));
-        return task;
+        const returnMsg = await res.json();
+        dispatch(deleteTask(taskId));
+        return returnMsg;
     }
 
     return res;
 }
 
 // ******** REDUCER ********
-const initialState = {};
+const initialState = {all_tasks:null};
 
 const taskReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -117,23 +117,16 @@ const taskReducer = (state = initialState, action) => {
             newState.one_task = action.payload;
             return newState;
         case GET_TASKS:
-            newState.all_tasks = {};
-            action.payload['Tasks'].forEach(task => newState.all_tasks[task.id] = task);
+            newState.all_tasks=action.payload;
             return newState;
         case CREATE_TASK:
             newState.created_task = action.payload;
             newState.all_tasks[action.payload.id] = action.payload;
-            return {...newState};
-        case DELETE_TASK:
-            if(newState.all_tasks){
-                delete newState.all_tasks[action.payload];
-            }
-            return {...newState,
-                all_tasks: {
-                    ...newState.all_tasks
-                }
-            
+            return {...newState
             };
+        case DELETE_TASK:
+            delete newState.all_tasks[action.payload];
+            return newState;
         default:
             return newState;
     }

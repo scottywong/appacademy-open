@@ -5,17 +5,16 @@ import { useHistory } from 'react-router';
 import { fetchDeleteCourse } from '../../../../store/course';
 
 
-function CourseDeleteForm({  courseId, setShowDeleteCourseModal, refreshCourseList }) {
+function CourseDeleteForm({  courseId, setShowDeleteCourseModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [errors, setErrors] = useState([]);
 
-    const onDelete = () => {
+
+    const onDelete = async() => {
         dispatch(fetchDeleteCourse(courseId))
-          .then(() => setShowDeleteCourseModal(false))
-          .then(refreshCourseList() )
-          .then(refreshCourseList() )
+          .then(setShowDeleteCourseModal(false))
           .then(history.push('/learn/admin'))
           .catch(async (res) => {
             const data = await res.json();

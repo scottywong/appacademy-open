@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { fetchDeleteTask } from '../../../../store/task';
 
 
-function TaskDeleteForm({  taskId, setShowDeleteTaskModal, refreshTaskList }) {
+function TaskDeleteForm({  taskId, setShowDeleteTaskModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -13,10 +13,8 @@ function TaskDeleteForm({  taskId, setShowDeleteTaskModal, refreshTaskList }) {
 
     const onDelete = () => {
         dispatch(fetchDeleteTask(taskId))
-          .then(() => setShowDeleteTaskModal(false))
-          .then(refreshTaskList() )
-          .then(refreshTaskList() )
           .then(history.push('/learn/admin'))
+          .then(() => setShowDeleteTaskModal(false))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);

@@ -4,7 +4,7 @@ import { Modal} from '../../../../context/Modal';
 import CourseDeleteForm from '../../Forms/CourseDeleteForm';
 import './CourseListItem.css';
 
-function CourseListItem({course,refreshCourseList}){
+function CourseListItem({course}){
 
     const history = useHistory();
     const [showDeleteCourseModal,setShowDeleteCourseModal] = useState(false);
@@ -20,7 +20,7 @@ function CourseListItem({course,refreshCourseList}){
                     {/* <button className='green-btn' onClick={()=> setShowDeleteCourseModal(true)}> Delete Course </button> */}
                     {showDeleteCourseModal && (
                     <Modal onClose={() => setShowDeleteCourseModal(false)}>
-                        <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal} refreshCourseList={refreshCourseList} />
+                        <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal}  />
                     </Modal>
                     )}
                     

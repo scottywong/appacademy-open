@@ -18,6 +18,8 @@ function CourseDetail(){
 
     const dispatch = useDispatch();
     const {courseId} = useParams();
+    console.log('theCourseId: ', courseId);
+
     const history = useHistory();
     const location = useLocation();
     const course = useSelector(state => state.course?.one_course);
@@ -88,7 +90,7 @@ function CourseDetail(){
             <div className='CourseDetail-lists'>
                 <AssignmentList refreshAssignmentList={refreshAssignmentList} courseId={courseId}/>
                 
-                <EnrollmentList id={courseId}/>
+                <EnrollmentList courseId={courseId}/>
             </div>
         </div>
     );

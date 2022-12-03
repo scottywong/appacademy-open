@@ -10,7 +10,7 @@ course_routes = Blueprint('courses', __name__)
 @login_required
 def all_courses():
     courses = Course.query.all()
-    return {'Courses' : [course.to_dict() for course in courses]}
+    return  {course.id: course.to_dict() for course in courses}
 
 
 @course_routes.route('/',methods=['POST'])

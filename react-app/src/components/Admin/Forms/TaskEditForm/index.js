@@ -60,7 +60,8 @@ function TaskEditForm(){
         history.push(`/learn/admin/tasks/${task?.id}`)
     }
 
-    return (
+    //task &&
+    return  ( 
         <div className='TaskEditForm-container'>
             <input
             className='modal-input-title'

@@ -3,6 +3,7 @@ const GET_ENROLLMENT = 'user/GET_ENROLLMENT';
 const GET_ENROLLMENTS = 'admin/GET_ENROLLMENTS';
 const GET_ENROLLMENTSBYCOURSEID = 'admin/GET_ENROLLMENTSBYCOURSEID';
 const CREATE_ENROLLMENT = 'admin/CREATE_ENROLLMENT';
+const CREATE_ENROLLMENTS = 'admin/CREATE_ENROLLMENTS';
 const DELETE_ENROLLMENT = 'admin/DELETE_ENROLLMENT';
 
 // ******** Enrollment Actions ********'
@@ -21,10 +22,15 @@ const getEnrollmentById = (enrollment) => ({
     type: GET_ENROLLMENT,
     payload: enrollment
   });
-  const createEnrollment = (enrollment) => ({
+const createEnrollment = (enrollment) => ({
     type: CREATE_ENROLLMENT,
     payload: enrollment
 })
+const createEnrollments = (enrollments) => ({
+    type: CREATE_ENROLLMENTS,
+    payload: enrollments
+})
+
 
 const deleteEnrollment = (enrollmentId) => ({
     type: DELETE_ENROLLMENT,
@@ -83,6 +89,25 @@ export const fetchCreateEnrollment = (enrollment) => async (dispatch) => {
     };
     
 }
+
+export const fetchCreateEnrollments = (payload) => async (dispatch) => {
+
+    const res = await fetch(`/api/enrollments/list`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(payload)
+      }
+    );
+
+    if (res.ok){
+        const enrollments = await res.json();
+        dispatch(createEnrollments(enrollments));
+        return enrollments;
+    };
+    
+}
 export const fetchDeleteEnrollment = (enrollmentId) => async (dispatch) => {
 
     const res = await fetch(`/api/enrollments/${enrollmentId}`,{
@@ -117,6 +142,7 @@ const enrollmentReducer = (state = initialState, action) => {
             return newState;
         case CREATE_ENROLLMENT:
             newState.created_enrollment = action.payload;
+            if(newState.enrollments) newState.enrollments[action.payload?.id] = action.payload;
             if(newState.all_enrollments) newState.all_enrollments[action.payload?.id] = action.payload;
             return {...newState};
         case DELETE_ENROLLMENT:

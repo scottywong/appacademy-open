@@ -99,16 +99,16 @@ export const fetchDeleteCourse = (courseId) => async (dispatch) => {
     });
         
     if(res.ok){
-        const course = await res.json();
-        dispatch(deleteCourse(course));
-        return course;
+        const returnMsg = await res.json();
+        dispatch(deleteCourse(courseId));
+        return returnMsg;
     }
 
     return res;
 }
 
 // ******** REDUCER ********
-const initialState = {};
+const initialState = {one_course:null,created_course:null,all_courses:null};
 
 const courseReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -117,23 +117,15 @@ const courseReducer = (state = initialState, action) => {
             newState.one_course = action.payload;
             return newState;
         case GET_COURSES:
-            newState.all_courses = {};
-            action.payload['Courses'].forEach(course => newState.all_courses[course.id] = course);
+            newState.all_courses = action.payload;
             return newState;
         case CREATE_COURSE:
             newState.created_course = action.payload;
             newState.all_courses[action.payload.id] = action.payload;
             return {...newState};
         case DELETE_COURSE:
-            if(newState.all_courses){
                 delete newState.all_courses[action.payload];
-            }
-            return {...newState,
-                all_courses: {
-                    ...newState.all_courses
-                }
-            
-            };
+            return newState;
         default:
             return newState;
     }

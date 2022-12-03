@@ -8,24 +8,25 @@ import './CourseList.css';
 
 function CourseList(){
 
-    const courses = Object.values(useSelector(state => state.course?.all_courses ?  state.course?.all_courses :  [] ))
+    const courses = useSelector(state => state.course)
+    
     const dispatch = useDispatch();
-    console.log('courses: ', courses)
 
     const [showCourseModal,setShowCourseModal] = useState(false);
+    const [courseList,setCourseList] = useState(false);
 
-    const refreshCourseList = () => {
-
-        dispatch(fetchGetCourses());
-    }
     useEffect (() => {
+        if(courses.all_courses){
+            setCourseList(Object.values(courses.all_courses));
+        } 
+    },[courses]);
 
-        refreshCourseList();
-
+    useEffect( ()=> {
+        dispatch(fetchGetCourses());
     },[dispatch])
 
 
-    return  (
+    return courseList && (
 
         <div className="CourseList-container"> 
 
@@ -43,7 +44,7 @@ function CourseList(){
                 </Modal>
                 )}
 
-            {courses?.map( course =>  <CourseListItem course={course} refreshCourseList={refreshCourseList}/> )}
+            {courseList?.map( course =>  <CourseListItem key={course.id} course={course} /> )}
         </div>
     )
 }

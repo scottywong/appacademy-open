@@ -4,7 +4,7 @@ import TaskDeleteForm from '../../Forms/TaskDeleteForm';
 import { Modal } from '../../../../context/Modal';
 import './TaskListItem.css'
 
-function TaskListItem({task, refreshTaskList}){
+function TaskListItem({task}){
 
     const history = useHistory();
     const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
@@ -26,11 +26,10 @@ function TaskListItem({task, refreshTaskList}){
 
             {showDeleteTaskModal && (
                 <Modal onClose={() => setShowDeleteTaskModal(false)}>
-                    <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} refreshTaskList={refreshTaskList} />
+                    <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal}/>
                 </Modal>
                 )}
-            {/* <button className='green-btn'> Edit Task</button>
-            <button className='green-btn' onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Task </button> */}
+          
         </div>
         </div>
 

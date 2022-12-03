@@ -1,10 +1,14 @@
 // ******** User Constraints ********
+const GET_ALLUSERS = 'admin/GET_user_enrollments';
 const GET_USERENROLLMENTS = 'user/GET_user_enrollments';
 const GET_USERPROGRESSES = 'user/GET_user_progresses';
 const UPDATE_PROGRESS = 'progress/UPDATE_PROGRESS';
 
 // ******** User Actions ********
-
+const getAllUsers = (users) => ({
+    type: GET_ALLUSERS,
+    payload: users
+  });
 const getUserEnrollments = (enrollments) => ({
     type: GET_USERENROLLMENTS,
     payload: enrollments
@@ -19,7 +23,17 @@ const updateProgressById = (progress) => ({
 });
 
 // ******** User THUNKs ********
+export const fetchUsers = () => async (dispatch) => {
+    const res = await fetch(`/api/users/`);
 
+    console.log('the res:' , res);
+    if (res.ok){
+        const users = await res.json();
+        dispatch( getAllUsers(users));
+        return users
+    };
+    return res;
+};
 export const fetchUserEnrollments = () => async (dispatch) => {
     const res = await fetch(`/api/users/enrollments`);
 
@@ -64,18 +78,19 @@ export const fetchUpdateProgress = (id,completionStatus) => async (dispatch) => 
 };
 
 // ******** REDUCER ********
-const initialState = {};
+const initialState = {all_users:{},enrollments:{},progresses:{}};
 
 const userReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type) {
+        case GET_ALLUSERS:
+            newState.all_users=action.payload;
+            return newState;
         case GET_USERENROLLMENTS:
-            newState.enrollments = {};
-            action.payload['My Enrollments'].forEach(e => newState.enrollments[e.id] = e);
+            newState.enrollments=action.payload;
             return newState;
         case GET_USERPROGRESSES:
-            newState.progresses = {};
-            action.payload['My Progresses'].forEach(p => newState.progresses[p.assignmentId] = p);
+            newState.progresses=action.payload;
             return newState;
         case UPDATE_PROGRESS:
             // newState.progresses[action.payload.assignmentId] = action.payload;

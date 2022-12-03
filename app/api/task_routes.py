@@ -14,7 +14,7 @@ def tasks(id):
 @login_required
 def all_tasks():
     tasks = Task.query.all()
-    return {'Tasks' : [task.to_dict() for task in tasks]}
+    return {task.id : task.to_dict() for task in tasks}
 
 @task_routes.route('/',methods=['POST'])
 @login_required

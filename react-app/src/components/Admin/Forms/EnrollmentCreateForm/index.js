@@ -1,73 +1,55 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {fetchCreateEnrollment} from '../../../../store/enrollment';
-import { useLocation } from 'react-router';
+import {fetchCreateEnrollments} from '../../../../store/enrollment';
+import { useLocation, useParams } from 'react-router';
 import './EnrollmentCreateForm.css';
+import Search from '../../Search';
+import { useEffect } from 'react';
+import { fetchUsers } from '../../../../store/user';
 
-function EnrollmentCreateForm({id,setShowEnrollmentModal,refreshEnrollmentList}){
+function EnrollmentCreateForm({setShowEnrollmentModal}){
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const {courseId} = useParams();
 
-    const [courseId,setCourseId] = useState(id);
-    const [userId,setUserId] = useState('');
+    const [theCourseId,setCourseId] = useState(courseId);
+    const [userIdList,setUserIdList] = useState(new Set());
     const [errors, setErrors] = useState([]);
-    const [query, setQuery] = useState("");
+
+    console.log('theCourseId: ', theCourseId);
+    console.log('userIdList: ', userIdList);
+    
+    useEffect( () =>{
+        dispatch(fetchUsers());
+    },[dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         const payload = {
-            userId,
-            courseId
-        };
 
-        return dispatch(fetchCreateEnrollment(payload))
-        .then(refreshEnrollmentList())
-        .then(refreshEnrollmentList())
+            course:parseInt(theCourseId),
+            userid_list:userIdList
+        }
+
+        return dispatch(fetchCreateEnrollments(payload))
         .then(
             (res) => history.push(`/learn/admin/courses/${courseId}`)
-        );
+        )
+        .then( setShowEnrollmentModal(false));
     }    
 
     return(
        
     <div className='EnrollmentCreateForm-container'>
+
+       
         <form className='modal-container' onSubmit={onSubmit}>
             <h2 className='modal-form-title'>Create Enrollment</h2>
 
-            <input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
-        {
-            // Data.filter(post => {
-            // if (query === '') {
-            //     return post;
-            // } else if (post.title.toLowerCase().includes(query.toLowerCase())) {
-            //     return post;
-            // }
-            // }).map((post, index) => (
-            // <div className="box" key={index}>
-            //     <p>{post.title}</p>
-            //     <p>{post.author}</p>
-            // </div>
-            // ))
-        }
-            <input
-            className='modal-input-title'
-            type='text'
-            value={courseId}
-            onChange={(e) => setCourseId(e.target.value)}
-            placeholder='Enter courseId'
-            required
-            />
-            <input
-            className='modal-input-title'
-            type='text'
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            placeholder='Enter userId'
-            required
-            />
+            <Search type='user' selector={setUserIdList} selected={userIdList}/>
 
             <ul className='errorMsg'>
             {errors.map((error, idx) => (
@@ -78,13 +60,13 @@ function EnrollmentCreateForm({id,setShowEnrollmentModal,refreshEnrollmentList})
             </ul>
 
             <div>
-            <button className='modal-btn modal-submit-btn'>Submit</button>
-            <button
-            className='modal-btn modal-cancel-btn'
-            onClick={() => setShowEnrollmentModal(false)}
-            >
-            Cancel
-            </button>
+                <button className='modal-btn modal-submit-btn'>Submit</button>
+                <button
+                className='modal-btn modal-cancel-btn'
+                onClick={() => setShowEnrollmentModal(false)}
+                >
+                Cancel
+                </button>
         </div>
         </form>
     </div>

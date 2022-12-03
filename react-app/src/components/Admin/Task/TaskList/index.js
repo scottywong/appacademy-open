@@ -10,21 +10,23 @@ import { Modal } from '../../../../context/Modal';
 function TaskList(){
 
     const dispatch = useDispatch();
-    const tasks = Object.values(useSelector(state => state.task.all_tasks ? state.task.all_tasks : {} ));
+    const tasks = useSelector(state => state.task);
     const [showTaskModal,setShowTaskModal] = useState(false);
-    const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
 
-    const refreshTaskList = () => {
-
-        dispatch(fetchGetTasks());
-    }
+    const [taskList,setTaskList] = useState(false);
 
     useEffect(()=> {
-        refreshTaskList();
+        if(tasks.all_tasks){
+            setTaskList(Object.values(tasks.all_tasks));
+        } 
+    },[tasks]);
+
+    useEffect(()=> {
+        dispatch(fetchGetTasks());
     },[dispatch]);
 
 
-    return(
+    return taskList && (
     <div className='TaskList-container'> 
 
         <div className='TaskList-header'>
@@ -40,7 +42,7 @@ function TaskList(){
                     <TaskCreateForm setShowTaskModal={setShowTaskModal} />
                 </Modal>
                 )}
-        { tasks?.map( task => <TaskListItem task={task} refreshTaskList={refreshTaskList} /> )}
+        { taskList?.map( task => <TaskListItem key={task.id} task={task} /> )}
     </div>
     )
 }
