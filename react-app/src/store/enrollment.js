@@ -124,7 +124,11 @@ export const fetchDeleteEnrollment = (enrollmentId) => async (dispatch) => {
 }
 
 // ******** REDUCER ********
-const initialState = {};
+const initialState = {  one_enrollment:{},
+                        all_enrollments:{},
+                        enrollments:{},
+                        created_enrollment:{}
+                    };
 
 const enrollmentReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -133,12 +137,10 @@ const enrollmentReducer = (state = initialState, action) => {
             newState.one_enrollment = action.payload;
             return newState;
         case GET_ENROLLMENTS:
-            newState.all_enrollments = {};
-            action.payload['Enrollments'].forEach(enrollment => newState.all_enrollments[enrollment.id] = enrollment);
+            newState.all_enrollments = action.payload;
             return newState;
         case GET_ENROLLMENTSBYCOURSEID:
-            newState.enrollments = {};
-            action.payload['Enrollments'].forEach(enrollment => newState.enrollments[enrollment.id] = enrollment);
+            newState.enrollments = action.payload;
             return newState;
         case CREATE_ENROLLMENT:
             newState.created_enrollment = action.payload;

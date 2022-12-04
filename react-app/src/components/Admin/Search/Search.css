@@ -13,6 +13,7 @@
     margin: 3px;
     width: 20rem;
     padding-left: 10px;
+    height: 50px;
 }
 
 .selected{
@@ -23,5 +24,6 @@
     width: 20rem;
     padding-left: 10px;
     color: green;
+    height: 50px;
    
 }

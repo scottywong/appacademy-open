@@ -5,15 +5,15 @@ import TaskDeleteForm from '../../Forms/TaskDeleteForm';
 import './AssignmentListItem.css';
 import AssignmentDeleteForm from '../../Forms/AssignmentDeleteForm';
 
-function AssignmentListItem({assignment,refreshAssignmentList}){
+function AssignmentListItem({assignment}){
 
     const history = useHistory();
     const location = useLocation();
 
-    console.log(location.pathname);
+    // console.log(location.pathname);
     const [showDeleteAssignmentModal,setShowDeleteAssignmentModal] = useState(false);
 
-    console.log('ali: ', assignment)
+    // console.log('ali: ', assignment)
     return (
         <div className='AssignmentListItem-container'>
             <div onClick={()=> history.push(`/learn/admin/tasks/${assignment?.Task?.id}`)} className='AssignmentListItem-name'>{assignment?.Task?.title}</div>
@@ -27,7 +27,7 @@ function AssignmentListItem({assignment,refreshAssignmentList}){
 
             {showDeleteAssignmentModal && (
                 <Modal onClose={() => setShowDeleteAssignmentModal(false)}>
-                    <AssignmentDeleteForm assignmentId={assignment?.id} setShowDeleteAssignmentModal={setShowDeleteAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                    <AssignmentDeleteForm assignmentId={assignment?.id} setShowDeleteAssignmentModal={setShowDeleteAssignmentModal}  />
                 </Modal>
                 )}
                 {/* <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Assignment </button> */}

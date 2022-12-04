@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchCreateEnrollments} from '../../../../store/enrollment';
-import { useLocation, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import './EnrollmentCreateForm.css';
 import Search from '../../Search';
 import { useEffect } from 'react';
@@ -31,7 +31,7 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
         const payload = {
 
             course:parseInt(theCourseId),
-            userid_list:userIdList
+            userid_list:Array.from(userIdList)
         }
 
         return dispatch(fetchCreateEnrollments(payload))

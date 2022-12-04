@@ -17,7 +17,7 @@ def enrollments(id):
 @login_required
 def all_enrollments():
     enrollments = Enrollment.query.all()
-    return {'Enrollments' : [enrollment.to_dict() for enrollment in enrollments]}
+    return {enrollment.to_dict() for enrollment in enrollments}
 
 
 @enrollment_routes.route('/',methods=['POST'])

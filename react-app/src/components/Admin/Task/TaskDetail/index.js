@@ -67,7 +67,7 @@ function TaskDetail(){
                         </a>
                         {showAssignmentModal && (
                         <Modal onClose={() => setShowAssignmentModal(false)}>
-                            <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                            <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} type="task"/>
                         </Modal>
                         )}
                     </div>

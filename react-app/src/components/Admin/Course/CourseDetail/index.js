@@ -18,7 +18,7 @@ function CourseDetail(){
 
     const dispatch = useDispatch();
     const {courseId} = useParams();
-    console.log('theCourseId: ', courseId);
+    // console.log('theCourseId: ', courseId);
 
     const history = useHistory();
     const location = useLocation();
@@ -32,14 +32,6 @@ function CourseDetail(){
 
     const refreshOneCourse = () => {
         dispatch(fetchGetCourseById(courseId));
-    }
-
-    const refreshAssignmentList = () => {
-        dispatch(fetchGetAssignmentsByCourseId(courseId));
-    }
-
-    const refreshEnrollmentList = () => {
-        dispatch(fetchGetEnrollmentsByCourseId(courseId))
     }
 
     useEffect(()=> {
@@ -74,7 +66,7 @@ function CourseDetail(){
             </a>
             {showAssignmentModal && (
                 <Modal onClose={() => setShowDeleteCourseModal(false)}>
-                    <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} refreshAssignmentList={refreshAssignmentList} />
+                    <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} />
                 </Modal>
                 )}
             <a onClick={()=> setShowEnrollmentModal(true)} className="button green">
@@ -83,12 +75,12 @@ function CourseDetail(){
             </a>
             {showEnrollmentModal && (
                 <Modal onClose={() => setShowEnrollmentModal(false)}>
-                    <EnrollmentCreateForm courseId={courseId} setShowEnrollmentModal={setShowEnrollmentModal} refreshEnrollmentList={refreshEnrollmentList} />
+                    <EnrollmentCreateForm courseId={courseId} setShowEnrollmentModal={setShowEnrollmentModal} />
                 </Modal>
                 )}
             </div>
             <div className='CourseDetail-lists'>
-                <AssignmentList refreshAssignmentList={refreshAssignmentList} courseId={courseId}/>
+                <AssignmentList courseId={courseId}/>
                 
                 <EnrollmentList courseId={courseId}/>
             </div>

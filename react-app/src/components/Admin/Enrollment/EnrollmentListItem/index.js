@@ -3,7 +3,7 @@ import './EnrollmentListItem.css';
 
 function EnrollmentListItem({enrollment}){
 
-    console.log('the enrollment: ', enrollment)
+    // console.log('the enrollment: ', enrollment)
     return (
         <div className='EnrollmentListItem-container'>
    

@@ -78,10 +78,10 @@ def course(id):
 @login_required
 def enrollments(id):
     enrollments = Enrollment.query.filter(Enrollment.courseId==id).all()
-    return {'Enrollments' : [enrollment.to_dict() for enrollment in enrollments]}
+    return {enrollment.id: enrollment.to_dict() for enrollment in enrollments}
 
 @course_routes.route('/<int:id>/assignments')
 @login_required
 def assignments(id):
     assignments = Assignment.query.filter(Assignment.courseId==id).all()
-    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
+    return {assignment.id: assignment.to_dict() for assignment in assignments}

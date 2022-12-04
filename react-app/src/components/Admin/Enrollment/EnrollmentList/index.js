@@ -7,7 +7,7 @@ import './EnrollmentList.css';
 function EnrollmentList({courseId}){
     const dispatch = useDispatch();
     const enrollments = Object.values(useSelector(state => state.enrollment?.enrollments ?  state.enrollment?.enrollments :  [] ))
-    console.log('theCourseId-enrollmentlist: ', courseId);
+    // console.log('theCourseId-enrollmentlist: ', courseId);
     useEffect (() => {
         dispatch(fetchGetEnrollmentsByCourseId(courseId));
     },[dispatch])
@@ -16,7 +16,7 @@ function EnrollmentList({courseId}){
 
         <div className="EnrollmentList-container"> 
         <h1> Enrollment List </h1>
-            {enrollments?.map( enrollment =>  <EnrollmentListItem enrollment={enrollment} /> )}
+            {enrollments?.map( enrollment =>  <EnrollmentListItem enrollment={enrollment} key={enrollment.id} /> )}
             {enrollments?.length === 0 && <p>No enrollments to display.</p>}
         </div>
     )

@@ -72,4 +72,4 @@ def delete_task(id):
 @login_required
 def assignments(id):
     assignments = Assignment.query.filter(Assignment.taskId==id).all()
-    return {'Assignments' : [assignment.to_dict() for assignment in assignments]}
+    return {assignment.id: assignment.to_dict() for assignment in assignments}

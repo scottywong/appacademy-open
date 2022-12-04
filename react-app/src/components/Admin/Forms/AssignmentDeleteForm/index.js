@@ -5,10 +5,9 @@ import { useHistory } from 'react-router';
 import { fetchDeleteAssignment } from '../../../../store/assignment';
 import './AssignmentDeleteForm.css';
 
-function AssignmentDeleteForm({  assignmentId, setShowDeleteAssignmentModal, refreshAssignmentList }) {
+function AssignmentDeleteForm({  assignmentId, setShowDeleteAssignmentModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    // const location = useLocation();
 
     const [errors, setErrors] = useState([]);
     const goAdminHome = () => {
@@ -17,12 +16,9 @@ function AssignmentDeleteForm({  assignmentId, setShowDeleteAssignmentModal, ref
 
     const onDelete = () => {
         dispatch(fetchDeleteAssignment(assignmentId))
-          .then(() => setShowDeleteAssignmentModal(false))
-          .then(refreshAssignmentList() )
-          .then(refreshAssignmentList() )
-          .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
+        .then( setShowDeleteAssignmentModal(false))
+        .catch(async (res) => {
+            if (res && res.errors) setErrors(res.errors);
           });
     }
   return (

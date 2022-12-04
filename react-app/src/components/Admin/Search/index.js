@@ -1,6 +1,7 @@
 import { useState , useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { fetchGetCourses } from '../../../store/course';
+import { fetchGetTasks } from '../../../store/task';
 import { fetchUsers } from '../../../store/user';
 
 
@@ -13,18 +14,21 @@ const Search = ({type,selector,selected}) => {
     const [dataList, setDataList] = useState(false);
     const courses = useSelector(state => state.course)
     const users = useSelector(state => state.user);
+    const tasks = useSelector(state=>state.task)
 
     useEffect (() => {
       if(type==='course' && courses?.all_courses){
           setDataList(Object.values(courses.all_courses));
       } else if(type==='user' && users.all_users){
           setDataList(Object.values(users.all_users));
-      }
-    },[courses,users])
+      } else if(type==='task' && tasks.all_tasks){
+          setDataList(Object.values(tasks.all_tasks));
+      }},[courses,users,tasks])
 
     useEffect (() => {
         if(type==='course') dispatch(fetchGetCourses())
         if(type==='user') dispatch(fetchUsers())
+        if(type==='task') dispatch(fetchGetTasks())
     },[dispatch]);
  
 
@@ -49,7 +53,7 @@ const Search = ({type,selector,selected}) => {
 
     const onClickUnselect = (data) =>{
 
-      console.log('data: ', data)
+      // console.log('data: ', data)
       chosen.delete(data.id)
       setChosen(chosen)
       selected.delete(data.id)
@@ -57,9 +61,9 @@ const Search = ({type,selector,selected}) => {
       dataList.push(data)
       setDataList([...dataList])
 
-      console.log('dataList: ', dataList)
-      console.log('chosen: ', chosen)
-      console.log('selected: ', selected)
+      // console.log('dataList: ', dataList)
+      // console.log('chosen: ', chosen)
+      // console.log('selected: ', selected)
     }
 
 
@@ -71,7 +75,7 @@ const Search = ({type,selector,selected}) => {
                         dataList.filter(d => {
                             if (query ==='') {
                               return d;
-                            } else if (type === 'course' && d.title.toLowerCase().includes(query.toLowerCase())) {
+                            } else if ((type === 'course'|| type==='task') && d.title.toLowerCase().includes(query.toLowerCase())) {
                               return d;
                             } else if (
                               type === 'user' && 
@@ -81,8 +85,8 @@ const Search = ({type,selector,selected}) => {
                             }
                           }).map((d) => 
                                 <div className='box' onClick={() =>onClickSelect(d.id,d)} key={d.id} id={`box-${d.id}`}>
-                                {type === 'course' && d.title && <h1>{d.title}</h1>}
-                                {type === 'user' && d.username && <h1>{d.username}</h1>}
+                                {(type === 'course' || type==='task') && d.title && <p>{d.title}</p>}
+                                {type === 'user' && d.username && <p>{d.username}</p>}
                                 </div>
                         )
                     }
@@ -92,9 +96,9 @@ const Search = ({type,selector,selected}) => {
 
                      Array.from(chosen.entries()).map( choice => 
                              
-                            <div className='selected' onClick={() => onClickUnselect(choice[1])} id={`box-${choice[0]}`}>
-                                {type === 'course' &&  choice[1].title && <h1>{choice[1].title}</h1>}
-                                {type === 'user' && choice[1].username && <h1>{choice[1].username}</h1>}
+                            <div className='selected' onClick={() => onClickUnselect(choice[1])}  key={choice[0]}  id={`box-${choice[0]}`}>
+                                {(type === 'course' || type==='task') &&  choice[1].title && <p>{choice[1].title}</p>}
+                                {type === 'user' && choice[1].username && <p>{choice[1].username}</p>}
         
                             </div>
                         )
