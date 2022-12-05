@@ -20,20 +20,14 @@ function TaskDetail(){
     const {taskId} = useParams();
 
     const task = useSelector(state => state.task?.one_task);
-    const [showEditTaskModal,setShowEditTaskModal] = useState(false);
+
     const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
     const [showAssignmentModal,setShowAssignmentModal] = useState(false);
-    const [showDeleteAssignmentModal,setShowDeleteAssignmentModal] = useState(false);
-
-    const refreshTaskList = () => {
-        dispatch(fetchGetTasks());
-    }
-    const refreshOneTask = () => {
-        dispatch(fetchGetTaskById(taskId));
-    }
-    const refreshAssignmentList = () => {
-        dispatch(fetchGetAssignmentsByCourseId(task?.courseId));
-    }
+    const [oneTask,setOneTask] = useState(false);
+   
+    useEffect(()=> {
+        if(task?.one_task) setOneTask(task.one_task)
+    },task)
 
     useEffect(()=> {
         dispatch(fetchGetTaskById(taskId))
@@ -58,7 +52,7 @@ function TaskDetail(){
                         </a>
                         {showDeleteTaskModal && (
                         <Modal onClose={() => setShowDeleteTaskModal(false)}>
-                            <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} refreshTaskList={refreshTaskList} />
+                            <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} />
                         </Modal>
                         )}
                         <a onClick={()=>setShowAssignmentModal(true)} className="button green">
@@ -73,7 +67,7 @@ function TaskDetail(){
                     </div>
                 </div>
                 <div className='TaskDetail-lists'>
-                <AssignmentList taskId={taskId} refreshAssignmentList={refreshAssignmentList} />
+                <AssignmentList taskId={taskId} />
                 </div>
             </div>
 

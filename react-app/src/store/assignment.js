@@ -187,7 +187,7 @@ const assignmentReducer = (state = initialState, action) => {
             return {...newState};
         case DELETE_ASSIGNMENT:
             if(newState.assignmentsByCourseId[action.payload]) delete newState.assignmentsByCourseId[action.payload];
-            if(newState.assignmentsByTaskId[action.payload]) delete newState.assignmentsBytaskId[action.payload];
+            if(newState.assignmentsByTaskId[action.payload]) delete newState.assignmentsByTaskId[action.payload];
             return {...newState};
         default:
             return newState;

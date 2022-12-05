@@ -1,5 +1,5 @@
 // ******** User Constraints ********
-const GET_ALLUSERS = 'admin/GET_user_enrollments';
+const GET_ALLUSERS = 'admin/GET_all_users';
 const GET_USERENROLLMENTS = 'user/GET_user_enrollments';
 const GET_USERPROGRESSES = 'user/GET_user_progresses';
 const UPDATE_PROGRESS = 'progress/UPDATE_PROGRESS';

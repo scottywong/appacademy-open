@@ -16,8 +16,8 @@ function TaskDeleteForm({  taskId, setShowDeleteTaskModal }) {
           .then(history.push('/learn/admin'))
           .then(() => setShowDeleteTaskModal(false))
           .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
+           
+            if (res && res.errors) setErrors(res.errors);
           });
     }
   return (

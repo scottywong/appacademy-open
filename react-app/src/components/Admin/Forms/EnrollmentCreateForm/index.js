@@ -21,9 +21,9 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
     console.log('theCourseId: ', theCourseId);
     console.log('userIdList: ', userIdList);
     
-    useEffect( () =>{
-        dispatch(fetchUsers());
-    },[dispatch])
+    // useEffect( () =>{
+    //     dispatch(fetchUsers());
+    // },[dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();

@@ -1,20 +1,29 @@
 
+import EnrollmentDeleteForm from '../../Forms/EnrollmentDeleteForm';
+import { useState } from 'react';
+import { Modal } from '../../../../context/Modal';
+
+
 import './EnrollmentListItem.css';
 
 function EnrollmentListItem({enrollment}){
+    const [showDeleteEnrollmentModal,setShowDeleteEnrollmentModal] = useState(false);
 
-    // console.log('the enrollment: ', enrollment)
     return (
         <div className='EnrollmentListItem-container'>
    
         <div className='EnrollmentListItem-name'>{enrollment?.username}</div>
             <div className='EnrollmentListItem-btns'>
                 
-                <a onClick={()=> window.confirm('Are you sure you want to delete this item?')} className="button green">
+                <a onClick={()=> setShowDeleteEnrollmentModal(true)} className="button green">
                     <span className="button-inner"> Delete Enrollment</span>
                     <span className="button-bg green"></span>
                 </a>
-                {/* <button onClick={()=> window.confirm('Are you sure you want to delete this item?')}> Delete Enrollment </button> */}
+                {showDeleteEnrollmentModal && (
+                <Modal onClose={() => setShowDeleteEnrollmentModal(false)}>
+                    <EnrollmentDeleteForm enrollmentId={enrollment.id} setShowDeleteEnrollmentModal={setShowDeleteEnrollmentModal} />
+                </Modal>
+                )}
             </div>
         </div>
         

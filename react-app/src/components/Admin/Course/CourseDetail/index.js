@@ -18,7 +18,6 @@ function CourseDetail(){
 
     const dispatch = useDispatch();
     const {courseId} = useParams();
-    // console.log('theCourseId: ', courseId);
 
     const history = useHistory();
     const location = useLocation();
@@ -26,9 +25,6 @@ function CourseDetail(){
     const [showDeleteCourseModal,setShowDeleteCourseModal] = useState(false);
     const [showAssignmentModal,setShowAssignmentModal] = useState(false);
     const [showEnrollmentModal,setShowEnrollmentModal] = useState(false);
-    const refreshCourseList = () => {
-        dispatch(fetchGetCourses());
-    };
 
     const refreshOneCourse = () => {
         dispatch(fetchGetCourseById(courseId));
@@ -57,7 +53,7 @@ function CourseDetail(){
             </a>
             {showDeleteCourseModal && (
                 <Modal onClose={() => setShowDeleteCourseModal(false)}>
-                    <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal} refreshCourseList={refreshCourseList} />
+                    <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal} />
                 </Modal>
                 )}
             <a onClick={()=> setShowAssignmentModal(true)} className="button green">

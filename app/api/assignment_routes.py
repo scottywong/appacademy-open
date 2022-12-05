@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required,current_user
 from app.forms import AssignmentForm
 from app.models import db,Assignment
+
 assignment_routes = Blueprint('assignments', __name__)
 
 @assignment_routes.route('/<int:id>')
@@ -16,25 +17,25 @@ def all_assignments():
     assignments = Assignment.query.all()
     return {assignment.id:assignment.to_dict() for assignment in assignments}
 
-@assignment_routes.route('/',methods=['POST'])
-@login_required
-def create_assignment():
-    form = AssignmentForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+# @assignment_routes.route('/',methods=['POST'])
+# @login_required
+# def create_assignment():
+#     form = AssignmentForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
+#     if form.validate_on_submit():
 
-        assignment = Assignment(
-            # userId=current_user.id,
-            courseId=form.data['courseId'],
-            taskId=form.data['taskId']
-        )
+#         assignment = Assignment(
+#             # userId=current_user.id,
+#             courseId=form.data['courseId'],
+#             taskId=form.data['taskId']
+#         )
 
-        db.session.add(assignment)
-        db.session.commit()
-        return assignment.to_dict(), 200
+#         db.session.add(assignment)
+#         db.session.commit()
+#         return assignment.to_dict(), 200
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+#     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 @assignment_routes.route('/list',methods=['POST'])
 @login_required
@@ -69,10 +70,10 @@ def create_assignments():
                 #add enrollment object to enrollment_list
                 assignment_list.append(assignment)
             else:   
-                error_list.append({user_id:"Duplicate assignment found for taskId!"})
+                error_list.append({thetask_id:"Duplicate assignment found for taskId!"})
     elif parent_type =='task':
         for thecourse_id in courseid_list:
-            assignments = Assignment.query.filter(Assignment.taskId==task_id).filter(Assignment.coursed==thecourse_id).all()
+            assignments = Assignment.query.filter(Assignment.taskId==task_id).filter(Assignment.courseId==thecourse_id).all()
             print('the assignments: ',assignments)
             if len(assignments) == 0:
                 assignment = Assignment(
@@ -81,8 +82,8 @@ def create_assignments():
                 )
                 #add enrollment object to enrollment_list
                 assignment_list.append(assignment)
-        else:   
-            error_list.append({user_id:"Duplicate assignment found for courseId!"})
+            else:   
+                error_list.append({thecourse_id:"Duplicate assignment found for courseId!"})
     print('assignmentList', assignment_list)
     db.session.add_all(assignment_list)
     db.session.commit()

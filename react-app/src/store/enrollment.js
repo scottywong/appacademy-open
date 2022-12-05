@@ -113,11 +113,13 @@ export const fetchDeleteEnrollment = (enrollmentId) => async (dispatch) => {
     const res = await fetch(`/api/enrollments/${enrollmentId}`,{
         method: 'DELETE'
     });
+
+    console.log('fde: ', res)
         
     if(res.ok){
-        const enrollment = await res.json();
-        dispatch(deleteEnrollment(enrollment));
-        return enrollment;
+        const returnMsg = await res.json();
+        dispatch(deleteEnrollment(enrollmentId));
+        return returnMsg;
     }
 
     return res;
@@ -131,6 +133,9 @@ const initialState = {  one_enrollment:{},
                     };
 
 const enrollmentReducer = (state = initialState, action) => {
+
+    console.log('action.payload: ', action.payload)
+        
     let newState = {...state};
     switch(action.type) {
         case GET_ENROLLMENT:
@@ -144,19 +149,17 @@ const enrollmentReducer = (state = initialState, action) => {
             return newState;
         case CREATE_ENROLLMENT:
             newState.created_enrollment = action.payload;
-            if(newState.enrollments) newState.enrollments[action.payload?.id] = action.payload;
+            newState.enrollments[action.payload?.id] = action.payload;
             if(newState.all_enrollments) newState.all_enrollments[action.payload?.id] = action.payload;
             return {...newState};
+        case CREATE_ENROLLMENTS:
+            newState.all_enrollments = Object.assign(newState.all_enrollments,action.payload);
+            newState.enrollments = Object.assign(newState.enrollments,action.payload)
+            return {...newState};
         case DELETE_ENROLLMENT:
-            if(newState.all_enrollments){
-                delete newState.all_enrollments[action.payload?.id];
-            }
-            return {...newState,
-                all_enrollments: {
-                    ...newState.all_enrollments
-                }
-            
-            };
+            if(newState.all_enrollments[action.payload]) delete newState.all_enrollments[action.payload];
+            if(newState.enrollments[action.payload]) delete newState.enrollments[action.payload];
+            return {...newState};
         default:
             return newState;
     }

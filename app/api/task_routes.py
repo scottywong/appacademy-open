@@ -32,7 +32,7 @@ def create_task():
 
         db.session.add(task)
         db.session.commit()
-        return task.to_dict(), 200
+        return {task.id: task.to_dict()}, 200
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 @task_routes.route('/<int:id>',methods=['POST'])
