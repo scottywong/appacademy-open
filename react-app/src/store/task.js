@@ -73,8 +73,6 @@ export const fetchCreateTask = (task) => async (dispatch) => {
 }
 
 export const fetchUpdateTask = (task, taskId) => async (dispatch) => {
-
-    console.log('this the payload: ', task);
     
 const res = await fetch(`/api/tasks/${taskId}`,{
     method: 'POST',
@@ -108,7 +106,11 @@ export const fetchDeleteTask = (taskId) => async (dispatch) => {
 }
 
 // ******** REDUCER ********
-const initialState = {all_tasks:null};
+const initialState = {
+            all_tasks:null,
+            created_task:null,
+            one_task:null
+        };
 
 const taskReducer = (state = initialState, action) => {
     let newState = {...state};
@@ -124,6 +126,9 @@ const taskReducer = (state = initialState, action) => {
             newState.all_tasks[action.payload.id] = action.payload;
             return {...newState
             };
+        case UPDATE_TASK:
+            newState.one_task = action.payload;
+            return newState;
         case DELETE_TASK:
             delete newState.all_tasks[action.payload];
             return newState;

@@ -15,29 +15,24 @@ function TaskEditForm(){
     const history = useHistory();
     const {taskId} = useParams();
 
-    const refreshOneTask = () => {
-        dispatch(fetchGetTaskById(taskId));
-    }
+    const task = useSelector(state => state.task)
 
-    const task = useSelector(state => state.task?.one_task);
-    const [title,setTitle] = useState(task?.title);
-    const [task_detail,setTaskDetail] = useState(task?.detail);
+    const [id,setId] = useState(false);
+    const [title,setTitle] = useState(false);
+    const [task_detail,setTaskDetail] = useState(false);
     const [errors, setErrors] = useState([]);
-    const [value, setValue] =  useState("");
-
-    console.log(task_detail)
 
     useEffect( ()=> {
-
-        if(task){
-            setTitle(task?.title);
-            setTaskDetail(task?.detail);
-        } else {
-            refreshOneTask();
+        if(task.one_task){
+            setId(task.one_task.id);
+            setTitle(task.one_task.title);
+            setTaskDetail(task.one_task.detail);
         }
-        
-    },[task])
+    },[task.one_task])
 
+    useEffect( ()=> {
+        dispatch(fetchGetTaskById(taskId));
+    },[dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -47,22 +42,19 @@ function TaskEditForm(){
             task_detail
         };
 
-        return dispatch(fetchUpdateTask(payload,task?.id))
-        .then(refreshOneTask())
-        .then(refreshOneTask())
+        return dispatch(fetchUpdateTask(payload,id))
         .then(
-            (res) => history.push(`/learn/admin/tasks/${res.id}`)
+            (res) => history.push(`/learn/admin/tasks/${id}`)
         );
     }    
 
     const onCancel = async (e) => {
         e.preventDefault();
-        history.push(`/learn/admin/tasks/${task?.id}`)
+        history.push(`/learn/admin/tasks/${id}`)
     }
 
-    //task &&
-    return  ( 
-        <div className='TaskEditForm-container'>
+    return title && task_detail && ( 
+         <div className='TaskEditForm-container'>
             <input
             className='modal-input-title'
             type='text'
@@ -71,7 +63,7 @@ function TaskEditForm(){
             placeholder='Enter Title'
             required
             />
-            {task_detail && <QuillEditor value={task_detail} setValue={setTaskDetail}/>}
+           <QuillEditor value={task_detail} setValue={setTaskDetail}/>
             <div className='TaskEditForm-btns'>
                 <button className='modal-btn modal-submit-btn' onClick={onSubmit}>Save</button>
                 <button className='modal-btn modal-cancel-btn' onClick={onCancel}>Cancel</button>

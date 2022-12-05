@@ -13,11 +13,6 @@ function AssignmentList({courseId,taskId}){
    
     const [assignmentsTask,setAsssignmentsTask] = useState(false);
     const [assignmentsCourse,setAsssignmentsCourse] = useState(false);
-    
-    console.log('AssignmentList - tasks: ', assignmentsTask)
-    // console.log('AssignmentList - courses: ', assignmentsCourse)
-
-    console.log('al - taskId: ', taskId)
 
     useEffect(()=> {
         if(location.pathname.includes('/tasks') && assignments.assignmentsByTaskId){

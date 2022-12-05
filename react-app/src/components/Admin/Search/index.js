@@ -52,8 +52,6 @@ const Search = ({type,selector,selected}) => {
     }
 
     const onClickUnselect = (data) =>{
-
-      // console.log('data: ', data)
       chosen.delete(data.id)
       setChosen(chosen)
       selected.delete(data.id)
@@ -61,9 +59,6 @@ const Search = ({type,selector,selected}) => {
       dataList.push(data)
       setDataList([...dataList])
 
-      // console.log('dataList: ', dataList)
-      // console.log('chosen: ', chosen)
-      // console.log('selected: ', selected)
     }
 
 

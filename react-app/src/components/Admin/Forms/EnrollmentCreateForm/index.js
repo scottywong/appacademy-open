@@ -18,9 +18,6 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
     const [userIdList,setUserIdList] = useState(new Set());
     const [errors, setErrors] = useState([]);
 
-    console.log('theCourseId: ', theCourseId);
-    console.log('userIdList: ', userIdList);
-    
     // useEffect( () =>{
     //     dispatch(fetchUsers());
     // },[dispatch])

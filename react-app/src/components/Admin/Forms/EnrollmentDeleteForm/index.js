@@ -11,8 +11,6 @@ function EnrollmentDeleteForm({  enrollmentId, setShowDeleteEnrollmentModal }) {
 
     const [errors, setErrors] = useState([]);
 
-    console.log('enrollmentId: ', enrollmentId)
-
     const onDelete = async() => {
         dispatch(fetchDeleteEnrollment(enrollmentId))
           .then(setShowDeleteEnrollmentModal(false))

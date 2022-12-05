@@ -113,8 +113,6 @@ export const fetchDeleteEnrollment = (enrollmentId) => async (dispatch) => {
     const res = await fetch(`/api/enrollments/${enrollmentId}`,{
         method: 'DELETE'
     });
-
-    console.log('fde: ', res)
         
     if(res.ok){
         const returnMsg = await res.json();
@@ -133,8 +131,6 @@ const initialState = {  one_enrollment:{},
                     };
 
 const enrollmentReducer = (state = initialState, action) => {
-
-    console.log('action.payload: ', action.payload)
         
     let newState = {...state};
     switch(action.type) {

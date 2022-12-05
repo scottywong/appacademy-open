@@ -13,14 +13,10 @@ function AssignmentCreateForm({setShowAssignmentModal}){
     const {taskId,courseId} = useParams();
 
     const parentType = courseId ? 'course': 'task'
-    console.log('taskId: ', taskId);
-    console.log('courseId: ', courseId);
 
     const [courseIdList,setCourseIdList] = useState(new Set());
     const [taskIdList,setTaskIdList] = useState(new Set());
     const [errors, setErrors] = useState([]);
-
-    console.log('errors: ', errors)
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -38,8 +34,6 @@ function AssignmentCreateForm({setShowAssignmentModal}){
         return dispatch(fetchCreateAssignments(payload))
         .then(setShowAssignmentModal(false))
         .catch(async (res) => {
-           
-            console.log(res)
             if (res && res.errors) setErrors(res.errors);
           });
        

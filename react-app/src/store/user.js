@@ -26,7 +26,6 @@ const updateProgressById = (progress) => ({
 export const fetchUsers = () => async (dispatch) => {
     const res = await fetch(`/api/users/`);
 
-    console.log('the res:' , res);
     if (res.ok){
         const users = await res.json();
         dispatch( getAllUsers(users));

@@ -7,12 +7,6 @@ function AssignmentSideBar({assignments,enrollment}){
     const history = useHistory();
     const location = useLocation();
 
-    console.log('location: ', location.pathname)
-
-    console.log('AssignmentSideBar-assignment: ', assignments)
-    console.log('AssignmentSideBar-enrollment: ', enrollment)
-    
-
     return (
         <div className="AssignmentSideBar-container">
 

@@ -111,7 +111,6 @@ export const fetchCreateAssignment = (assignment) => async (dispatch) => {
 
 export const fetchCreateAssignments = (payload) => async (dispatch) => {
 
-    // console.log('JSON.stringify(assignments)', JSON.stringify(assignments))
     const res = await fetch(`/api/assignments/list`,{
         method: 'POST',
         headers: {
@@ -134,11 +133,8 @@ export const fetchDeleteAssignment = (assignmentId) => async (dispatch) => {
         method: 'DELETE'
     });
 
-    console.log('fetchDeleteAssignment - res: ', res)
-        
     if(res.ok){
         const returnMsg = await res.json();
-        console.log('returnMsg: ', returnMsg)
         dispatch(deleteAssignment(assignmentId));
         return returnMsg;
     }
@@ -179,7 +175,6 @@ const assignmentReducer = (state = initialState, action) => {
             if(newState.assignmentsByTaskId) newState.assignmentsByTaskId[action.payload?.taskId] = action.payload;
             return {...newState};
         case CREATE_ASSIGNMENTS:
-            console.log('action.parentType:' , action.parentType)
             newState.created_assignments = action.payload;
             newState.all_assignments = Object.assign(newState.all_assignments,action.payload) 
             if(action.parentType==='course') newState.assignmentsByCourseId = Object.assign(newState.assignmentsByCourseId,action.payload) 
