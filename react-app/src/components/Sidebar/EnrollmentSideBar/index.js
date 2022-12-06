@@ -3,14 +3,14 @@ import './EnrollmentSideBar.css';
 
 function EnrollmentSideBar({enrollments}){
 
+    console.log('esb: ', enrollments)
 
-    return (
+    return enrollments && (
 
         <div className='enroll-sidebar-container'>
-
+            <h3>Courses </h3>
             {enrollments &&  enrollments.map(enrollment => (
-                <EnrollmentListItemStudent enrollment={enrollment} />
-                
+                <EnrollmentListItemStudent enrollment={enrollment} />    
             ))}
 
         </div>

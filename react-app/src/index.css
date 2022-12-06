@@ -48,9 +48,9 @@ html, body, #root {
 
 .button-inner{
     display: inline-block;
-	padding: 7px 10px 5px;
-	position: relative;
-	z-index: 1;
+    padding: 7px 10px 5px;
+    position: relative;
+    z-index: 1;
 }
 
 .button-bg{
@@ -112,4 +112,100 @@ html, body, #root {
     cursor: pointer;
     font-weight: 700;
     outline-color: #d0021b;
+}
+/* 
+.sidebar{
+    width: 400px;
+    float: left;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+    transition: width 0.3s ease 0s;
+    overflow: hidden auto;
+    height: 100%;
+    box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
+    position: relative;
+    background: rgb(255, 255, 255);
+}
+.hide-sidebar{
+
+    width: 0px !important;
+
+} */
+
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: lightcoral;
+  }
+  .sidebar {
+    position: absolute;
+    top: 60px;
+    left: -15vw;
+    height: calc(100% - 160px);
+    width: 15vw;
+    transition: left 0.3s ease-in-out;
+    background-color: white;
+    
+  }
+  .sidebar-toggle {
+    position: absolute;
+    top: 20%;
+    right: -60px;
+    height: 60px;
+    width: 60px;
+    z-index: 1;
+  }
+  .content {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 100%;
+    transition: left 0.3s ease-in-out;
+    background-color: white;
+
+  }
+  .sidebar-active-content{
+
+    position: relative;
+    left: 200px;
+    transition: right 0.3s ease-in-out;
+  }
+
+  .sidebar-inactive-content{
+    position: relative;
+    left: 0px;
+    transition: left 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  .content.open {
+    left: 15vw;
+  }
+  
+
+
+.fa-bars,fa-arrow-left-long,.fa-bars,fa-arrow-right-long{
+
+  color: rgb(163, 198, 231);
+ 
+}
+
+.fa-bars:hover,fa-arrow-left-long{
+
+  color: white;
+  cursor: pointer;
+
+}
+
+.learnpage-title-container{
+  background-color: #1464cb;
 }

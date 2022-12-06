@@ -15,8 +15,6 @@ function TaskDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
-
-    console.log('pathname: ', location.pathname);
     const {taskId} = useParams();
 
     const task = useSelector(state => state.task?.one_task);
@@ -74,7 +72,6 @@ function TaskDetail(){
             <div className='TaskDetail-detail-container'>
 
                 {location.pathname.includes('/edit') && <div className='TaskDetail'> <TaskEditForm /> </div> }
-                {/* {!location.pathname.includes('/edit') && <div className='TaskDetail-detail'> {task?.detail} </div>} */}
                 {!location.pathname.includes('/edit') && 
                 (<div className='TaskDetail'>
                     <h1 className='TaskDetail-title'> {task?.title} </h1>

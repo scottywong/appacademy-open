@@ -66,6 +66,7 @@ export const fetchCreateTask = (task) => async (dispatch) => {
 
     if (res.ok){
         const task = await res.json();
+        console.log('created task: ', task)
         dispatch(createTask(task));
         return task;
     };

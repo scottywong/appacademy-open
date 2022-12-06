@@ -14,6 +14,8 @@ function AssignmentList({courseId,taskId}){
     const [assignmentsTask,setAsssignmentsTask] = useState(false);
     const [assignmentsCourse,setAsssignmentsCourse] = useState(false);
 
+    console.log("assignmentsTask:" , assignmentsTask);
+    console.log("assignmentsCourse:" , assignmentsCourse);
     useEffect(()=> {
         if(location.pathname.includes('/tasks') && assignments.assignmentsByTaskId){
             setAsssignmentsTask(Object.values(assignments.assignmentsByTaskId))
@@ -29,12 +31,12 @@ function AssignmentList({courseId,taskId}){
     },[dispatch]);
 
     return  (assignmentsTask ||assignmentsCourse) && (
-
+       
         <div className="AssignmentList-container"> 
         <h1> Assignment List </h1>
             {assignmentsTask && assignmentsTask?.map( assignment =>  <AssignmentListItem assignment={assignment} key={`at-${assignment.id}`} /> )}
             {assignmentsCourse&& assignmentsCourse?.map( assignment =>  <AssignmentListItem assignment={assignment} key={`ac-${assignment.id}`} /> )}
-            {assignmentsTask?.length === 0 && assignmentsCourse?.length === 0 && <p>No assignments to display.</p>}
+            {((assignmentsTask && assignmentsTask?.length === 0 )|| (assignmentsCourse && assignmentsCourse?.length === 0)) && <p>No assignments to display.</p>}
         </div>
     )
 }

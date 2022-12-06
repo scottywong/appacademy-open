@@ -1,12 +1,10 @@
 .LearnDefaultPage-container{
 
 
+   
     display: flex;
     flex-direction: column;
-    margin:auto;
-
-    width: fit-content;
-    padding-left:50px;
-    padding-right: 50px;
-
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

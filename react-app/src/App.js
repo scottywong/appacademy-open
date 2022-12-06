@@ -25,8 +25,24 @@ import AdminDetail from './components/Admin/AdminDetail';
 import CourseDetail from './components/Admin/Course/CourseDetail';
 import TaskDetail from './components/Admin/Task/TaskDetail';
 
+import LearnSideBar from './components/Sidebar/LearnSideBar';
+
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [sidebarOpen, setSideBarOpen] = useState(true);
+  const handleViewSidebar = () => {
+    setSideBarOpen(!sidebarOpen);
+    if(sidebarOpen){
+      const el = document.querySelector('.sidebar-active-content')
+      el?.classList.remove('sidebar-active-content')
+      el?.classList.add('sidebar-inactive-content')
+    } else {
+      const el = document.querySelector('.sidebar-inactive-content')
+      el?.classList.remove('sidebar-inactive-content')
+      el?.classList.add('sidebar-active-content')
+    }
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +59,8 @@ function App() {
   return (
     <BrowserRouter>
       <ProtectedRoute path='/learn'>
-          <LearnNavBar/>
+          <LearnNavBar toggleSidebar={handleViewSidebar}/>
+          
       </ProtectedRoute>
       <Switch>
         <Route path='/' exact={true}>
@@ -68,16 +85,22 @@ function App() {
           <Redirect to='/learn/home' />
         </ProtectedRoute>
         <ProtectedRoute path='/learn/home'>
+          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
           <LearnHomePage/>
         </ProtectedRoute>
         <ProtectedRoute path='/learn/profile' exact={true} >
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
+          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
           <EnrollmentHomePage />
         </ProtectedRoute>
-        <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'>  
-          <EnrollmentDetailPage/>
+        <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
+          
+            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> 
+     
+            <EnrollmentDetailPage/>
+
         </ProtectedRoute>
         <ProtectedRoute path='/learn/admin' exact={true} >
           <ProtectedRouteAdmin>

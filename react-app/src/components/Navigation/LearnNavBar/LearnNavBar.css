@@ -7,10 +7,12 @@
     align-items:center;
     padding: 20px;
 }
-.LearnNavBar-menu{
+.LearnNavToggle{
+
 
     
 }
+
 .LearnNavBar-links{
 
     display: flex;

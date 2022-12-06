@@ -7,9 +7,11 @@ function AssignmentSideBar({assignments,enrollment}){
     const history = useHistory();
     const location = useLocation();
 
+    console.log('asb: - assignments', assignments)
+    console.log('asb: - enrollment', enrollment)
     return (
         <div className="AssignmentSideBar-container">
-
+        <h3>Tasks </h3>
         <div className='AssignmentSideBar-Enrollment-header' >
             <i className="fa-solid fa-arrow-left"></i>
             { location.pathname.startsWith(`/learn/enrollments/${enrollment?.id}/assignments`) && <div className='AssignmentSideBar-Enrollment' onClick={() => history.push(`/learn/enrollments/${enrollment.id}/home`)}> {enrollment?.course_title}</div>}

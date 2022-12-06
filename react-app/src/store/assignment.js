@@ -120,11 +120,11 @@ export const fetchCreateAssignments = (payload) => async (dispatch) => {
       }
     );
 
-    if (res.ok){
+    // if (res.ok){
         const assignments = await res.json();
-        dispatch(createAssignments(assignments,payload.parent_type));
+        if(!assignments.errors) dispatch(createAssignments(assignments,payload.parent_type));
         return assignments;
-    };
+    // };
     
 }
 export const fetchDeleteAssignment = (assignmentId) => async (dispatch) => {

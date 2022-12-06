@@ -30,11 +30,13 @@ function AssignmentCreateForm({setShowAssignmentModal}){
             courseid_list:Array.from(courseIdList)
         };
 
-
         return dispatch(fetchCreateAssignments(payload))
-        .then(setShowAssignmentModal(false))
-        .catch(async (res) => {
-            if (res && res.errors) setErrors(res.errors);
+        .then( (res) => {
+            if (res && res.errors){
+                setErrors(res.errors)
+            } else {
+                setShowAssignmentModal(false)
+            }
           });
        
     }    

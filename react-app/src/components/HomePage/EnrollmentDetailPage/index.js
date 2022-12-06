@@ -15,12 +15,7 @@ function EnrollmentDetailPage(){
     const {enrollmentId,assignmentId} = useParams();
 
     const myEnrollments = useSelector(state=>state.user?.enrollments)
-    console.log(myEnrollments)
     const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
-    const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment?.one_enrollment?.Assignments : state.enrollment));
-    
-    console.log('EnrollmentDefaultPage - enrollment: ', enrollment);
-    console.log('EnrollmentDefaultPage - assignmentId: ', assignmentId);
 
     let enrolled = false;
 
@@ -32,10 +27,10 @@ function EnrollmentDetailPage(){
     if(myEnrollments && myEnrollments[enrollment.id]) enrolled = true;
 
     return (
-        <div className='EnrollmentDetailPage-container'>
+        <div className='EnrollmentDetailPage-container sidebar-active-content'>
             {enrolled  && 
             <div className='EnrollmentDetailPage-items'>
-                    <AssignmentSideBar assignments={assignments} enrollment={enrollment}/>
+                    {/* <AssignmentSideBar assignments={assignments} enrollment={enrollment}/> */}
                     <AssignmentDetailStudent  assignmentId={assignmentId}/>
             </div>
             }

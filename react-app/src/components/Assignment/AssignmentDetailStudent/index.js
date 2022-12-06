@@ -5,7 +5,6 @@ import {fetchGetAssignmentById} from '../../../store/assignment';
 
 import './AssignmentDetailStudent.css';
 import { fetchUserProgresses, fetchUpdateProgress } from '../../../store/user';
-// import { fetchUpdateProgress } from '../../../store/progress';
 
 function AssignmentDetailStudent(){
 
@@ -15,8 +14,6 @@ function AssignmentDetailStudent(){
     const assignment = useSelector(state => state.assignment?.one_assignment);
     const myProgresses = useSelector(state => state.user.progresses);
 
-    console.log('adS-assignment: ', assignment);
-    console.log('adS-progresses: ', myProgresses);
     let adsProgress;
 
     if(myProgresses){

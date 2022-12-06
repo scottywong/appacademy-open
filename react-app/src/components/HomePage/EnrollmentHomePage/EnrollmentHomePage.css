@@ -1,6 +1,8 @@
 .EnrollmentHomePage-container{
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
 
 }
 
@@ -8,4 +10,5 @@
 .EnrollmentHomePage-items{
     display: flex;
     flex-direction: row;
+    width: max-content;
 }

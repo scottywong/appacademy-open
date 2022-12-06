@@ -4,7 +4,6 @@ import { fetchGetCourses } from '../../../store/course';
 import { fetchGetTasks } from '../../../store/task';
 import { fetchUsers } from '../../../store/user';
 
-
 import './Search.css'
 
 const Search = ({type,selector,selected}) => {

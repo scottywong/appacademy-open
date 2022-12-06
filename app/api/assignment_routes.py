@@ -83,13 +83,13 @@ def create_assignments():
                 #add enrollment object to enrollment_list
                 assignment_list.append(assignment)
             else:   
-                error_list.append({thecourse_id:"Duplicate assignment found for courseId!"})
+                error_list.append(f"Duplicate assignment found for courseId: {thecourse_id}!")
     print('assignmentList', assignment_list)
     db.session.add_all(assignment_list)
     db.session.commit()
     if len(error_list) > 0:
         print('error_list: ', error_list)
-        return {"errors": (error_list)}, 401
+        return {"errors":  [ error for error in error_list]}, 401
     else:
         return {assignment.id:assignment.to_dict() for assignment in assignment_list}, 200
     

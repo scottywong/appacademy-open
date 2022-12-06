@@ -13,11 +13,7 @@ function AssignmentListItemStudent({assignment}){
     const [isChecked,setIsChecked] = useState(false);
 
     const myProgresses = useSelector(state => state.user.progresses);
-    // const myOneProgress = useSelector(state => state.progress)
-    // console.log('ALIStudent: ', assignment)
-    // console.log('ALIStudent-myProgresses', myProgresses)
-    // console.log('ALIStudent-MyOneProgress', myOneProgress.completion_status)
-
+    
     const refreshADS = (assignmentId) => {
         dispatch(fetchGetAssignmentById(assignmentId))
     }

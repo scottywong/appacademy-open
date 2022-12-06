@@ -1,11 +1,15 @@
 .EnrollmentDetailPage-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
+    
 }
 
 
 .EnrollmentDetailPage-items{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    width: 800px;
 }

@@ -86,11 +86,13 @@ const userReducer = (state = initialState, action) => {
             newState.all_users=action.payload;
             return newState;
         case GET_USERENROLLMENTS:
+            console.log('action.payload: ', action.payload)
             newState.enrollments=action.payload;
-            return newState;
+            console.log('newState: ', newState)
+            return {...newState};
         case GET_USERPROGRESSES:
             newState.progresses=action.payload;
-            return newState;
+            return {...newState};
         case UPDATE_PROGRESS:
             // newState.progresses[action.payload.assignmentId] = action.payload;
             // return {...newState, ...newState.progresses:  };
