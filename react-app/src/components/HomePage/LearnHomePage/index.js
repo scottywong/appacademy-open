@@ -8,23 +8,9 @@ import './LearnHomePage.css';
 
 function LearnHomePage(){
 
-    const dispatch = useDispatch();
-    // const [userEnrollments,setUserEnrollments] = useState(false);
-    // const user = useSelector(state=>state.user)
-    
-    // useEffect(()=>{
-    //     if(user.enrollments){
-    //         setUserEnrollments(Object.values(user.enrollments));
-    //     }
-
-    // },[user])
-
-    // useEffect(()=>{
-    //     dispatch(fetchUserEnrollments());
-    // },[dispatch])
     return     (
         <div className='LearnHomePage-container sidebar-active-content'>
-            {/* <EnrollmentSideBar enrollments={userEnrollments}/> */}
+       
             <LearnDefaultPage/>
         </div>
     )

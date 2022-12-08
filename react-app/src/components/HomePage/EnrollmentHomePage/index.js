@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import {useDispatch, useSelector } from "react-redux";
 import EnrollmentDefaultPage from "../../DefaultPage/EnrollmentDefaultPage";
 import AssignmentSideBar from "../../Sidebar/AssignmentSideBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchUserEnrollments } from "../../../store/user";
 import { fetchGetCourseById } from "../../../store/course";
 import './EnrollmentHomePage.css';
@@ -11,28 +11,36 @@ import { fetchGetEnrollmentById } from "../../../store/enrollment";
 function EnrollmentHomePage(){
 
     const dispatch = useDispatch();
+    const enrollment = useSelector(state=>state.enrollment)
+    const [title,setTitle]=useState(null)
+    const [body,setBody]=useState(null)
     const {enrollmentId} = useParams();
-    // const myEnrollments = useSelector(state=>state.user?.enrollments ? state.user.enrollments : state.user);
-    // const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
 
-    // const assignments = Object.values(useSelector(state=>state.enrollment?.one_enrollment?.Assignments? state.enrollment.one_enrollment?.Assignments : state.enrollment));
+    useEffect(()=> {
 
+        if(enrollment.one_enrollment){
+            setTitle(enrollment.one_enrollment.course_title)
+            setBody(enrollment.one_enrollment.notes)
+        }
+    },[enrollment.one_enrollment])
 
-    // useEffect(()=> {
+    useEffect(()=> {
 
-    //     dispatch(fetchUserEnrollments())
-    //     .then(dispatch(fetchGetEnrollmentById(enrollmentId)));
+       dispatch(fetchGetEnrollmentById(enrollmentId))
+        
+    },[dispatch])
 
-    // },[dispatch])
     return (
     
         <div className='EnrollmentHomePage-container sidebar-active-content'>
-           {/* {myEnrollments && myEnrollments[enrollment?.id] &&  */}
-            <div className='EnrollmentHomePage-items'>
-                {/* <AssignmentSideBar assignments={assignments} enrollment={enrollment}/> */}
-                <EnrollmentDefaultPage/>
+          
+            <div className='EnrollmentHomePage-items '>
+
+                  <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
+                  <p>{body}</p> 
+
             </div>
-            {/* } */}
+          
           
         </div>
     

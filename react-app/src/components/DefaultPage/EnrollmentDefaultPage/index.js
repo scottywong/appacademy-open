@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { fetchGetEnrollmentById } from '../../../store/enrollment';
 import './EnrollmentDefaultPage.css';
 
 function EnrollmentDefaultPage(){
 
+    const dispatch = useDispatch();
     const enrollment = useSelector(state=>state.enrollment)
-    const [title,setTitle]=useState(false)
-    const [body,setBody]=useState(false)
+    const [title,setTitle]=useState(null)
+    const [body,setBody]=useState(null)
+    const {enrollmentId} = useParams();
+
     useEffect(()=> {
 
         if(enrollment.one_enrollment){
@@ -14,10 +19,17 @@ function EnrollmentDefaultPage(){
             setBody(enrollment.one_enrollment.notes)
         }
     },[enrollment.one_enrollment])
-    return title && body && (
+
+    useEffect(()=> {
+
+       dispatch(fetchGetEnrollmentById(enrollmentId))
+        
+    },[dispatch])
+
+    return title && (
         
         <div className='EnrollmentDefaultPage-container'>
-            <h1>Welcome to {title}</h1>
+            <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
             <p>{body}</p>
         </div>
         )

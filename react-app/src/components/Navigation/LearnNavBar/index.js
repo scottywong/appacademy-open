@@ -17,15 +17,11 @@ function LearnNavBar({toggleSidebar}){
         if(!showMenu){
             setShowMenu(true);
             toggleSidebar();
-            // document.querySelector('.enroll-sidebar-container')?.classList.remove('hide-scrollbar');
-            // document.querySelector('.AssignmentSideBar-container')?.classList.remove('hide-scrollbar');
         
         }
         if(showMenu) {
             setShowMenu(false);
             toggleSidebar();
-            // document.querySelector('.enroll-sidebar-container')?.classList.add('hide-scrollbar');
-            // document.querySelector('.AssignmentSideBar-container')?.classList.remove('hide-scrollbar');
         }
     }
 

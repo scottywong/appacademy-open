@@ -44,7 +44,7 @@ function AssignmentDetailStudent(){
 
         <div className='ads-container'>
 
-            <h1> {assignment?.Task?.title}</h1>
+            <div className='learnpage-title-container'><h1> {assignment?.Task?.title}</h1></div>
             <div dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}></div>
 
             <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
