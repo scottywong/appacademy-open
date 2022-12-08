@@ -54,7 +54,7 @@ function CourseEditForm( ){
     
     const onCancel = async (e) => {
         e.preventDefault();
-        history.push(`/learn/admin/course/${id}`)
+        history.push(`/learn/admin/courses/${id}`)
     }
 
     return id && (

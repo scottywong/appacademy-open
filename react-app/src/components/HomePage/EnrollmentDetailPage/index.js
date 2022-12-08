@@ -17,28 +17,27 @@ function EnrollmentDetailPage(){
     const myEnrollments = useSelector(state=>state.user?.enrollments)
     const enrollment = useSelector(state=>state.enrollment?.one_enrollment);
 
-    let enrolled = false;
+    const [enrolled,setEnrolled] =useState(false);
+    
+    useEffect(() => {
+        if(myEnrollments && myEnrollments[enrollment.id]) setEnrolled(true)
+    },[myEnrollments,enrollment])
 
     useEffect(() => {
         dispatch(fetchUserEnrollments())
         .then(dispatch(fetchGetEnrollmentById(enrollmentId)))
     },[dispatch,assignmentId]);
     
-    if(myEnrollments && myEnrollments[enrollment.id]) enrolled = true;
-
-    return (
-        <div className='EnrollmentDetailPage-container sidebar-active-content'>
+    return enrolled && (
+        <div className='EnrollmentDetailPage-container title-container'>
             {enrolled  && 
-            <div className='EnrollmentDetailPage-items'>
-                   
-                    <AssignmentDetailStudent  assignmentId={assignmentId}/>
-            </div>
-            }
-            {!enrolled &&
-                <p>Something went wrong!</p>
-            }            
+                <AssignmentDetailStudent  assignmentId={assignmentId}/>
+            }             
          </div>
-        )
+        ) || 
+        (!enrolled &&
+        <p>Something went wrong!</p>)
+        
 }
 
 export default EnrollmentDetailPage;

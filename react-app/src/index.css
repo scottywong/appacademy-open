@@ -113,28 +113,6 @@ html, body, #root {
     font-weight: 700;
     outline-color: #d0021b;
 }
-/* 
-.sidebar{
-    width: 400px;
-    float: left;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: 1;
-    transition: width 0.3s ease 0s;
-    overflow: hidden auto;
-    height: 100%;
-    box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
-    position: relative;
-    background: rgb(255, 255, 255);
-}
-.hide-sidebar{
-
-    width: 0px !important;
-
-} */
-
-
 header {
     position: absolute;
     top: 0;
@@ -149,8 +127,10 @@ header {
     left: -15vw;
     height: calc(100% - 160px);
     width: 15vw;
-    transition: left 0.3s ease-in-out;
+    transition: left 1s ease-in-out;
     background-color: white;
+
+    box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
     
   }
   .sidebar-toggle {
@@ -167,7 +147,7 @@ header {
     left: 0;
     right: 0;
     height: 100%;
-    transition: left 0.3s ease-in-out;
+    transition: left 1s ease-in-out;
     background-color: white;
 
   }
@@ -175,17 +155,18 @@ header {
 
     position: relative;
     left: 15vw;
-    transition: right 0.3s ease-in-out;
+    transition: right 1s ease-in-out;
   }
 
   .sidebar-inactive-content{
     position: relative;
     left: 0px;
-    transition: left 0.3s ease-in-out;
+    transition: left 1s ease-in-out;
   }
   
   .sidebar.open {
     left: 0;
+    transition: right 1s ease-in-out;
   }
   .content.open {
     left: 15vw;
@@ -199,7 +180,7 @@ header {
  
 }
 
-.fa-bars:hover,fa-arrow-left-long{
+.fa-bars:hover,.fa-arrow-left-long:hover{
 
   color: white;
   cursor: pointer;
@@ -209,6 +190,11 @@ header {
 .learnpage-title-container{
   background-color: #1464cb;
   width: calc(100vw);
+  color: white;
+}
+.title-container{
+
+
 }
 
 ul.errorMsg > li {

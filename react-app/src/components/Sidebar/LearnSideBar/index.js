@@ -11,6 +11,10 @@ import { useLocation } from "react-router";
 const LearnSideBar = ({isOpen,toggleSidebar}) => {
 
   const sidebarClass = isOpen ? "sidebar open" : "sidebar";
+  
+  if(isOpen && document.querySelector('.title-container')){
+    document.querySelector('.title-container').classList.add('sidebar-active-content');
+  }
 
   const dispatch = useDispatch();
   const {enrollmentId} = useParams();
@@ -21,14 +25,9 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
   const [relatedAssignments,setRelatedAssignments] = useState(false);
   
   const [loaded,setLoaded] = useState(false);
-  const [showMenu,setShowMenu] = useState(true)
   
   const user = useSelector(state=>state.user);
   const enrollment = useSelector(state=>state.enrollment);
-
-  const handleViewSidebar = () => {
-        setShowMenu(!showMenu);
-    }
 
     useEffect(()=>{
         dispatch(fetchUserEnrollments())
@@ -50,14 +49,6 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
       
       {userEnrollments && location.pathname === '/learn/home' && ( <EnrollmentSideBar enrollments={userEnrollments}/>)}
       
-      {/* <button onClick={toggleSidebar} className="sidebar-toggle">
-        {!showMenu && <div onClick={handleViewSidebar} className='LearnNavBar-menu'>
-                <i className="fa-solid fa-arrow-right-long fa-2xl"></i>
-            </div>}
-            {showMenu && <div onClick={handleViewSidebar} className='LearnNavBar-menu'>
-                <i class="fa-solid fa-arrow-left-long fa-2xl"></i>
-            </div>}
-      </button> */}
     </div>
   );
 };

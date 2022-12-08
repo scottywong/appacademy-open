@@ -60,8 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       <ProtectedRoute path='/learn'>
-          <LearnNavBar toggleSidebar={handleViewSidebar}/>
-          
+          <LearnNavBar toggleSidebar={handleViewSidebar}/> 
       </ProtectedRoute>
       <Switch>
         <Route path='/' exact={true}>

@@ -32,7 +32,7 @@ function EnrollmentHomePage(){
 
     return (
     
-        <div className='EnrollmentHomePage-container sidebar-active-content'>
+        <div className='EnrollmentHomePage-container title-container'>
           
             <div className='EnrollmentHomePage-items '>
 

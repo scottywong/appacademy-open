@@ -1,7 +1,7 @@
 .CourseDetail-container{
     display: grid;
-    overflow-x: hidden;
-    overflow-y:auto;
+    overflow-x: clip;
+    overflow-y:scroll;
     height: 100%;
     grid-template-columns: 40% 60%;
     

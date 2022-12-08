@@ -38,17 +38,22 @@ function AssignmentDetailStudent(){
         dispatch(fetchUpdateProgress(adsProgress.id,1));
 
     }
-
+    const styleObj = {
+        height: '600px'
+      };
 
     return (
 
         <div className='ads-container'>
-
+            
             <div className='learnpage-title-container'><h1> {assignment?.Task?.title}</h1></div>
-            <div dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}></div>
+         
+            <div style={styleObj} dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}></div>
 
-            <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
-            <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
+            <div className='ads-buttons'>
+                <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
+                <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
+            </div>
        </div>
     )
 
