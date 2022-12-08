@@ -3,6 +3,7 @@ from flask_login import login_required,current_user
 from app.forms import CourseForm
 from app.models import db,Course,Enrollment,Assignment
 from app.api.auth_routes import validation_errors_to_error_messages
+import re
 
 course_routes = Blueprint('courses', __name__)
 
@@ -18,7 +19,9 @@ def all_courses():
 def create_course():
     form = CourseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('form.data[body]',form.data['body'])
+    if form.data['body'].isspace() or re.sub(r'<.*?>', '', form.data['body']).isspace() or re.sub(r'<.*?>', '', form.data['body'])=='':
+        return {'errors': ["Body can't be an empty"]}, 402
     if form.validate_on_submit():
 
         course = Course(
@@ -45,6 +48,10 @@ def update_course(id):
 
     form = CourseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    print('form.data[body]',form.data['body'])
+    if form.data['body'].isspace() or re.sub(r'<.*?>', '', form.data['body']).isspace() or re.sub(r'<.*?>', '', form.data['body'])=='':
+        return {'errors': ["Body can't be an empty"]}, 401
 
     if form.validate_on_submit():
         course.title=form.data['title']

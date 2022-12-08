@@ -6,4 +6,4 @@ from app.models import Course
 
 class CourseForm(FlaskForm):
     title = StringField('title',validators=[DataRequired()])
-    body =  TextAreaField('body')
+    body =  TextAreaField('body',validators=[DataRequired()])

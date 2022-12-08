@@ -16,6 +16,7 @@ import Profile from './components/Profile';
 import Footer from './components/Footer';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import DemoLogin from './components/auth/DemoLogin';
 
 import LearnHomePage from './components/HomePage/LearnHomePage';
 import EnrollmentHomePage from './components/HomePage/EnrollmentHomePage';
@@ -71,6 +72,10 @@ function App() {
           <HomeNavigationBar/>
           <LoginForm />
         </Route>
+        <Route path='/demo-login' exact={true}>
+          <HomeNavigationBar/>
+          <DemoLogin />
+        </Route>
         <Route path='/sign-up' exact={true}>
           <HomeNavigationBar/>
           <SignUpForm />
@@ -96,11 +101,8 @@ function App() {
           <EnrollmentHomePage />
         </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
-          
             <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> 
-     
             <EnrollmentDetailPage/>
-
         </ProtectedRoute>
         <ProtectedRoute path='/learn/admin' exact={true} >
           <ProtectedRouteAdmin>

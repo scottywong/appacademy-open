@@ -28,7 +28,7 @@ function TaskEditForm(){
             setTitle(task.one_task.title);
             setTaskDetail(task.one_task.detail);
         }
-    },[task.one_task])
+    },[task,task.one_task])
 
     useEffect( ()=> {
         dispatch(fetchGetTaskById(taskId));
@@ -43,18 +43,34 @@ function TaskEditForm(){
         };
 
         return dispatch(fetchUpdateTask(payload,id))
-        .then(
-            (res) => history.push(`/learn/admin/tasks/${id}`)
+        .then(async (res) => {
+            if(res.ok === false) {
+              const data = await res.json()
+              if (data && data.errors) setErrors(data.errors)
+            } else {
+                    history.push(`/learn/admin/tasks/${id}`)
+                }
+            }
         );
     }    
+
+    console.log('errors:' , errors)
 
     const onCancel = async (e) => {
         e.preventDefault();
         history.push(`/learn/admin/tasks/${id}`)
     }
 
-    return title && task_detail && ( 
+    return id && ( 
          <div className='TaskEditForm-container'>
+            <ul className='errorMsg'>
+            {errors.map((error, idx) => (
+                <li className='errors' key={idx}>
+                {error}
+                </li>
+            ))}
+            </ul>
+
             <input
             className='modal-input-title'
             type='text'
@@ -63,8 +79,10 @@ function TaskEditForm(){
             placeholder='Enter Title'
             required
             />
+
            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
-            <div className='TaskEditForm-btns'>
+           
+           <div className='TaskEditForm-btns'>
                 <button className='modal-btn modal-submit-btn' onClick={onSubmit}>Save</button>
                 <button className='modal-btn modal-cancel-btn' onClick={onCancel}>Cancel</button>
             </div>

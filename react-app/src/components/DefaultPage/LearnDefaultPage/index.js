@@ -1,13 +1,17 @@
+import {useSelector} from 'react-redux';
 import './LearnDefaultPage.css';
 
 
 function LearnDefaultPage(){
 
+    const sessionUser = useSelector(state=> state.session.user)
+
+    console.log(sessionUser)
     return (
 
         <div className='LearnDefaultPage-container'>
-                <div className='learnpage-title-container'><h1>Welcome to LearnDefaultPage</h1></div>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <div className='learnpage-title-container'><h1>Hello, {sessionUser.username} </h1></div>
+                <p>This is your home page.</p>
         </div>
 
     )

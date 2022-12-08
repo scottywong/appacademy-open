@@ -45,19 +45,19 @@ function AssignmentCreateForm({setShowAssignmentModal}){
        
     <div className='AssignmentCreateForm-container'>
         <form className='modal-container' onSubmit={onSubmit}>
-           
-
-             <h2 className='modal-form-title'>Create Assignment</h2>
+        <h2 className='modal-form-title'>Create Assignment</h2>
+            <ul className='errorMsg'>
+                {errors.map((error, idx) => (
+                    <li className='errors' key={idx}>
+                    {error}
+                    </li>
+                ))}
+            </ul>
+          
             {courseId && <Search type='task' selector={setTaskIdList} selected={taskIdList}/>}
             {taskId && <Search type='course' selector={setCourseIdList} selected={courseIdList}/>}
 
-            <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-            </ul>
+           
 
             <div>
                 <button className='modal-btn modal-submit-btn'>Submit</button>

@@ -5,4 +5,4 @@ from app.models import Task
 
 class TaskForm(FlaskForm):
     title = StringField('title',validators=[DataRequired()])
-    task_detail =  TextAreaField('task_detail')
+    task_detail =  TextAreaField('task_detail',validators=[DataRequired()])

@@ -1,17 +1,61 @@
 .CourseDetail-container{
+    display: grid;
+    overflow-x: hidden;
+    overflow-y:auto;
+    height: 100%;
+    grid-template-columns: 40% 60%;
+    
+}
+
+.CourseDetail-left-container{
+
     display: flex;
-    flex-direction:column;
-    align-items: center;
-    margin:auto;
+    flex-direction: column;
+    align-items:left;
+    border-right: 1px ridge;
+}
+
+
+.CourseDetail-left{
+    margin:50px;
 }
 
 .CourseDetail-btns{
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
+    
+}
+.CourseDetail-detail{
+    max-width: 800px;
+    margin: auto;
+    padding: auto;
+    overflow-y: scroll;
+}
+.CourseDetail-lists{
+    margin:50px;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 50px;
+    
+    
 }
 
-.CourseDetail-lists{
-    display: block;
+.CourseDetail-detail-container{
+    display:flex;
+    flex-direction: row;
+    margin-top:100px;
+    justify-content: flex-start;
+    padding-left:50px;
+    padding-right:50px;
+    /* display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); */
 }
+.CourseDetail{
+    width:100%;
+    height: 100%;
+    
+    /* border: 1px gray solid; */
+    /* margin-right: 50px; */
+
+}
+

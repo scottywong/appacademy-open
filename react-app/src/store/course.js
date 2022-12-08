@@ -71,6 +71,8 @@ export const fetchCreateCourse = (course) => async (dispatch) => {
         dispatch(createCourse(course));
         return course;
     };
+
+    return res;
     
 }
 
@@ -87,10 +89,12 @@ export const fetchUpdateCourse = (course,courseId) => async (dispatch) => {
 
     if (res.ok){
         const course = await res.json();
+        console.log('course', course)
         dispatch(updateCourse(course));
+       
         return course;
     };
-    
+    return res;
 }
 export const fetchDeleteCourse = (courseId) => async (dispatch) => {
 
@@ -123,6 +127,9 @@ const courseReducer = (state = initialState, action) => {
             newState.created_course = action.payload;
             newState.all_courses[action.payload.id] = action.payload;
             return {...newState};
+        case UPDATE_COURSE:
+            newState.one_course = action.payload;
+            return newState;
         case DELETE_COURSE:
                 delete newState.all_courses[action.payload];
             return newState;

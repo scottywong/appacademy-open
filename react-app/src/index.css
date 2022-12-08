@@ -174,7 +174,7 @@ header {
   .sidebar-active-content{
 
     position: relative;
-    left: 200px;
+    left: 15vw;
     transition: right 0.3s ease-in-out;
   }
 
@@ -208,4 +208,14 @@ header {
 
 .learnpage-title-container{
   background-color: #1464cb;
+  width: calc(100vw);
+}
+
+ul.errorMsg > li {
+  list-style: none;
+}
+
+li.errors{
+
+  color: #d0021b;
 }

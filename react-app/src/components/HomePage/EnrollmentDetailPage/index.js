@@ -30,7 +30,7 @@ function EnrollmentDetailPage(){
         <div className='EnrollmentDetailPage-container sidebar-active-content'>
             {enrolled  && 
             <div className='EnrollmentDetailPage-items'>
-                    {/* <AssignmentSideBar assignments={assignments} enrollment={enrollment}/> */}
+                   
                     <AssignmentDetailStudent  assignmentId={assignmentId}/>
             </div>
             }

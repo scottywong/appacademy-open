@@ -20,6 +20,11 @@ function HomeNavigationBar(){
                 </NavLink>
             </li>
             <li>
+                <NavLink className='nav-item' to='/demo-login' exact={true} activeClassName='active'>
+                    Demo
+                </NavLink>
+            </li>
+            <li>
                 <NavLink className='nav-item' to='/login' exact={true} activeClassName='active'>
                     Login
                 </NavLink>

@@ -63,14 +63,13 @@ export const fetchCreateTask = (task) => async (dispatch) => {
         body : JSON.stringify(task)
       }
     );
-
+          
     if (res.ok){
         const task = await res.json();
-        console.log('created task: ', task)
         dispatch(createTask(task));
         return task;
-    };
-    
+    } 
+        return res;   
 }
 
 export const fetchUpdateTask = (task, taskId) => async (dispatch) => {
@@ -84,11 +83,14 @@ const res = await fetch(`/api/tasks/${taskId}`,{
   }
 );
 
+
 if (res.ok){
     const task = await res.json();
     dispatch(updateTask(task));
     return task;
 };
+
+    return res;
 
 }
 export const fetchDeleteTask = (taskId) => async (dispatch) => {
@@ -129,7 +131,7 @@ const taskReducer = (state = initialState, action) => {
             };
         case UPDATE_TASK:
             newState.one_task = action.payload;
-            return newState;
+            return {... newState};
         case DELETE_TASK:
             delete newState.all_tasks[action.payload];
             return newState;

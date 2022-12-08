@@ -17,7 +17,7 @@ function TaskDetail(){
     const location = useLocation();
     const {taskId} = useParams();
 
-    const task = useSelector(state => state.task?.one_task);
+    const task = useSelector(state => state.task);
 
     const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
     const [showAssignmentModal,setShowAssignmentModal] = useState(false);
@@ -25,24 +25,35 @@ function TaskDetail(){
    
     useEffect(()=> {
         if(task?.one_task) setOneTask(task.one_task)
-    },task)
+    },[task,task.one_task])
 
     useEffect(()=> {
         dispatch(fetchGetTaskById(taskId))
-        .then( dispatch(fetchGetAssignmentsByCourseId(task?.courseId)))
     },[dispatch]);
 
-    return (
+    useEffect(()=> {
+        dispatch(fetchGetAssignmentsByCourseId(oneTask?.courseId));
+    },[oneTask])
+
+    return oneTask&& (
 
         <div className='TaskDetail-container'>
             <div className='TaskDetail-left-container'>
                 <div className='TaskDetail-left'>
-                    <h1 className='TaskDetail-title'> {task?.title} </h1>
+                    <h1 className='TaskDetail-title'> {oneTask?.title} </h1>
                     <div className='TaskDetail-btns'>
+                    {location.pathname.includes('/edit') && 
+                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}`)} className="button green">
+                            <span className="button-inner">View Task</span>
+                            <span className="button-bg green"></span>
+                        </a>
+                    }
+                    {!location.pathname.includes('/edit') && 
                         <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}/edit`)} className="button green">
                             <span className="button-inner">Edit Task</span>
                             <span className="button-bg green"></span>
                         </a>
+                    }
 
                         <a onClick={() => setShowDeleteTaskModal(true)} className="button green">
                             <span className="button-inner">Delete Task</span>
@@ -50,7 +61,7 @@ function TaskDetail(){
                         </a>
                         {showDeleteTaskModal && (
                         <Modal onClose={() => setShowDeleteTaskModal(false)}>
-                            <TaskDeleteForm taskId={task.id} setShowDeleteTaskModal={setShowDeleteTaskModal} />
+                            <TaskDeleteForm taskId={oneTask.id} setShowDeleteTaskModal={setShowDeleteTaskModal} />
                         </Modal>
                         )}
                         <a onClick={()=>setShowAssignmentModal(true)} className="button green">
@@ -74,8 +85,8 @@ function TaskDetail(){
                 {location.pathname.includes('/edit') && <div className='TaskDetail'> <TaskEditForm /> </div> }
                 {!location.pathname.includes('/edit') && 
                 (<div className='TaskDetail'>
-                    <h1 className='TaskDetail-title'> {task?.title} </h1>
-                 <div  dangerouslySetInnerHTML={{__html: task?.detail}}/>
+                    <h1 className='TaskDetail-title'> {oneTask?.title} </h1>
+                 <div  dangerouslySetInnerHTML={{__html: oneTask?.detail}}/>
                  </div>) }
               
             </div>

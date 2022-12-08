@@ -38,7 +38,7 @@ function LearnNavBar({toggleSidebar}){
                 <i className="fa-solid fa-bars fa-2xl"></i>
             </div>}
             {showMenu && <div onClick={handleViewSidebar} className='LearnNavBar-menu'>
-                <i class="fa-solid fa-arrow-left-long fa-2xl"></i>
+                <i className="fa-solid fa-arrow-left-long fa-2xl"></i>
             </div>}
         </div>
 

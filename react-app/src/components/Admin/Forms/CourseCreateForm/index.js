@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchCreateCourse} from '../../../../store/course';
+import QuillEditor from '../../../QuillEditor';
 import './CourseCreateForm.css';
 
 function CourseCreateForm({setShowCourseModal}){
@@ -21,15 +22,28 @@ function CourseCreateForm({setShowCourseModal}){
             body
         };
 
-        return dispatch(fetchCreateCourse(payload)).then(
-            (res) => history.push(`/learn/admin/courses/${res.id}`)
-        );
+        return dispatch(fetchCreateCourse(payload))
+        .then(async (res) => {
+            if(res.ok === false) {
+              const data = await res.json()
+              if (data && data.errors) setErrors(data.errors)
+            } else {
+                return history.push(history.push(`/learn/admin/courses/${res.id}`));
+            } 
+        })
     }    
 
     return(
 
         <form className='modal-container' onSubmit={onSubmit}>
             <h2 className='modal-form-title'>Create Course</h2>
+            <ul className='errorMsg'>
+            {errors.map((error, idx) => (
+                <li className='errors' key={idx}>
+                {error}
+                </li>
+            ))}
+            </ul>
             <input
             className='modal-input-title'
             type='text'
@@ -38,22 +52,18 @@ function CourseCreateForm({setShowCourseModal}){
             placeholder='Enter title'
             required
             />
-            <input
+
+            <QuillEditor value={body} setValue={setBody}/>
+            {/* <input
             className='modal-input-title'
             type='text'
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder='Enter body'
             required
-            />
+            /> */}
 
-            <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-            </ul>
+           
 
             <div>
             <button className='modal-btn modal-submit-btn'>Submit</button>
