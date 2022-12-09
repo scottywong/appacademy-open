@@ -31,6 +31,7 @@ import LearnSideBar from './components/Sidebar/LearnSideBar';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [sidebarOpen, setSideBarOpen] = useState(true);
+  
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
     if(sidebarOpen){
@@ -39,17 +40,18 @@ function App() {
       const el3 = document.querySelector('.LearnNavBar-container')
       el?.classList.remove('sidebar-active-content')
       el?.classList.add('sidebar-inactive-content')
-      if(el2)el2.style.width='100vw';
-      if(el3)el3.style.width='100vw';
- 
+      if(el2)el2.classList.add('LearnNavBar-fullwidth')
+      if(el3)el3.classList.add('LearnNavBar-fullwidth')
+     
     } else {
       const el = document.querySelector('.sidebar-inactive-content')
       const el2 = document.querySelector('.learnpage-title-container')
       const el3 = document.querySelector('.LearnNavBar-container')
       el?.classList.remove('sidebar-inactive-content')
       el?.classList.add('sidebar-active-content')
-      if(el2)el2.style.width ='85vw';
-      if(el3)el3.style.width='85vw';
+      if(el2)el2.classList.add('LearnNavBar-shortwidth')
+      if(el3)el3.classList.add('LearnNavBar-shortwidth')
+      
     }
   };
 

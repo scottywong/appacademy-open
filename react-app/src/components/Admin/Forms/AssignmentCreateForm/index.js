@@ -20,8 +20,7 @@ function AssignmentCreateForm({setShowAssignmentModal}){
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        
+ 
         const payload = {
             parent_type:parentType,
             course:parseInt(courseId),

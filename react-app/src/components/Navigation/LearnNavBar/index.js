@@ -13,8 +13,9 @@ function LearnNavBar({toggleSidebar}){
     const showToggle = location.pathname.includes('/enrollments') || location.pathname === '/learn/home'
     const isTaskPage = location.pathname.includes('/learn/admin/tasks/')
     const isCoursePage = location.pathname.includes('/learn/admin/courses/')
-
     const [showMenu,setShowMenu] = useState(true)
+
+    const LearnNavBarClass= showToggle && showMenu ? 'LearnNavBar-container LearnNavBar-shortwidth' : 'LearnNavBar-container LearnNavBar-fullwidth';
 
     const handleViewSidebar = () => {
       
@@ -35,7 +36,7 @@ function LearnNavBar({toggleSidebar}){
 
     return (
         <div className='LearnNavBar-wrapper'>
-            <div className='LearnNavBar-container'>
+            <div className={LearnNavBarClass}>
                 
             <div className='LearnNavToggle'>
                 {(isTaskPage || isCoursePage )&& <div onClick={goAdminHome} className='LearnNavBar-menu'>
@@ -68,9 +69,6 @@ function LearnNavBar({toggleSidebar}){
                     <NavLink to="/forum">
                         <i className="fa-solid fa-question"></i>
                     </NavLink>
-                </div>
-                <div className='LearnNavBar-linkitem'>
-                    <NavLink to="/search"> Search </NavLink>
                 </div>
             </div>
 

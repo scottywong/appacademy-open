@@ -145,12 +145,12 @@ export const fetchDeleteAssignment = (assignmentId) => async (dispatch) => {
 
 
 // ******** REDUCER ********
-const initialState = {  all_assignments:{},
-                        one_assignment:{},
-                        assignmentsByCourseId:{},
-                        assignmentsByTaskId:{},
-                        created_assignment:{},
-                        created_assignments:{}
+const initialState = {  all_assignments:null,
+                        one_assignment:null,
+                        assignmentsByCourseId:null,
+                        assignmentsByTaskId:null,
+                        created_assignment:null,
+                        created_assignments:null
                         };
 
 const assignmentReducer = (state = initialState, action) => {

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { fetchGetEnrollmentById } from '../../../store/enrollment';
+
 import './EnrollmentDefaultPage.css';
 
 function EnrollmentDefaultPage(){
@@ -11,6 +12,8 @@ function EnrollmentDefaultPage(){
     const [title,setTitle]=useState(null)
     const [body,setBody]=useState(null)
     const {enrollmentId} = useParams();
+    const history = useHistory();
+
 
     useEffect(()=> {
 
@@ -21,18 +24,17 @@ function EnrollmentDefaultPage(){
     },[enrollment.one_enrollment])
 
     useEffect(()=> {
-
        dispatch(fetchGetEnrollmentById(enrollmentId))
-        
     },[dispatch])
 
-    return title && (
+
+    return (title && (
         
         <div className='EnrollmentDefaultPage-container'>
             <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
             <p>{body}</p>
         </div>
-        )
+        )) 
 }
 
 export default EnrollmentDefaultPage;

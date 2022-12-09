@@ -68,6 +68,7 @@ export const fetchGetEnrollmentById = (enrollmentId) => async (dispatch) => {
         dispatch(getEnrollmentById(enrollment));
         return enrollment
     };
+    console.log('this is res hha', res)
     return res;
 };
 

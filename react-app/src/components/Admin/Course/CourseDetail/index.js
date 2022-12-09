@@ -25,15 +25,18 @@ function CourseDetail(){
     const [showAssignmentModal,setShowAssignmentModal] = useState(false);
     const [showEnrollmentModal,setShowEnrollmentModal] = useState(false);
 
+    const [loaded,setIsLoaded] = useState(false);
     useEffect(()=> {
+        setIsLoaded(true);
         if(course?.one_course) setOneCourse(course?.one_course)
     },[course])
 
     useEffect(()=> {
        dispatch(fetchGetCourseById(courseId));
+     
     },[dispatch]);
 
-    return oneCourse && (
+    return loaded && (oneCourse && (
         <div className='CourseDetail-container'>
               <div className='CourseDetail-left-container'>
                 <div className='CourseDetail-left'>
@@ -95,9 +98,12 @@ function CourseDetail(){
             <div  dangerouslySetInnerHTML={{__html: oneCourse?.body}}/>
             </div>) }
         </div>
-    </div>
-       
-    );
+    </div> 
+        )|| 
+        (!oneCourse && ( <main style={{ padding: "1rem" }}>
+        <p>Sorry, the page couldn't be found.</p>
+        </main>))
+        )
 }
 
 export default CourseDetail;

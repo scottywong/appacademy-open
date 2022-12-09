@@ -35,7 +35,8 @@ function TaskDetail(){
         dispatch(fetchGetAssignmentsByCourseId(oneTask?.courseId));
     },[oneTask])
 
-    return oneTask&& (
+    return (oneTask && 
+    (
 
         <div className='TaskDetail-container'>
             <div className='TaskDetail-left-container'>
@@ -91,7 +92,11 @@ function TaskDetail(){
               
             </div>
         </div>
-    );
+    ) || 
+    (!oneTask && ( <main style={{ padding: "1rem" }}>
+    <p>Sorry, the page couldn't be found.</p>
+    </main>))
+    )
 }
 
 export default TaskDetail;

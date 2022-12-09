@@ -42,11 +42,12 @@ function AssignmentDetailStudent(){
         height: '600px',
         width: '85vw'
       };
-
-    return (
+      
+    return  (
 
         <div className='ads-container'>
             
+            {assignment &&<>
             <div className='learnpage-title-container'><h1> {assignment?.Task?.title}</h1></div>
          
             <div style={styleObj} dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}></div>
@@ -54,7 +55,9 @@ function AssignmentDetailStudent(){
             <div className='ads-buttons'>
                 <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
                 <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
-            </div>
+            </div></>}
+            {!assignment &&
+                 <p>Something went wrong!</p>}   
        </div>
     )
 

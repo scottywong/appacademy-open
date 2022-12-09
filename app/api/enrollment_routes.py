@@ -10,8 +10,10 @@ enrollment_routes = Blueprint('enrollments', __name__)
 @login_required
 def enrollments(id):
     enrollment = Enrollment.query.get(id)
-    return enrollment.to_dict()
 
+    if enrollment is None:
+        return {'error': ['Record not found']}, 404
+    return enrollment.to_dict()
 
 @enrollment_routes.route('/')
 @login_required
@@ -25,7 +27,7 @@ def all_enrollments():
 def create_enrollment():
     form = EnrollmentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print('formData-courseId: ', form.data['theCourseId'])
+    
     if form.validate_on_submit():
         enrollments = Enrollment.query.filter(Enrollment.courseId==form.data['courseId']).filter(Enrollment.userId==form.data['userId']).all()
 

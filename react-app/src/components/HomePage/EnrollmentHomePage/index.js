@@ -1,13 +1,10 @@
 import { useParams } from "react-router";
 import {useDispatch, useSelector } from "react-redux";
-import EnrollmentDefaultPage from "../../DefaultPage/EnrollmentDefaultPage";
-import AssignmentSideBar from "../../Sidebar/AssignmentSideBar";
 import { useEffect, useState } from "react";
-import { fetchUserEnrollments } from "../../../store/user";
-import { fetchGetCourseById } from "../../../store/course";
 import './EnrollmentHomePage.css';
 import { fetchGetEnrollmentById } from "../../../store/enrollment";
 
+import { useHistory } from "react-router";
 function EnrollmentHomePage(){
 
     const dispatch = useDispatch();
@@ -15,7 +12,10 @@ function EnrollmentHomePage(){
     const [title,setTitle]=useState(null)
     const [body,setBody]=useState(null)
     const {enrollmentId} = useParams();
+    const history = useHistory();
 
+    const[loaded,setLoaded] = useState(false)
+    
     useEffect(()=> {
 
         if(enrollment.one_enrollment){
@@ -27,20 +27,20 @@ function EnrollmentHomePage(){
     useEffect(()=> {
 
        dispatch(fetchGetEnrollmentById(enrollmentId))
-        
+       .then((res) => {
+           if(res.ok===false){
+            history.push('/learn/not-found');
+        } else {
+            setLoaded(true);
+        }})
     },[dispatch])
 
-    return (
+    return loaded && (
     
-        <div className='EnrollmentHomePage-container title-container'>
-          
-            {/* <div className='EnrollmentHomePage-items '> */}
+        <div className='EnrollmentHomePage-container'>
 
                 <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
                 <p>{body}</p> 
-
-            {/* </div> */}
-          
           
         </div>
     
