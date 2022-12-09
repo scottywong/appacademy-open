@@ -39,7 +39,8 @@ function AssignmentDetailStudent(){
 
     }
     const styleObj = {
-        height: '600px'
+        height: '600px',
+        width: '85vw'
       };
 
     return (

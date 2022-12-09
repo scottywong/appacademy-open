@@ -34,12 +34,12 @@ function EnrollmentHomePage(){
     
         <div className='EnrollmentHomePage-container title-container'>
           
-            <div className='EnrollmentHomePage-items '>
+            {/* <div className='EnrollmentHomePage-items '> */}
 
-                  <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
-                  <p>{body}</p> 
+                <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
+                <p>{body}</p> 
 
-            </div>
+            {/* </div> */}
           
           
         </div>

@@ -123,13 +123,12 @@ header {
   }
   .sidebar {
     position: absolute;
-    top: 60px;
+    /* top: 60px; */
     left: -15vw;
-    height: calc(100% - 160px);
+    height: calc(100% - 100px);
     width: 15vw;
     transition: left 1s ease-in-out;
     background-color: white;
-
     box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
     
   }
@@ -149,10 +148,8 @@ header {
     height: 100%;
     transition: left 1s ease-in-out;
     background-color: white;
-
   }
   .sidebar-active-content{
-
     position: relative;
     left: 15vw;
     transition: right 1s ease-in-out;
@@ -172,26 +169,22 @@ header {
     left: 15vw;
   }
   
-
-
 .fa-bars,fa-arrow-left-long,.fa-bars,fa-arrow-right-long{
-
   color: rgb(163, 198, 231);
  
 }
 
-.fa-bars:hover,.fa-arrow-left-long:hover{
-
-  color: white;
+.fa-bars:hover,.fa-arrow-left-long:hover, .fa-house-flag:hover{
+  color: #4dc981;
   cursor: pointer;
 
 }
 
 .learnpage-title-container{
   background-color: #1464cb;
-  width: calc(100vw);
   color: white;
 }
+
 .title-container{
 
 
@@ -202,6 +195,5 @@ ul.errorMsg > li {
 }
 
 li.errors{
-
   color: #d0021b;
 }

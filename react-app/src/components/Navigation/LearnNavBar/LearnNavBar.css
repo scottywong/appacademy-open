@@ -1,3 +1,8 @@
+.LearnNavBar-wrapper{
+    display: flex;
+    justify-content: right;
+}
+
 .LearnNavBar-container{
 
     background-color: #1464cb;
@@ -6,6 +11,8 @@
     justify-content: space-between;
     align-items:center;
     padding: 20px;
+    width: calc(100% - 15vw);
+    
 }
 .LearnNavToggle{
 
