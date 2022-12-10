@@ -3,13 +3,8 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    min-height: 100px;
     background-color: #1464cb;
-
-}
-
-.footer--pin {
-    margin-top: auto
+    height: 100px;
 }
 
 .footer-link-container{
@@ -17,7 +12,6 @@
     align-items: center;
     margin-right:20px;
     color:white;
-
 }
 
 .footer-link-container > i {

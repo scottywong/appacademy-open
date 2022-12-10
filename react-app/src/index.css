@@ -1,9 +1,22 @@
 /* TODO Add site wide styles */
-html, body, #root {
+html, body, #root{
     height: 100%;
     margin: 0;
 }
 
+
+/************PIN FOOTER DOWN***************/
+
+.content-container {
+  min-height: calc(100vh - 100px);
+}
+
+.footer--pin {
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+/***************************/
 *{
     font-family: 'Titillium Web', sans-serif;
     box-sizing: border-box;

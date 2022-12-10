@@ -55,15 +55,17 @@ export const fetchUserProgresses = () => async (dispatch) => {
     return res;
 };
 
-
-export const fetchUpdateProgress = (id,completionStatus) => async (dispatch) => {
+export const fetchUpdateProgress = (id,assignmentId,enrollmentId,completionStatus) => async (dispatch) => {
 
     const res = await fetch(`/api/progresses/${id}`,{
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body : JSON.stringify({'completion_status' : parseInt(completionStatus)})
+        body : JSON.stringify({
+            'completion_status' : parseInt(completionStatus),
+            'assignmentId': parseInt(assignmentId),
+            'enrollmentId': parseInt(enrollmentId)})
       }
     );
 
@@ -75,6 +77,25 @@ export const fetchUpdateProgress = (id,completionStatus) => async (dispatch) => 
     
     return res;
 };
+// export const fetchUpdateProgress = (id,completionStatus) => async (dispatch) => {
+
+//     const res = await fetch(`/api/progresses/${id}`,{
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body : JSON.stringify({'completion_status' : parseInt(completionStatus)})
+//       }
+//     );
+
+//     if (res.ok){
+//         const progress = await res.json();
+//         dispatch(updateProgressById(progress));
+//         return progress
+//     };
+    
+//     return res;
+// };
 
 // ******** REDUCER ********
 const initialState = {all_users:{},enrollments:{},progresses:{}};

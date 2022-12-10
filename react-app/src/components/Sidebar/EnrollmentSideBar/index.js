@@ -3,7 +3,7 @@ import './EnrollmentSideBar.css';
 
 function EnrollmentSideBar({enrollments}){
 
-    console.log('esb: ', enrollments)
+    // console.log('esb: ', enrollments)
 
     return enrollments && (
 

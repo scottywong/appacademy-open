@@ -33,11 +33,13 @@
 }
 .TaskDetail-lists{
     margin:50px;
-    max-height: 400px;
+    max-height: 600px;
     overflow-y: scroll;
     padding-right: 50px;
-    
-    
+    /* border: 2px black solid; */
+    padding: 20px;
+    width: fit-content;
+    box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
 }
 
 .TaskDetail-detail-container{

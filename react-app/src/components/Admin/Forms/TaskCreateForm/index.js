@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchCreateTask} from '../../../../store/task';
 import QuillEditor from '../../../QuillEditor';
+import { isEmptyOrSpaces } from '../../Utils';
 import './TaskCreateForm.css';
 
 function TaskCreateForm({setShowTaskModal}){
@@ -15,9 +16,20 @@ function TaskCreateForm({setShowTaskModal}){
     const [task_detail,setTaskDetail] = useState('');
     const [errors, setErrors] = useState([]);
 
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        //Front End Validation
+        if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
+            let frontEndValidation = [];
+            if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
+            if(isEmptyOrSpaces(task_detail)) frontEndValidation.push(`task_detail: This field is required.`)
+            return setErrors(frontEndValidation);
+        }
+            
+       
+        console.log('the errors: ', errors)
         const payload = {
             title,
             task_detail
@@ -27,7 +39,7 @@ function TaskCreateForm({setShowTaskModal}){
         .then(async (res) => {
             if(res.ok === false) {
               const data = await res.json()
-              if (data && data.errors) setErrors(data.errors)
+              if (data && data.errors) setErrors([data.errors])
             } else {
                 return history.push(`/learn/admin/tasks/${res.id}`);
             } 
@@ -35,31 +47,35 @@ function TaskCreateForm({setShowTaskModal}){
     }
 
     return (
-
+        
+       
        <div className='task-modal-container'>
+        
+
+        <div id='modal-close' onClick={() => setShowTaskModal(false)}> <i class="fa-regular fa-circle-xmark fa-2xl"></i></div>
+        
         <h2 className='modal-form-title'>Add Task</h2>
+
+            <input
+            className='modal-input-title'
+            type='text'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='Enter Title'
+            required
+            />
+            <ul className='errorMsg'>
+                {errors.map((error, idx) => (
+                    <li className='errors' key={idx}>
+                    {error}
+                    </li>
+                ))}
+            </ul>
+
+            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
+
         
-
-        <input
-        className='modal-input-title'
-        type='text'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder='Enter Title'
-        required
-        />
-        <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-        </ul>
-
-        <QuillEditor value={task_detail} setValue={setTaskDetail}/>
-
-        
-        <div >
+        <div className='modal-btns'>
             <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>
             <button
             className='modal-btn modal-cancel-btn'

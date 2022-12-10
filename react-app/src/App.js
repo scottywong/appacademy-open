@@ -69,77 +69,81 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <ProtectedRoute path='/learn'>
-          <LearnNavBar toggleSidebar={handleViewSidebar}/> 
-      </ProtectedRoute>
-      <Switch>
-        <Route path='/' exact={true}>
-          <HomeNavigationBar/>
-          <HomePage/>
-        </Route>
-        <Route path='/login' exact={true}>
-          <HomeNavigationBar/>
-          <LoginForm />
-        </Route>
-        <Route path='/demo-login' exact={true}>
-          <HomeNavigationBar/>
-          <DemoLogin />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <HomeNavigationBar/>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+    <div>
+      <div className="content-container">
+      <BrowserRouter>
+        <ProtectedRoute path='/learn'>
+            <LearnNavBar toggleSidebar={handleViewSidebar}/> 
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn' exact={true}>
-          <Redirect to='/learn/home' />
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/home'>
-          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
-          <LearnHomePage/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/profile' exact={true} >
-          <Profile />
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
-          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
-          <EnrollmentHomePage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
-            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> 
-            <EnrollmentDetailPage/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/admin' exact={true} >
-          <ProtectedRouteAdmin>
-            <AdminDetail />
-          </ProtectedRouteAdmin>
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/admin/courses/:courseId' >
-          <ProtectedRouteAdmin>
-            <CourseDetail />
-          </ProtectedRouteAdmin>
-        </ProtectedRoute>
-        <ProtectedRoute path='/learn/admin/tasks/:taskId' >
-          <ProtectedRouteAdmin >
-            <TaskDetail />
-          </ProtectedRouteAdmin>
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-        </ProtectedRoute>
-        <Route path="*">
-        <main style={{ padding: "1rem" }}>
-            <p>Sorry, the page couldn't be found.</p>
-          </main>
-        </Route>
-      </Switch>
-
+        <Switch>
+          <Route path='/' exact={true}>
+            <HomeNavigationBar/>
+            <HomePage/>
+          </Route>
+          <Route path='/login' exact={true}>
+            <HomeNavigationBar/>
+            <LoginForm />
+          </Route>
+          <Route path='/demo-login' exact={true}>
+            <HomeNavigationBar/>
+            <DemoLogin />
+          </Route>
+          <Route path='/sign-up' exact={true}>
+            <HomeNavigationBar/>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn' exact={true}>
+            <Redirect to='/learn/home' />
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/home'>
+            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+            <LearnHomePage/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/profile' exact={true} >
+            <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
+            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+            <EnrollmentHomePage />
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
+              <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> 
+              <EnrollmentDetailPage/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/admin' exact={true} >
+            <ProtectedRouteAdmin>
+              <AdminDetail />
+            </ProtectedRouteAdmin>
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/admin/courses/:courseId' >
+            <ProtectedRouteAdmin>
+              <CourseDetail />
+            </ProtectedRouteAdmin>
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/admin/tasks/:taskId' >
+            <ProtectedRouteAdmin >
+              <TaskDetail />
+            </ProtectedRouteAdmin>
+          </ProtectedRoute>
+          <ProtectedRoute path='/' exact={true} >
+          </ProtectedRoute>
+          <Route path="*">
+          <main style={{ padding: "1rem" }}>
+              <p>Sorry, the page couldn't be found.</p>
+            </main>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      </div>
       <Footer/>
-    </BrowserRouter>
+    </div>
+
   );
 }
 

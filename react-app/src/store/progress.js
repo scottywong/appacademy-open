@@ -28,14 +28,17 @@ export const fetchGetProgressById = (progressId) => async (dispatch) => {
     return res;
 };
 
-export const fetchUpdateProgress = (id,completionStatus) => async (dispatch) => {
+export const fetchUpdateProgress = (id,assignmentId,enrollmentId,completionStatus) => async (dispatch) => {
 
     const res = await fetch(`/api/progresses/${id}`,{
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body : JSON.stringify({'completion_status' : parseInt(completionStatus)})
+        body : JSON.stringify({
+            'completion_status' : parseInt(completionStatus),
+            'assignmentId': parseInt(assignmentId),
+            'enrollmentId': parseInt(enrollmentId)})
       }
     );
 
@@ -59,6 +62,7 @@ const progressReducer = (state = initialState, action) => {
             return newState;
         case UPDATE_PROGRESS:
             newState = action.payload;
+            
             return newState;
         default:
             return newState;

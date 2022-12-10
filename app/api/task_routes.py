@@ -46,6 +46,7 @@ def create_task():
         return task.to_dict(), 200
 
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
 @task_routes.route('/<int:id>',methods=['POST'])
 @login_required
 def update_task(id):
@@ -57,12 +58,11 @@ def update_task(id):
 
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
     if form.data['task_detail'].isspace() or re.sub(r'<.*?>', '', form.data['task_detail']).isspace() or re.sub(r'<.*?>', '', form.data['task_detail'])=='':
         return {'errors': ["Title detail can't be an empty"]}, 402
 
     if form.validate_on_submit():
-        # print('formdata:',re.sub(r'<.*?>', '', form.data['task_detail']) ==' ')
-        
         task.title=form.data['title']
         task.task_detail=form.data['task_detail']
         db.session.commit()

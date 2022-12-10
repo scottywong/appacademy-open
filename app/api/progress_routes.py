@@ -6,24 +6,46 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 progress_routes = Blueprint('progresses', __name__)
 
-
-@progress_routes.route('/<int:id>',methods=['PUT'])
+@progress_routes.route('/<int:id>',methods=['POST'])
 @login_required
 def update_progress(id):
-    
-    progress = Progress.query.get(id)
-    if progress is None:
-        return {"errors": ["can't find this progress, bully!"]}, 404
-
-    if progress.get_enrollment().get_user().id != current_user.id:
-        return {"errors": ["ain't your progress, bully!"]}, 401
 
     form = ProgressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
-        progress.completion_status = form.data['completion_status']
+    progress = Progress.query.get(id)
+    print('progress@', progress)
+
+    if progress is None:
+        progress = Progress(
+            enrollmentId = form.data['enrollmentId'],
+            assignmentId = form.data['assignmentId'],
+            completion_status = form.data['completion_status']
+        )
+        db.session.add(progress)
         db.session.commit()
         return progress.to_dict(), 200
 
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+    elif progress.get_enrollment().get_user().id != current_user.id:
+            return {"errors": ["This isn't your progress record."]}, 401
+
+    elif form.validate_on_submit():
+            progress.completion_status = form.data['completion_status']
+            db.session.add(progress)
+            db.session.commit()
+            return progress.to_dict(), 200
+    else:
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+@progress_routes.route('/<int:id>',methods=['DELETE'])
+@login_required
+def delete_progress(id):
+    progress = Progress.query.get(id)
+    if progress is None:
+        return {'errors': ["This progress was not found!"]}, 404
+    if current_user.profile != 'Admin':
+        return {'errors': ["Only admins can perform this action!"]}, 401
+    db.session.delete(progress)
+    db.session.commit()
+
+    return {'Message': "You've successfully delete this progress!"}, 200
