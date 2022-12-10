@@ -8,16 +8,19 @@ import './SignUpForm.css';
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
+  const [profile, setProfile] = useState('Admin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  console.log('')
+
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password,profile));
       if (data) {
         setErrors(data)
       }
@@ -34,6 +37,10 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const updateProfile = (e) => {
+    setProfile(e.target.value);
   };
 
   const updateRepeatPassword = (e) => {
@@ -61,6 +68,7 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
+      
       <div className='signup-input'>
         <label>Email</label>
         <input
@@ -69,6 +77,13 @@ const SignUpForm = () => {
           onChange={updateEmail}
           value={email}
         ></input>
+      </div>
+      <div className='signup-input'>
+        <label>Profile</label>
+        <select name='profile'onChange={updateProfile}>
+          <option value="Student">Admin </option>
+          <option value="Student">Student </option>           
+        </select>
       </div>
       <div className='signup-input'>
         <label>Password</label>

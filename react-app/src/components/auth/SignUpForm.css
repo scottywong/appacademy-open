@@ -23,3 +23,8 @@
     width: 300px;
     margin:10px;
 }
+
+.signup-input > select{
+    width: 153px;
+}
+
