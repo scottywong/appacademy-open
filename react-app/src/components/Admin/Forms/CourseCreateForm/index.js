@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {fetchCreateCourse} from '../../../../store/course';
 import QuillEditor from '../../../QuillEditor';
+import { isEmptyOrSpaces } from '../../Utils';
 import './CourseCreateForm.css';
 
 function CourseCreateForm({setShowCourseModal}){
@@ -17,6 +18,16 @@ function CourseCreateForm({setShowCourseModal}){
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        //Front End Validation
+        if(isEmptyOrSpaces(title) || isEmptyOrSpaces(body)){
+            let frontEndValidation = [];
+            if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
+            if(isEmptyOrSpaces(body)) frontEndValidation.push(`body: This field is required.`)
+            return setErrors(frontEndValidation);
+        }
+            
+       
+        console.log('the errors: ', errors)
         const payload = {
             title,
             body
@@ -35,15 +46,13 @@ function CourseCreateForm({setShowCourseModal}){
 
     return(
 
-        <form className='modal-container' onSubmit={onSubmit}>
+        <div className='modal-container'>
+            
+            <div id='modal-close' onClick={() => setShowCourseModal(false)}> <i class="fa-regular fa-circle-xmark fa-2xl"></i></div>
+        
+
             <h2 className='modal-form-title'>Create Course</h2>
-            <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-            </ul>
+           
             <input
             className='modal-input-title'
             type='text'
@@ -53,28 +62,26 @@ function CourseCreateForm({setShowCourseModal}){
             required
             />
 
+            <ul className='errorMsg'>
+            {errors.map((error, idx) => (
+                <li className='errors' key={idx}>
+                {error}
+                </li>
+            ))}
+            </ul>
+
             <QuillEditor value={body} setValue={setBody}/>
-            {/* <input
-            className='modal-input-title'
-            type='text'
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            placeholder='Enter body'
-            required
-            /> */}
-
-           
-
-            <div>
-            <button className='modal-btn modal-submit-btn'>Submit</button>
-            <button
-            className='modal-btn modal-cancel-btn'
-            onClick={() => setShowCourseModal(false)}
-            >
-            Cancel
-            </button>
+        
+            <div className='modal-btn-container'>
+                <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>
+                <button
+                className='modal-btn modal-cancel-btn'
+                onClick={() => setShowCourseModal(false)}
+                >
+                Cancel
+                </button>
+            </div>
         </div>
-        </form>
 
 
     )

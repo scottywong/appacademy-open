@@ -27,9 +27,7 @@ function TaskCreateForm({setShowTaskModal}){
             if(isEmptyOrSpaces(task_detail)) frontEndValidation.push(`task_detail: This field is required.`)
             return setErrors(frontEndValidation);
         }
-            
-       
-        console.log('the errors: ', errors)
+
         const payload = {
             title,
             task_detail
@@ -49,9 +47,8 @@ function TaskCreateForm({setShowTaskModal}){
     return (
         
        
-       <div className='task-modal-container'>
+       <div className='modal-container'>
         
-
         <div id='modal-close' onClick={() => setShowTaskModal(false)}> <i class="fa-regular fa-circle-xmark fa-2xl"></i></div>
         
         <h2 className='modal-form-title'>Add Task</h2>
@@ -75,7 +72,7 @@ function TaskCreateForm({setShowTaskModal}){
             <QuillEditor value={task_detail} setValue={setTaskDetail}/>
 
         
-        <div className='modal-btns'>
+        <div className='modal-btn-container'>
             <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>
             <button
             className='modal-btn modal-cancel-btn'
