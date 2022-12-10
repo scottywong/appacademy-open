@@ -16,10 +16,19 @@ function AssignmentDeleteForm({  assignmentId, setShowDeleteAssignmentModal }) {
 
     const onDelete = () => {
         dispatch(fetchDeleteAssignment(assignmentId))
-        .then( setShowDeleteAssignmentModal(false))
-        .catch(async (res) => {
-            if (res && res.errors) setErrors(res.errors);
-          });
+        .then( async (res) => {
+          if(res.ok === false) {
+            const data = await res.json()
+            if (data && data.errors) setErrors(data.errors)
+          } else {
+            setShowDeleteAssignmentModal(false)
+          }
+        });
+
+        // .then( setShowDeleteAssignmentModal(false))
+        // .catch(async (res) => {
+        //     if (res && res.errors) setErrors(res.errors);
+        //   });
     }
   return (
     <div className='modal-container'>

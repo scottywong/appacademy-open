@@ -100,11 +100,14 @@ export const fetchCreateAssignment = (assignment) => async (dispatch) => {
       }
     );
 
+ 
     if (res.ok){
         const assignment = await res.json();
         dispatch(createAssignment(assignment));
         return assignment;
     };
+
+    return res;
     
 }
 
@@ -119,12 +122,14 @@ export const fetchCreateAssignments = (payload) => async (dispatch) => {
         body : JSON.stringify(payload)
       }
     );
-
-    // if (res.ok){
+ 
+    if (res.ok){
         const assignments = await res.json();
         if(!assignments.errors) dispatch(createAssignments(assignments,payload.parent_type));
         return assignments;
-    // };
+    };
+
+    return res;
     
 }
 export const fetchDeleteAssignment = (assignmentId) => async (dispatch) => {
@@ -176,13 +181,13 @@ const assignmentReducer = (state = initialState, action) => {
             return {...newState};
         case CREATE_ASSIGNMENTS:
             newState.created_assignments = action.payload;
-            newState.all_assignments = Object.assign(newState.all_assignments,action.payload) 
-            if(action.parentType==='course') newState.assignmentsByCourseId = Object.assign(newState.assignmentsByCourseId,action.payload) 
-            if(action.parentType==='task') newState.assignmentsByTaskId=Object.assign(newState.assignmentsByTaskId,action.payload) 
+            if(newState.all_assignments) newState.all_assignments = Object.assign(newState.all_assignments,action.payload) 
+            if(action.parentType==='course' && newState.assignmentsByCourseId) newState.assignmentsByCourseId = Object.assign(newState.assignmentsByCourseId,action.payload) 
+            if(action.parentType==='task' && newState.assignmentsByTaskId) newState.assignmentsByTaskId=Object.assign(newState.assignmentsByTaskId,action.payload) 
             return {...newState};
         case DELETE_ASSIGNMENT:
-            if(newState.assignmentsByCourseId[action.payload]) delete newState.assignmentsByCourseId[action.payload];
-            if(newState.assignmentsByTaskId[action.payload]) delete newState.assignmentsByTaskId[action.payload];
+            if(newState.assignmentsByCourseId && newState.assignmentsByCourseId[action.payload]) delete newState.assignmentsByCourseId[action.payload];
+            if(newState.assignmentsByTaskId && newState.assignmentsByTaskId[action.payload]) delete newState.assignmentsByTaskId[action.payload];
             return {...newState};
         default:
             return newState;

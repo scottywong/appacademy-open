@@ -30,9 +30,11 @@ function AssignmentCreateForm({setShowAssignmentModal}){
         };
 
         return dispatch(fetchCreateAssignments(payload))
-        .then( (res) => {
-            if (res && res.errors){
-                setErrors(res.errors)
+        .then( async (res) => {
+
+            if(res.ok === false) {
+              const data = await res.json()
+              if (data && data.errors) setErrors(data.errors)
             } else {
                 setShowAssignmentModal(false)
             }
