@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -8,22 +8,27 @@ const DemoLogin = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  useEffect(()=> {
+    onLogin();
+  },[])
+
   if (user) {
     return <Redirect to='/learn/home' />;
   }
 
-  const onLogin = async (e) => {
-    e.preventDefault();
+  const onLogin = async () => {
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data) {
       setErrors(data);
     }
   };
 
-  return (
-    <form onSubmit={onLogin}>
-      <button type="submit">Demo User</button>
-    </form>
+  return errors && (
+
+    <div>
+      There was an error logging in.
+    </div>
+ 
   );
 };
 
