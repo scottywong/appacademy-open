@@ -28,7 +28,7 @@ function EnrollmentDetailPage(){
         dispatch(fetchGetEnrollmentById(enrollmentId))
         .then((res) => {
             if(res.ok===false){
-             history.push('/learn/enrollments/not-found');
+             history.push('/learn/not-found');
          } else {
              setLoaded(true);
          }})
