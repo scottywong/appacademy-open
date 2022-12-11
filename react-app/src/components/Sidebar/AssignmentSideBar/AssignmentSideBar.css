@@ -2,25 +2,37 @@
     
     display: flex;
     flex-direction: column;
-    
-    /* width:400px; */
+    align-items: center;
 
 }
 
 .AssignmentSideBar-Enrollment-header{
     display: flex;
     flex-direction: row;
-    margin: auto;
+    justify-content: space-between;
+
+    width: 20vw;
     cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .AssignmentSideBar-Enrollment-header > * {
+    text-align: center;
+    align-items: center;
+}
 
-    margin:auto;
+.asb-arrow{
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
 }
 
 .AssignmentSideBar-Enrollment{
 
+    width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
 }

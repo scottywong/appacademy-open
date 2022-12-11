@@ -3,34 +3,49 @@
     font-size: 0.875rem;
     width: 100%;
     margin: auto;
+
 }
 
 .ali-student-item{
     display:flex;
     justify-content: space-between;
-    min-height: 30px;
+    
     margin: auto;
+    height: 50px;
 
 }
 
 .ali-student-item > *{
     margin: auto;
+    
 }
 
 .ali-student-item:hover{
-
+align-items: center;
     cursor:pointer;
     background: #f7f7f7;
 }
 
 .fa-circle-check{
-
     color:green;
-
-
 }
 
 .fa-circle{
     color:gray;
+}
 
+.selected-ali{
+    color: white;
+    background-color: #1464cb !important;
+}
+
+.ali-student-link{
+    width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+.ali-check{
+    width: 20px;
+    text-align: center;
 }

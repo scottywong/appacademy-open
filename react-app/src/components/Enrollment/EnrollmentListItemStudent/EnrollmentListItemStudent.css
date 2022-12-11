@@ -7,11 +7,27 @@
 .eli-student-item{
     display:flex;
     justify-content: space-between;
-
+    margin: auto;
+    height: 50px;
+    align-items: center;
 }
 
 .eli-student-item:hover{
 
     cursor:pointer;
     background: #f7f7f7;
+}
+
+.eli-student-link{
+    text-overflow: ellipsis;
+    overflow:hidden;
+    width: 100%;
+}
+
+
+.eli-arrow{
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
 }

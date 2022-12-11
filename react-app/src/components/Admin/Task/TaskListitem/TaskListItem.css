@@ -10,8 +10,10 @@
 
 .TaskListItem-name{
 
+    text-overflow: ellipsis;
+    max-width: 400px;
+    overflow:hidden;
     cursor: pointer;
-    
 
 }
 

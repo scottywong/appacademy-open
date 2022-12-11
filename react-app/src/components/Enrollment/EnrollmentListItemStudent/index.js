@@ -13,8 +13,10 @@ function EnrollmentListItemStudent({enrollment}){
 
             {enrollment && 
             <div onClick={()=> history.push(`/learn/enrollments/${enrollment.id}/home`)} className='eli-student-item'>
-                <NavLink className="eli-student-link" to={`/learn/enrollments/${enrollment.id}/home`}>{enrollment.course_title}</NavLink>
+                <div className="eli-student-link" to={`/learn/enrollments/${enrollment.id}/home`}>{enrollment.course_title}</div>
+                <div className='asb-arrow'>
                 <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </div>
             }
 

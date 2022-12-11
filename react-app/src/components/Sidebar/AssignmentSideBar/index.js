@@ -9,9 +9,13 @@ function AssignmentSideBar({assignments,enrollment}){
 
     return (
         <div className="AssignmentSideBar-container">
-        <h3> åTasks </h3>
-        <div className='AssignmentSideBar-Enrollment-header' >
+            
+        <h3> Tasks </h3>
+        <div className='AssignmentSideBar-Enrollment-header'>
+            
+            <div className='asb-arrow'>
             <i className="fa-solid fa-arrow-left"></i>
+            </div>
             { location.pathname.startsWith(`/learn/enrollments/${enrollment?.id}/assignments`) && 
             <div className='AssignmentSideBar-Enrollment' onClick={() => history.push(`/learn/enrollments/${enrollment.id}/home`)}> {enrollment?.course_title}</div>}
             { location.pathname===`/learn/enrollments/${enrollment?.id}/home` && 
@@ -25,8 +29,9 @@ function AssignmentSideBar({assignments,enrollment}){
             )}
 
         </div>
-        );
-
+        
+        
+    )
 
 }
 

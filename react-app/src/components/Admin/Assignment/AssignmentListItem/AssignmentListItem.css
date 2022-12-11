@@ -4,16 +4,32 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+ 
 }
 
 .AssignmentListItem-name{
 
+    text-overflow: ellipsis;
+    width: 400px;
+    overflow:hidden;
     cursor: pointer;
 
-}
 
+}
 
 .AssignmentListItem-name:hover{
 
     color: #4dc981;
+}
+.AssignmentListItem-btns{
+
+    display:flex;
+    flex-direction: row;
+    margin-left:20px;
+}
+
+.ali-btns{
+    width: 250px;
+    text-align: center;
+    margin-right: 20px;
 }

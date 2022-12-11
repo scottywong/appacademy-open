@@ -3,16 +3,32 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .EnrollmentListItem-name{
 
+    text-overflow: ellipsis;
+    width: 400px;
+    overflow:hidden;
     cursor: pointer;
-
 }
 
 
 .EnrollmentListItem-name:hover{
 
     color: #4dc981;
+}
+
+.nrollmentListItem-btns{
+
+    display:flex;
+    flex-direction: row;
+    margin-left:20px;
+}
+
+.eli-btns{
+    width: 250px;
+    text-align: center;
+    margin-right: 20px;
 }

@@ -3,6 +3,7 @@
     overflow-x: hidden;
     overflow-y:auto;
     height: 100vh;
+    width: 100%;
     grid-template-columns: 40% 60%;
     
 }
@@ -18,6 +19,11 @@
 
 .TaskDetail-left{
     margin:50px;
+}
+
+.TaskDetail-title{
+    text-overflow: ellipsis;
+    overflow:hidden;
 }
 
 .TaskDetail-btns{

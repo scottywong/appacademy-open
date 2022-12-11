@@ -17,7 +17,7 @@ function AssignmentListItem({assignment}){
              {location.pathname.includes('/tasks') && <div onClick={()=> history.push(`/learn/admin/courses/${assignment?.courseId}`)} className='AssignmentListItem-name'>{assignment?.course_title}</div>}
             <div className='AssignmentListItem-btns'>
                 
-            <a onClick={()=> setShowDeleteAssignmentModal(true)} className="button green">
+            <a onClick={()=> setShowDeleteAssignmentModal(true)} className="button green ali-btns">
                 <span className="button-inner"> Delete Assignment</span>
                 <span className="button-bg green"></span>
             </a>
