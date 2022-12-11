@@ -37,7 +37,7 @@ function EnrollmentHomePage(){
 
     return loaded && (
     
-        <div className='EnrollmentHomePage-container'>
+        <div className='EnrollmentHomePage-container page-container'>
 
                 <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
                 <p>{body}</p> 

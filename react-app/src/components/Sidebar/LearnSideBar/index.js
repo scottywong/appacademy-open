@@ -12,8 +12,11 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
 
   const sidebarClass = isOpen ? "sidebar open" : "sidebar";
   
-  if(isOpen && document.querySelector('.title-container')){
-    document.querySelector('.title-container').classList.add('sidebar-active-content');
+  if(isOpen && document.querySelector('[class*="page-container"]')){
+    document.querySelector('[class*="page-container"]').classList.add('sidebar-active-page');
+  }
+  if(isOpen && document.querySelector('[class*="learnpage-title-container"]')){
+    document.querySelector('[class*="learnpage-title-container"]').classList.add('sidebar-active-content-title');
   }
 
   const dispatch = useDispatch();

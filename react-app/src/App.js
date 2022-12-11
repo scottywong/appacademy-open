@@ -35,23 +35,35 @@ function App() {
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
     if(sidebarOpen){
-      const el = document.querySelector('.sidebar-active-content')
-      const el2 = document.querySelector('.learnpage-title-container')
-      const el3 = document.querySelector('.LearnNavBar-container')
-      el?.classList.remove('sidebar-active-content')
-      el?.classList.add('sidebar-inactive-content')
-      if(el2)el2.classList.add('LearnNavBar-fullwidth')
-      if(el3)el3.classList.add('LearnNavBar-fullwidth')
-     
-    } else {
-      const el = document.querySelector('.sidebar-inactive-content')
-      const el2 = document.querySelector('.learnpage-title-container')
-      const el3 = document.querySelector('.LearnNavBar-container')
-      el?.classList.remove('sidebar-inactive-content')
-      el?.classList.add('sidebar-active-content')
-      if(el2)el2.classList.add('LearnNavBar-shortwidth')
-      if(el3)el3.classList.add('LearnNavBar-shortwidth')
+      const el = document.querySelector('[class*="page-container"]')
+      const el2 = document.querySelector('[class*="learnpage-title-container"]')
+      const el3 = document.querySelector('[class*="LearnNavBar-container"]')
       
+      setTimeout(function(){el?.classList.remove('sidebar-active-page')},5)
+      el?.classList.add('sidebar-inactive-page')
+      if(el2){
+        setTimeout(function(){el2.classList.remove('sidebar-active-content-title')},1)
+        el2.classList.add('sidebar-inactive-content-title')
+      }
+      if(el3){
+        setTimeout(function(){el3.classList.remove('LearnNavBar-shortwidth')},1)
+        el3.classList.add('LearnNavBar-fullwidth')
+      }
+
+    } else {
+      const el = document.querySelector('[class*="page-container"]')
+      const el2 = document.querySelector('[class*="learnpage-title-container"]')
+      const el3 = document.querySelector('[class*="LearnNavBar-container"]')
+      setTimeout(function(){el?.classList.remove('sidebar-inactive-page')},1)
+      el?.classList.add('sidebar-active-page')
+      if(el2){
+        setTimeout(function(){el2.classList.remove('sidebar-inactive-content-title')},1)
+        el2.classList.add('sidebar-active-content-title')
+      }
+      if(el3){
+        setTimeout(function(){el3.classList.remove('LearnNavBar-fullwidth')},1)
+        el3.classList.add('LearnNavBar-shortwidth')
+      }
     }
   };
 
@@ -74,6 +86,9 @@ function App() {
       <BrowserRouter>
         <ProtectedRoute path='/learn'>
             <LearnNavBar toggleSidebar={handleViewSidebar}/> 
+        </ProtectedRoute>
+        <ProtectedRoute path='/learn/enrollments/:enrollmentId/'>
+          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
         </ProtectedRoute>
         <Switch>
           <Route path='/' exact={true}>
@@ -103,18 +118,17 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/learn/home'>
             <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
-            <LearnHomePage/>
+              <LearnHomePage/>
           </ProtectedRoute>
           <ProtectedRoute path='/learn/profile' exact={true} >
             <Profile />
           </ProtectedRoute>
-          <ProtectedRoute path='/learn/enrollments/:enrollmentId/home'>
-            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+
+          <ProtectedRoute path='/learn/enrollments/:enrollmentId/home' exact={true}>
             <EnrollmentHomePage />
           </ProtectedRoute>
           <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
-              <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> 
-              <EnrollmentDetailPage/>
+                <EnrollmentDetailPage/>
           </ProtectedRoute>
           <ProtectedRoute path='/learn/admin' exact={true} >
             <ProtectedRouteAdmin>

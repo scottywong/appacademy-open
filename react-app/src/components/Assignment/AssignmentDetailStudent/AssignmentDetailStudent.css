@@ -1,26 +1,101 @@
 .ads-container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
 }
 .ads-content{
-    height: 2000px;
+    /* height: 2000px; */
 }
+/* 
+.ads-detail{
+
+    width: 800px;
+    justify-content: center;
+    margin: auto;
+} */
 .ads-buttons{
     display:flex;
-    width: 300px;
+    width: 400px;
     justify-content:space-between;
+  
 }
+
+.ads-button{
+
+    padding: 15px 40px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    /* box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); */
+    
+}
+
+
+.ads-button:active {
+    box-shadow: 
+      7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    transform: translateY(2px);
+}
+
+
 .ads-CompleteBtn{
     color:white;
     background-color:#1464cb;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    border: none rgb(20, 100, 203);
+    border-radius: 5px;
+    position: relative;
+    padding: 15px 20px;
+    filter: none;
+    outline-width: thin;
+    transition: background 0.2s ease 0s;
+    min-width: 135px;
+    cursor: pointer;
+    font-weight: 700;
+    outline-color: rgb(20, 100, 203);
 }
 
 .ads-IncompleteBtn{
-    color:black;
-    color:gray;
+    color:white;
+    background-color:#ccc;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    border: none rgb(20, 100, 203);
+    border-radius: 5px;
+    position: relative;
+    padding: 15px 20px;
+    filter: none;
+    outline-width: thin;
+    transition: background 0.2s ease 0s;
+    min-width: 135px;
+    cursor: pointer;
+    font-weight: 700;
+    outline-color: rgb(20, 100, 203);
 }
 
-.ads-CompleteBtn:hover,.ads-IncompleteBtn:hover{
+
+.ads-IncompleteBtn:hover{
+    color: #4dc981;
+    cursor: pointer;
+   
+}
+
+.ads-CompleteBtn:hover{
+    background-color: #125ab7;
+    color:#4dc981;
     cursor: pointer;
 }

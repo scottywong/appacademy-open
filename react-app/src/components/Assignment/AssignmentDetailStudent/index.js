@@ -56,7 +56,8 @@ function AssignmentDetailStudent(){
     }
     const styleObj = {
         // height: '600px',
-        width: '85vw'
+        padding:'10px',
+        width: '60vw'
       };
       
     return  (
@@ -66,7 +67,8 @@ function AssignmentDetailStudent(){
             {assignment &&<>
             <div className='learnpage-title-container'><h1> {assignment?.Task?.title}</h1></div>
          
-            <div style={styleObj} dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}></div>
+            <div style={styleObj} dangerouslySetInnerHTML={{__html: assignment?.Task?.detail}}>
+            </div>
             <ul className='errorMsg'>
                 {errors.map((error, idx) => (
                     <li className='errors' key={idx}>
@@ -76,9 +78,10 @@ function AssignmentDetailStudent(){
             </ul>
 
             <div className='ads-buttons'>
-                <button className="ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
-                <button className="ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
-            </div></>}
+                <button className="ads-button ads-CompleteBtn"onClick={handleComplete}> ✔︎ Mark As Complete</button>
+                <button className="ads-button ads-IncompleteBtn"onClick={handleIncomplete}> Mark Incomplete</button>
+            </div>
+            </>}
             {!assignment &&
                  <p>Something went wrong!</p>}   
        </div>

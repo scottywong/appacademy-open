@@ -35,7 +35,7 @@ function EnrollmentDetailPage(){
     },[dispatch,assignmentId]);
     
     return loaded && (
-        <div className='EnrollmentDetailPage-container title-container'>
+        <div className='EnrollmentDetailPage-container page-container'>
             {enrolled  && 
                 <AssignmentDetailStudent  assignmentId={assignmentId}/>
             }     

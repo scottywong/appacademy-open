@@ -8,13 +8,9 @@ const DemoLogin = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    onLogin();
-  },[])
 
-  if (user) {
-    return <Redirect to='/learn/home' />;
-  }
+
+
 
   const onLogin = async () => {
     const data = await dispatch(login('demo@aa.io', 'password'));
@@ -23,6 +19,14 @@ const DemoLogin = () => {
     }
   };
 
+  useEffect(()=> {
+    onLogin();
+  },[])
+
+  if (user) {
+    return <Redirect to='/learn/home' />;
+  }
+  
   return errors && (
 
     <div>

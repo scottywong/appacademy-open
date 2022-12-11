@@ -11,6 +11,7 @@ html, body, #root{
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   
 }
 
@@ -137,55 +138,58 @@ header {
     height: 60px;
     background-color: lightcoral;
   }
-  .sidebar {
-    position: fixed;
-    /* top: 60px; */
-    left: -15vw;
-    height: 100%;
-    width: 15vw;
-    transition: left 1s ease-in-out;
-    background-color: white;
-    box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
-    
-  }
-  .sidebar-toggle {
-    position: absolute;
-    top: 20%;
-    right: -60px;
-    height: 60px;
-    width: 60px;
-    z-index: 1;
-  }
-  .content {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    height: 100%;
-    transition: left 1s ease-in-out;
-    background-color: white;
-  }
-  .sidebar-active-content{
-    position: relative;
-    left: 15vw;
-    transition: right 1s ease-in-out;
-  }
+.sidebar {
+  position: fixed;
+  /* top: 60px; */
+  left: -20vw;
+  height: 100%;
+  width: 20vw;
+  transition: left 1s ease-in-out;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px;
+  z-index: 3;
+  
+}
+.sidebar-toggle {
+  position: absolute;
+  top: 20%;
+  right: -60px;
+  height: 60px;
+  width: 60px;
+  z-index: 1;
+}
+.content {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: left 1s ease-in-out;
+  background-color: white;
+}
+.sidebar-active-page{
+  position: relative;
+  /* margin-left: 20vw; */
+  /* left: 20vw; */
+  width: 80vw;
+  transition: right 1s ease-in-out;
+}
 
-  .sidebar-inactive-content{
-    position: relative;
-    left: 0px;
-    transition: left 1s ease-in-out;
-  }
+.sidebar-inactive-page{
+  position: relative;
+  left: 0;
+  width: 100vw;
+  transition: left 1s ease-in-out;
+}
+
+
+.sidebar.open {
+  left: 0;
+  transition: right 1s ease-in-out;
+}
+
   
-  .sidebar.open {
-    left: 0;
-    transition: right 1s ease-in-out;
-  }
-  .content.open {
-    left: 15vw;
-  }
-  
-.fa-bars,fa-arrow-left-long,.fa-bars,fa-arrow-right-long{
+.fa-bars,.fa-arrow-left-long,.fa-bars,fa-arrow-right-long{
   color: rgb(163, 198, 231);
  
 }
@@ -196,9 +200,20 @@ header {
 
 }
 
+.page-container{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 .learnpage-title-container{
   background-color: #1464cb;
   color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
 }
 
 ul.errorMsg > li {
