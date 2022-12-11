@@ -223,3 +223,9 @@ ul.errorMsg > li {
 li.errors{
   color: #d0021b;
 }
+
+
+pre.ql-syntax{
+  background-color: black;
+  color: white;
+}

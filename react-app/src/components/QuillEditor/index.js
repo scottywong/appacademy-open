@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import './QuillEditor.css';
 
 const modules = {
+    syntax: true,   
     toolbar: [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
                 ['blockquote', 'code-block'],

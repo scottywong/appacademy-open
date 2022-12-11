@@ -6,6 +6,7 @@ import './CourseEditForm.css';
 import { useParams } from 'react-router';
 import QuillEditor from '../../../QuillEditor';
 
+
 function CourseEditForm( ){
 
     const dispatch = useDispatch();
@@ -78,6 +79,7 @@ function CourseEditForm( ){
             ))}
             </ul>
             
+            <p style={{color:'red'}}> Note: Copy/Paste is not currently supported in this editor.</p>
             <QuillEditor value={body} setValue={setBody}/>
 
             <div className='CourseEditForm-btns'>
@@ -89,6 +91,7 @@ function CourseEditForm( ){
                 </button>
             </div>
         </div>
+  
         )
 }
 
