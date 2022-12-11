@@ -5,16 +5,7 @@
     width: 100%;
     margin-bottom: 50px;
 }
-.ads-content{
-    /* height: 2000px; */
-}
-/* 
-.ads-detail{
 
-    width: 800px;
-    justify-content: center;
-    margin: auto;
-} */
 .ads-buttons{
     display:flex;
     width: 400px;

@@ -17,7 +17,7 @@ class Enrollment(db.Model):
     
     user = db.relationship('User', back_populates='enrollments')
     course = db.relationship('Course', back_populates='enrollments')
-    progresses = db.relationship('Progress',back_populates='enrollment')
+    progresses = db.relationship('Progress',back_populates='enrollment' ,cascade="all, delete-orphan")
 
     def get_user(self):
         user = User.query.filter(User.id == self.userId).first()

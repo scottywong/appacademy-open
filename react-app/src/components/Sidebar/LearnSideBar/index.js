@@ -3,7 +3,7 @@ import AssignmentSideBar from "../AssignmentSideBar";
 import EnrollmentSideBar from "../EnrollmentSideBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useState ,useEffect} from "react";
-import { fetchUserEnrollments } from "../../../store/user";
+import { fetchUserEnrollments, fetchUserProgresses } from "../../../store/user";
 import { useParams } from "react-router";
 import { fetchGetEnrollmentById } from "../../../store/enrollment";
 import { useLocation } from "react-router";
@@ -26,13 +26,15 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
   const [userEnrollments,setUserEnrollments] = useState(false);
   const [currentEnrollment,setCurrentEnrollment] = useState(false);
   const [relatedAssignments,setRelatedAssignments] = useState(false);
-  
+  const [relatedProgresses,setRelatedProgresses] = useState(false);
   const [loaded,setLoaded] = useState(false);
   
   const user = useSelector(state=>state.user);
   const enrollment = useSelector(state=>state.enrollment);
 
+
     useEffect(()=>{
+      dispatch(fetchUserProgresses())
         dispatch(fetchUserEnrollments())
         .then( () => {if(enrollmentId) dispatch(fetchGetEnrollmentById(enrollmentId))})
     },[dispatch,enrollmentId])
@@ -42,8 +44,9 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
         if(user.enrollments)  setUserEnrollments(Object.values(user.enrollments));
         if(enrollment.one_enrollment)  setCurrentEnrollment(enrollment.one_enrollment);
         if(enrollment.one_enrollment.Assignments) setRelatedAssignments(Object.values(enrollment.one_enrollment?.Assignments));
+        if(user.progresses) setRelatedProgresses(Object.values(user.progresses));
         setLoaded(true)
-    },[user,enrollment,enrollment.one_enrollment.Assignments])
+    },[user,enrollment,enrollment.one_enrollment.Assignments, user.progresses])
     
   return loaded && (
     <div className={sidebarClass}>

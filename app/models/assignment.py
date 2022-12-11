@@ -16,7 +16,7 @@ class Assignment(db.Model):
 
     task = db.relationship('Task', back_populates='assignments')
     course = db.relationship('Course', back_populates='assignments')
-    progresses = db.relationship('Progress',back_populates='assignment')
+    progresses = db.relationship('Progress',back_populates='assignment',cascade="all, delete-orphan")
 
 
     def get_coursetitle(self):

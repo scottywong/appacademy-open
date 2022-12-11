@@ -1,11 +1,27 @@
 import AssignmentListItemStudent from '../../Assignment/AssignmentListItemStudent';
 import { useHistory, useLocation } from 'react-router';
 import './AssignmentSideBar.css';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserProgresses } from '../../../store/user';
 
 function AssignmentSideBar({assignments,enrollment}){
 
     const history = useHistory();
+    const dispatch = useDispatch();
     const location = useLocation();
+
+
+    const myProgresses = useSelector(state => state.user.progresses);
+    const progress = useSelector(state=> state.progress)
+    console.log('progress: ', progress)
+
+    useEffect( ()=> {
+
+        dispatch(fetchUserProgresses())
+        
+    },[dispatch])
+
 
     return (
         <div className="AssignmentSideBar-container">

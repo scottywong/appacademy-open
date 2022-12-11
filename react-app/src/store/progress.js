@@ -62,7 +62,6 @@ const progressReducer = (state = initialState, action) => {
             return newState;
         case UPDATE_PROGRESS:
             newState = action.payload;
-            
             return newState;
         default:
             return newState;

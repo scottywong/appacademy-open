@@ -4,6 +4,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import { fetchGetAssignmentById } from "../../../store/assignment";
 import { useState, useEffect } from "react";
 import './AssignmentListItemStudent.css';
+import { fetchUserProgresses } from "../../../store/user";
 
 function AssignmentListItemStudent({assignment}){
     const history = useHistory();
@@ -12,20 +13,29 @@ function AssignmentListItemStudent({assignment}){
     const {enrollmentId} = useParams();
     const [isChecked,setIsChecked] = useState(false);
 
+
     const myProgresses = useSelector(state => state.user.progresses);
 
     const aliClass = location.pathname===`/learn/enrollments/${enrollmentId}/assignments/${assignment?.id}` ? 'selected-ali' : '';
-    
-    const refreshADS = (assignmentId) => {
-        dispatch(fetchGetAssignmentById(assignmentId))
-    }
 
     useEffect( ()=> {
 
-        if(myProgresses &&  myProgresses[assignment?.id] && myProgresses[assignment?.id].completion_status===1) setIsChecked(true)
-        if(myProgresses &&  myProgresses[assignment?.id] && myProgresses[assignment?.id].completion_status===0) setIsChecked(false)
+        if(myProgresses){
+            const existingProgress = Object.values(myProgresses).filter(progress=> progress['assignmentId'] === parseInt(assignment?.id) && progress['enrollmentId'] === parseInt(enrollmentId))
+            console.log('ep:' , existingProgress)
+            if(existingProgress.length === 1 && existingProgress[0].completion_status===parseInt(1)){
 
+                console.log('only 1 found')
+                setIsChecked(true)
+            } else if(existingProgress.length > 1){
+            
+                console.log('More than one progress found with same assId and eId');
+            }
+
+        }
     },[myProgresses])
+
+
     return (
         
         
@@ -33,7 +43,7 @@ function AssignmentListItemStudent({assignment}){
         { assignment && 
             <div className={`ali-student-item ${aliClass}`} onClick={()=> {
                 history.push(`/learn/enrollments/${enrollmentId}/assignments/${assignment.id}`)
-                refreshADS(assignment?.id)}} >
+                }} >
                 <div className='ali-check'>
                     {isChecked && <i className="fa-solid fa-circle-check"></i>}
                     {!isChecked && <i className="fa-regular fa-circle"></i>}
