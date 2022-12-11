@@ -1,14 +1,14 @@
 from app.models import db, Task
 
 def seed_tasks():
-    task1.1 = Task(
+    task1_1 = Task(
         userId=1 ,
         title="Week 1 - First Day Welcome", 
         task_detail= '''Live Lectures: 
         For this portion of the curriculum, lectures will be given live by the instructors and will be recorded and distributed. Take advantage of this to ask the lecturer questions especially during moments when you need clarification on what was just said. Don\t be afraid to ask for something to be repeated! 
         Remember to follow the asking good questions'''
     )
-    task1.2 = Task(
+    task1_2 = Task(
         userId=1,
         title='Expressions Learning Objectives'
         task_detail='''
@@ -17,17 +17,17 @@ def seed_tasks():
         the value of labeled lines</li><li><p>Create and assign a variable using <code class="sc-cMljjf hbDMZX">let</code> to a string, integer, and a
         boolean. Read its value and print to the console.</p></li></ol>'''
     )
-    task1.3 = Task(
+    task1_3 = Task(
         userId=1,
         title='Favorite Food'
         task_detail='''<p>Let's write a program! Use <code class="sc-cMljjf hbDMZX">console.log</code> to print out your favorite food. Closely follow the syntax of the given <code class="sc-cMljjf hbDMZX">console.log</code> example.</p>'''
     )
-    task1.4 = Task(
+    task1_4 = Task(
         userId=1,
         title='Numbers Exercise'
         task_detail='''<h1 class="sc-cPuPxo hsjqdO">Numbers Exercise</h1><p>Write 5 examples of expressions using each of the operations: <code class="sc-cMljjf hbDMZX">+</code>, <code class="sc-cMljjf hbDMZX">-</code>, <code class="sc-cMljjf hbDMZX">*</code>, <code class="sc-cMljjf hbDMZX">/</code>, and <code class="sc-cMljjf hbDMZX">%</code>. Print out the result of your expressions using <code class="sc-cMljjf hbDMZX">console.log</code>. Be sure to test your work by running your code!</p>'''
     )
-    task1.5 = Task(
+    task1_5 = Task(
         userId=1,
         title='Discussion Task'
         task_detail=
@@ -36,7 +36,7 @@ def seed_tasks():
         for asking questions!</p><p>If you are stuck, follow these steps:</p><ol><li>Write down everything you do understand about the topic</li><li>Write down everything you do not understand about the topic</li><li>Based on 1 and 2, come up with a <em>specific</em> question that clarifies the parts you do not understand</li><li>Trim down your question to be as <em>clear and concise</em> as possible</li><li>Ask the question</li></ol>
             '''
     )
-    task2.1 = Task(
+    task2_1 = Task(
         userId=2 ,
         title='Week 2 - Learning Boost', 
         task_detail= ''' Learning Boost
@@ -44,10 +44,10 @@ def seed_tasks():
         For questions that ask you to guess what certain code will evaluate to, do not use a repl before guessing what the answer should be.
         '''
     )
-    task2.2 = Task(
+    task2_2 = Task(
         userId=2,
         title='Two-Dimensional Arrays (2D Arrays)'
-        task_detail===
+        task_detail=
         '''<h1>Two-Dimensional Arrays (2D Arrays)</h1><p>It's time to broaden our understanding of arrays! We've already explored the
     fundamentals of arrays. Mainly, we can store any type of data we please as
     elements of an array and even mix types together. However, what happens if we
@@ -151,13 +151,13 @@ def seed_tasks():
     )
 
 
-    db.session.add(task1.1)
-    db.session.add(task1.2)
-    db.session.add(task1.3)
-    db.session.add(task1.4)
-    db.session.add(task1.5)
-    db.session.add(task2.1)
-    db.session.add(task2.2)
+    db.session.add(task1_1)
+    db.session.add(task1_2)
+    db.session.add(task1_3)
+    db.session.add(task1_4)
+    db.session.add(task1_5)
+    db.session.add(task2_1)
+    db.session.add(task2_2)
     db.session.add(task3)
     db.session.add(task4)
     db.session.add(task5)
