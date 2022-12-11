@@ -73,18 +73,17 @@ def create_enrollments():
             #add enrollment object to enrollment_list
             enrollment_list.append(enrollment)
         else:   
-            error_list.append({user_id:"Duplicate enrollment found for userId!"})
+            error_list.append(f"Duplicate enrollment found for userId: {user_id}!")
 
     print('enrollment_list: ', enrollment_list)
-    
-    #create list of ernrollments
-    db.session.add_all(enrollment_list)
-    db.session.commit()
-    
+        
     if len(error_list) > 0:
         print('error_list: ', error_list)
         return {"errors": (error_list)}, 401
     else:
+        #create list of ernrollments
+        db.session.add_all(enrollment_list)
+        db.session.commit()
         return {enrollment.id:enrollment.to_dict() for enrollment in enrollment_list}, 200
     
     

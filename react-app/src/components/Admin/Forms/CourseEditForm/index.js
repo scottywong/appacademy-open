@@ -61,14 +61,6 @@ function CourseEditForm( ){
 
         <div className='courseEdit-container'>
 
-            <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-            </ul>
-
             <input
             className='modal-input-title'
             type='text'
@@ -78,6 +70,14 @@ function CourseEditForm( ){
             required
             />
 
+            <ul className='errorMsg'>
+            {errors.map((error, idx) => (
+                <li className='errors' key={idx}>
+                {error}
+                </li>
+            ))}
+            </ul>
+            
             <QuillEditor value={body} setValue={setBody}/>
 
             <div className='CourseEditForm-btns'>

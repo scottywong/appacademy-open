@@ -5,8 +5,6 @@ import {fetchCreateEnrollments} from '../../../../store/enrollment';
 import { useParams } from 'react-router';
 import './EnrollmentCreateForm.css';
 import Search from '../../Search';
-import { useEffect } from 'react';
-import { fetchUsers } from '../../../../store/user';
 
 function EnrollmentCreateForm({setShowEnrollmentModal}){
 
@@ -18,10 +16,6 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
     const [userIdList,setUserIdList] = useState(new Set());
     const [errors, setErrors] = useState([]);
 
-    // useEffect( () =>{
-    //     dispatch(fetchUsers());
-    // },[dispatch])
-
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,21 +26,27 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
         }
 
         return dispatch(fetchCreateEnrollments(payload))
-        .then(
-            (res) => history.push(`/learn/admin/courses/${courseId}`)
-        )
-        .then( setShowEnrollmentModal(false));
+        .then( async (res) => {
+
+            if(res.ok === false) {
+              const data = await res.json()
+
+              if (data && data.errors) setErrors(data.errors)
+            } else {
+                setShowEnrollmentModal(false)
+            }
+          });
+
     }    
 
     return(
        
-    <div className='EnrollmentCreateForm-container'>
+    <div className='modal-container'>
 
-       
+        <div id='modal-close' onClick={() => setShowEnrollmentModal(false)}> <i class="fa-regular fa-circle-xmark fa-2xl"></i></div>
+
         <form className='modal-container' onSubmit={onSubmit}>
             <h2 className='modal-form-title'>Create Enrollment</h2>
-
-            <Search type='user' selector={setUserIdList} selected={userIdList}/>
 
             <ul className='errorMsg'>
             {errors.map((error, idx) => (
@@ -56,7 +56,9 @@ function EnrollmentCreateForm({setShowEnrollmentModal}){
             ))}
             </ul>
 
-            <div>
+            <Search type='user' lookupId={courseId} selector={setUserIdList} selected={userIdList}/>
+
+            <div className='modal-btn-container'>
                 <button className='modal-btn modal-submit-btn'>Submit</button>
                 <button
                 className='modal-btn modal-cancel-btn'

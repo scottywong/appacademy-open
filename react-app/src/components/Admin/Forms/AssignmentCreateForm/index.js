@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation,useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {fetchCreateAssignments} from '../../../../store/assignment';
 import './AssignmentCreateForm.css';
 import Search from '../../Search';
@@ -34,6 +34,7 @@ function AssignmentCreateForm({setShowAssignmentModal}){
 
             if(res.ok === false) {
               const data = await res.json()
+
               if (data && data.errors) setErrors(data.errors)
             } else {
                 setShowAssignmentModal(false)
@@ -44,9 +45,13 @@ function AssignmentCreateForm({setShowAssignmentModal}){
 
     return(
        
-    <div className='AssignmentCreateForm-container'>
-        <form className='modal-container' onSubmit={onSubmit}>
-        <h2 className='modal-form-title'>Create Assignment</h2>
+    <div className='modal-container'>
+
+        <div id='modal-close' onClick={() => setShowAssignmentModal(false)}> <i class="fa-regular fa-circle-xmark fa-2xl"></i></div>
+        
+        <div className='modal-container'>
+
+        <h2 className='modal-form-title'>Add Assignments</h2>
             <ul className='errorMsg'>
                 {errors.map((error, idx) => (
                     <li className='errors' key={idx}>
@@ -55,13 +60,11 @@ function AssignmentCreateForm({setShowAssignmentModal}){
                 ))}
             </ul>
           
-            {courseId && <Search type='task' selector={setTaskIdList} selected={taskIdList}/>}
-            {taskId && <Search type='course' selector={setCourseIdList} selected={courseIdList}/>}
+            {courseId && <Search type='task' lookupId={courseId} selector={setTaskIdList} selected={taskIdList}/>}
+            {taskId && <Search type='course' lookupId={taskId} selector={setCourseIdList} selected={courseIdList}/>}
 
-           
-
-            <div>
-                <button className='modal-btn modal-submit-btn'>Submit</button>
+            <div className='modal-btn-container'>
+                <button onClick={onSubmit}className='modal-btn modal-submit-btn'>Submit</button>
                 <button
                 className='modal-btn modal-cancel-btn'
                 onClick={() => setShowAssignmentModal(false)}
@@ -69,7 +72,7 @@ function AssignmentCreateForm({setShowAssignmentModal}){
                 Cancel
                 </button>
             </div>
-        </form>
+        </div>
     </div>
 
 

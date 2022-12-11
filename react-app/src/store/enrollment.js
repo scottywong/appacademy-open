@@ -107,6 +107,8 @@ export const fetchCreateEnrollments = (payload) => async (dispatch) => {
         dispatch(createEnrollments(enrollments));
         return enrollments;
     };
+
+    return res;
     
 }
 export const fetchDeleteEnrollment = (enrollmentId) => async (dispatch) => {

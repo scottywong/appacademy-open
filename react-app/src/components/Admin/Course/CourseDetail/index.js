@@ -65,7 +65,7 @@ function CourseDetail(){
                         </Modal>
                         )}
                     <a onClick={()=> setShowAssignmentModal(true)} className="button green">
-                        <span className="button-inner">Add Assignment</span>
+                        <span className="button-inner">Add Assignments</span>
                         <span className="button-bg green"></span>
                     </a>
                     {showAssignmentModal && (
@@ -74,7 +74,7 @@ function CourseDetail(){
                         </Modal>
                         )}
                     <a onClick={()=> setShowEnrollmentModal(true)} className="button green">
-                        <span className="button-inner"> Add Enrollment</span>
+                        <span className="button-inner"> Add Enrollments</span>
                         <span className="button-bg green"></span>
                     </a>
                     {showEnrollmentModal && (

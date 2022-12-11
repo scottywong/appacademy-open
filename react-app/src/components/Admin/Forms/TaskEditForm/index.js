@@ -63,13 +63,7 @@ function TaskEditForm(){
 
     return id && ( 
          <div className='TaskEditForm-container'>
-            <ul className='errorMsg'>
-            {errors.map((error, idx) => (
-                <li className='errors' key={idx}>
-                {error}
-                </li>
-            ))}
-            </ul>
+           
 
             <input
             className='modal-input-title'
@@ -79,7 +73,13 @@ function TaskEditForm(){
             placeholder='Enter Title'
             required
             />
-
+            <ul className='errorMsg'>
+                {errors.map((error, idx) => (
+                    <li className='errors' key={idx}>
+                    {error}
+                    </li>
+                ))}
+            </ul>
            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
            
            <div className='TaskEditForm-btns'>

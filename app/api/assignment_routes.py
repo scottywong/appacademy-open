@@ -70,7 +70,7 @@ def create_assignments():
                 #add enrollment object to enrollment_list
                 assignment_list.append(assignment)
             else:   
-                error_list.append({thetask_id:"Duplicate assignment found for taskId!"})
+                error_list.append(f"Duplicate assignment found for taskId: {thetask_id}!")
     elif parent_type =='task':
         for thecourse_id in courseid_list:
             assignments = Assignment.query.filter(Assignment.taskId==task_id).filter(Assignment.courseId==thecourse_id).all()
