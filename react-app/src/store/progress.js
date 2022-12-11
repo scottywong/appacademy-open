@@ -52,7 +52,9 @@ export const fetchUpdateProgress = (id,assignmentId,enrollmentId,completionStatu
 };
 
 // ******** REDUCER ********
-const initialState = {};
+const initialState = {
+
+};
 
 const progressReducer = (state = initialState, action) => {
     let newState = {...state};

@@ -51,6 +51,7 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
   return loaded && (
     <div className={sidebarClass}>
      
+      {/* {location.pathname.includes('/enrollments/') && <AssignmentSideBar enrollment={currentEnrollment}/>} */}
       {relatedAssignments && location.pathname.includes('/enrollments/') && <AssignmentSideBar assignments={relatedAssignments} enrollment={currentEnrollment}/>}
       
       {userEnrollments && location.pathname === '/learn/home' && ( <EnrollmentSideBar enrollments={userEnrollments}/>)}

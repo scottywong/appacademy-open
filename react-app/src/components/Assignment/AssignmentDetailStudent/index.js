@@ -2,10 +2,8 @@ import { useEffect,useState } from 'react';
 import { useParams } from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchGetAssignmentById} from '../../../store/assignment';
-
-
-import './AssignmentDetailStudent.css';
 import { fetchUserProgresses, fetchUpdateProgress } from '../../../store/user';
+import './AssignmentDetailStudent.css';
 
 function AssignmentDetailStudent(){
 
@@ -17,23 +15,20 @@ function AssignmentDetailStudent(){
     const [adsProgress,setadsProgress] = useState(0);
     const [errors,setErrors] = useState([]);
 
-    console.log('this is adsProgress: ', adsProgress)
-
     useEffect( ()=> {
        if(user.progresses){
            const existingProgress = Object.values(user.progresses).filter(progress=> progress['assignmentId'] === parseInt(assignmentId) && progress['enrollmentId'] === parseInt(enrollmentId))
            if(existingProgress.length > 0 ){
                setadsProgress(existingProgress[0]?.id)
-               console.log('ep!: ', existingProgress)
            }
        }
-    },[user.progresses,adsProgress])
+    },[user.progresses,adsProgress,assignmentId])
     
     useEffect(()=> {
         dispatch(fetchUserProgresses());
         dispatch(fetchGetAssignmentById(assignmentId));
 
-    },[dispatch])
+    },[dispatch,assignmentId])
 
     const handleIncomplete = async (e) => {
 
@@ -49,7 +44,6 @@ function AssignmentDetailStudent(){
               const data = await res.json()
               if (data && data.errors) setErrors(data.errors)
             } else {
-                console.log('res', res)
                 setadsProgress(res.id)
             }
           });

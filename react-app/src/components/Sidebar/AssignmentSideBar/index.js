@@ -1,29 +1,29 @@
 import AssignmentListItemStudent from '../../Assignment/AssignmentListItemStudent';
 import { useHistory, useLocation } from 'react-router';
-import './AssignmentSideBar.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserProgresses } from '../../../store/user';
+import './AssignmentSideBar.css';
 
 function AssignmentSideBar({assignments,enrollment}){
 
     const history = useHistory();
     const dispatch = useDispatch();
     const location = useLocation();
-
-
+    
     const myProgresses = useSelector(state => state.user.progresses);
-    const progress = useSelector(state=> state.progress)
-    console.log('progress: ', progress)
+    const [loadedProgresses,setLoadedProgresses] = useState(false);
 
     useEffect( ()=> {
-
+        if(myProgresses)setLoadedProgresses(myProgresses);
+    },[myProgresses])
+    
+    useEffect( ()=> {
         dispatch(fetchUserProgresses())
-        
     },[dispatch])
 
 
-    return (
+    return loadedProgresses && (
         <div className="AssignmentSideBar-container">
             
         <h3> Tasks </h3>
@@ -40,8 +40,14 @@ function AssignmentSideBar({assignments,enrollment}){
             {assignments && assignments.map(
                 
                 assignment => {
-                return <AssignmentListItemStudent assignment={assignment}/>
+                        const existingProgress = Object.values(loadedProgresses).filter(progress=> progress['assignmentId'] === parseInt(assignment?.id) && progress['enrollmentId'] === parseInt(enrollment.id))
+                        let completionStatus=0;
+                        if(existingProgress.length === 1 && existingProgress[0].completion_status===parseInt(1)){
+                            completionStatus=1;
+                        }
+                        return <AssignmentListItemStudent assignment={assignment} completionStatus={completionStatus}/>
                 }
+            
             )}
 
         </div>

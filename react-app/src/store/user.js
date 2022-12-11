@@ -115,17 +115,10 @@ const userReducer = (state = initialState, action) => {
             newState.progresses=action.payload;
             return {...newState};
         case UPDATE_PROGRESS:
-            // newState.progresses[action.payload.assignmentId] = action.payload;
-            // return {...newState, ...newState.progresses:  };
-            return {
-                ...newState,
-                progresses: {
-                  ...newState.progresses,
-                  [action.payload.assignmentId]: {
-                    ...action.payload
-                  }
-                }
-              }
+            const newProgress = {};
+            newProgress[action.payload.id] = action.payload;
+            newState.progresses = Object.assign(newState.progresses, newProgress)
+            return {...newState};
         default:
             return newState;
     }
