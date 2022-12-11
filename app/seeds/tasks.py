@@ -10,7 +10,7 @@ def seed_tasks():
     )
     task1_2 = Task(
         userId=1,
-        title='Expressions Learning Objectives'
+        title='Expressions Learning Objectives',
         task_detail='''
         <ol><li>Given a working REPL interface, write and execute a statement that will print “hello world” using console.log</li><li>Identify that strings are a list of characters defined by using double or
         single quotes</li><li>Given an arithmetic expression using +, -, *, /, %, compute its value</li><li>Given an expression, predict if its value is NaN</li><li>Construct the truth tables for &amp;&amp;, ||, !</li><li>Given an expression consisting of &gt;, &gt;=, ===, &lt;, &lt;=, compute its value</li><li>Apply De Morgan’s law to a boolean expression</li><li>Given an expression that utilizes operator precedence, compute its value</li><li>Given an expression, use the grouping operator to change it’s evaluation</li><li>Given expressions using == and ===, compute their values</li><li>Given a code snippet using postfix ++, postfix --, +=, -=, /=, *=, predict
@@ -19,17 +19,17 @@ def seed_tasks():
     )
     task1_3 = Task(
         userId=1,
-        title='Favorite Food'
-        task_detail='''<p>Let's write a program! Use <code class="sc-cMljjf hbDMZX">console.log</code> to print out your favorite food. Closely follow the syntax of the given <code class="sc-cMljjf hbDMZX">console.log</code> example.</p>'''
+        title='Favorite Food',
+        task_detail= '''<p>Let's write a program! Use <code class="sc-cMljjf hbDMZX">console.log</code> to print out your favorite food. Closely follow the syntax of the given <code class="sc-cMljjf hbDMZX">console.log</code> example.</p>'''
     )
     task1_4 = Task(
         userId=1,
-        title='Numbers Exercise'
+        title='Numbers Exercise',
         task_detail='''<h1 class="sc-cPuPxo hsjqdO">Numbers Exercise</h1><p>Write 5 examples of expressions using each of the operations: <code class="sc-cMljjf hbDMZX">+</code>, <code class="sc-cMljjf hbDMZX">-</code>, <code class="sc-cMljjf hbDMZX">*</code>, <code class="sc-cMljjf hbDMZX">/</code>, and <code class="sc-cMljjf hbDMZX">%</code>. Print out the result of your expressions using <code class="sc-cMljjf hbDMZX">console.log</code>. Be sure to test your work by running your code!</p>'''
     )
     task1_5 = Task(
         userId=1,
-        title='Discussion Task'
+        title='Discussion Task',
         task_detail=
         '''<h1>Discussion Task</h1><p>This is the time to discuss the practice exercises as a class. If you were not able to complete the
         exercise, be sure to come up with questions for discussion. Be sure to follow the <a href="https://open.appacademy.io/learn/student-handbook/code-of-conduct/asking-questions" target="_blank">guidelines</a>
@@ -46,7 +46,7 @@ def seed_tasks():
     )
     task2_2 = Task(
         userId=2,
-        title='Two-Dimensional Arrays (2D Arrays)'
+        title='Two-Dimensional Arrays (2D Arrays)',
         task_detail=
         '''<h1>Two-Dimensional Arrays (2D Arrays)</h1><p>It's time to broaden our understanding of arrays! We've already explored the
     fundamentals of arrays. Mainly, we can store any type of data we please as
