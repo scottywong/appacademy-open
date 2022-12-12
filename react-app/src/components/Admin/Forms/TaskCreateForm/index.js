@@ -21,6 +21,8 @@ function TaskCreateForm({setShowTaskModal}){
         e.preventDefault();
 
         let frontEndValidation = [];
+        const byteSize = task_detail => new Blob([task_detail]).size;
+        console.log('byteSize', byteSize)
 
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
@@ -29,7 +31,8 @@ function TaskCreateForm({setShowTaskModal}){
             return setErrors(frontEndValidation);
         }
 
-        if(task_detail.length > 2000){
+        if(task_detail.length > 2000 || byteSize > 65535 ){
+            
             frontEndValidation.push(`task_detail: This field is too long. Please reduce length.`)
             return setErrors(frontEndValidation);
         }
