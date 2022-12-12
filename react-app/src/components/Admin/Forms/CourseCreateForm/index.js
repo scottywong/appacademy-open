@@ -19,7 +19,8 @@ function CourseCreateForm({setShowCourseModal}){
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        let frontEndValidation = [];
+        
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(body)){
             let frontEndValidation = [];

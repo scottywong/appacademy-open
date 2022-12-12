@@ -35,7 +35,7 @@ function CourseEditForm( ){
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        let frontEndValidation = [];
          //Front End Validation
          if(isEmptyOrSpaces(title) || isEmptyOrSpaces(body)){
             if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)

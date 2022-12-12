@@ -17,26 +17,6 @@ def all_assignments():
     assignments = Assignment.query.all()
     return {assignment.id:assignment.to_dict() for assignment in assignments}
 
-# @assignment_routes.route('/',methods=['POST'])
-# @login_required
-# def create_assignment():
-#     form = AssignmentForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     if form.validate_on_submit():
-
-#         assignment = Assignment(
-#             # userId=current_user.id,
-#             courseId=form.data['courseId'],
-#             taskId=form.data['taskId']
-#         )
-
-#         db.session.add(assignment)
-#         db.session.commit()
-#         return assignment.to_dict(), 200
-
-#     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
-
 @assignment_routes.route('/list',methods=['POST'])
 @login_required
 def create_assignments():
@@ -50,11 +30,6 @@ def create_assignments():
     error_list = []
 
     print('request',request.json)
-    # print('parent_type',parent_type)
-    # print('course_id',course_id)
-    # print('task_id', task_id)
-    # print('taskid_list',taskid_list)
-    # print('courseid_list',courseid_list)
 
     #loop through user_id_list and create an enrollment object
     if parent_type == 'course' and task_id == None:

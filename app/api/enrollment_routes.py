@@ -21,35 +21,6 @@ def all_enrollments():
     enrollments = Enrollment.query.all()
     return {enrollment.to_dict() for enrollment in enrollments}
 
-
-@enrollment_routes.route('/',methods=['POST'])
-@login_required
-def create_enrollment():
-    form = EnrollmentForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    
-    if form.validate_on_submit():
-        enrollments = Enrollment.query.filter(Enrollment.courseId==form.data['courseId']).filter(Enrollment.userId==form.data['userId']).all()
-
-        
-        if len(enrollments) == 0:
-
-            enrollment = Enrollment(
-                # userId=current_user.id,
-                courseId=form.data['courseId'],
-                userId=form.data['userId']
-            )
-            db.session.add(enrollment)
-            db.session.commit()
-            return enrollment.to_dict(), 200
-        else:
-            print({enrollment.id:enrollment for enrollment in enrollments})
-            return {'errors': ["Duplicate enrollment found!"]}, 404
-
-    print(request.json,form.data['courseId'],{"errors": validation_errors_to_error_messages(form.errors)})
-    
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
-
 @enrollment_routes.route('/list',methods=['POST'])
 @login_required
 def create_enrollments():
@@ -86,9 +57,6 @@ def create_enrollments():
         db.session.commit()
         return {enrollment.id:enrollment.to_dict() for enrollment in enrollment_list}, 200
     
-    
-
-
 @enrollment_routes.route('/<int:id>',methods=['DELETE'])
 @login_required
 def delete_enrollment(id):
