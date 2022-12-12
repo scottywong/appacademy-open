@@ -51,11 +51,10 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
   return loaded && (
     <div className={sidebarClass}>
      
-      {/* {location.pathname.includes('/enrollments/') && <AssignmentSideBar enrollment={currentEnrollment}/>} */}
       {relatedAssignments && location.pathname.includes('/enrollments/') && <AssignmentSideBar assignments={relatedAssignments} enrollment={currentEnrollment}/>}
-      
+      {relatedAssignments?.length === 0 && location.pathname.includes('/enrollments/') && <p style={{textAlign:"center"}}> No assigned tasks</p>}
       {userEnrollments && location.pathname === '/learn/home' && ( <EnrollmentSideBar enrollments={userEnrollments}/>)}
-      
+      {userEnrollments?.length === 0 && location.pathname === '/learn/home' && <p style={{textAlign:"center"}}> No assigned courses</p>}
     </div>
   );
 };

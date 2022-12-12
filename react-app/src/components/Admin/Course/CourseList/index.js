@@ -45,6 +45,7 @@ function CourseList(){
                 )}
 
             {courseList?.map( course =>  <CourseListItem key={course.id} course={course} /> )}
+         
         </div>
     )
 }
