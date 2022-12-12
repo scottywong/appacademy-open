@@ -79,7 +79,7 @@ export const fetchCreateTask = (task) => async (dispatch) => {
       // The response wasn't a JSON object
       // Do your text handling here
       console.log('err: ', err)
-      return [...err];
+      return err;
     }
   });
     // .then(function (response) {
