@@ -16,12 +16,13 @@ function TaskCreateForm({setShowTaskModal}){
     const [task_detail,setTaskDetail] = useState('');
     const [errors, setErrors] = useState([]);
 
+    const byteSize = str => new Blob([str]).size;
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         let frontEndValidation = [];
-        const byteSize = task_detail => new Blob([task_detail]).size;
+
         console.log('byteSize', byteSize)
 
         //Front End Validation
@@ -33,7 +34,7 @@ function TaskCreateForm({setShowTaskModal}){
 
         if(byteSize > 65535 ){
             
-            frontEndValidation.push(`task_detail: This field is too long. Please reduce length.`)
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000 and less than 65535 Bytes .`)
             return setErrors(frontEndValidation);
         }
         const payload = {
@@ -79,7 +80,8 @@ function TaskCreateForm({setShowTaskModal}){
             </ul>
 
             <QuillEditor value={task_detail} setValue={setTaskDetail}/>
-            <p>Length: {task_detail.length}</p>
+            <p>Length: {task_detail.length}</p><span> Byte Size: {byteSize(task_detail)} </span>
+
 
         
         <div className='modal-btn-container'>
