@@ -61,7 +61,7 @@ function CourseDetail(){
                     </a>
                     {showDeleteCourseModal && (
                         <Modal onClose={() => setShowDeleteCourseModal(false)}>
-                            <CourseDeleteForm courseId={course.id} setShowDeleteCourseModal={setShowDeleteCourseModal} />
+                            <CourseDeleteForm courseId={courseId} setShowDeleteCourseModal={setShowDeleteCourseModal} />
                         </Modal>
                         )}
                     <a onClick={()=> setShowAssignmentModal(true)} className="button green">

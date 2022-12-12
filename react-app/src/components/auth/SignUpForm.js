@@ -15,11 +15,16 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  // console.log('')
+  function isValidEmail(e) {
+    return /\S+@\S+\.\S+/.test(e);
+  }
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+
+    if(!isValidEmail(email)){
+      setErrors(['Email is invalid']);
+    } else if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password,profile));
       if (data) {
         setErrors(data)
