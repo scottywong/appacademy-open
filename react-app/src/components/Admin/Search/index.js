@@ -33,9 +33,9 @@ const Search = ({type,selector,selected, lookupId}) => {
       }
     },[courses,users,tasks,assignments,enrollments])
 
-    console.log('filterList: ', filterList)
-    console.log('lookupId: ', lookupId)
-    console.log('type: ', type)
+    // console.log('filterList: ', filterList)
+    // console.log('lookupId: ', lookupId)
+    // console.log('type: ', type)
 
     useEffect (() => {
         if(type==='course'){
@@ -43,7 +43,7 @@ const Search = ({type,selector,selected, lookupId}) => {
           if(lookupId) dispatch(fetchGetAssignmentsByTaskId(lookupId))
         } else if(type==='task'){
           dispatch(fetchGetTasks())
-          console.log('sss')
+          // console.log('sss')
           if(lookupId) dispatch(fetchGetAssignmentsByCourseId(lookupId))
         } else if(type==='user'){
           dispatch(fetchUsers())
@@ -76,7 +76,7 @@ const Search = ({type,selector,selected, lookupId}) => {
       selected.delete(data.id)
       selector(selected);
       dataList.push(data)
-      console.log(dataList)
+      // console.log(dataList)
       setDataList([...dataList].sort(
         function compareFn(a,b){
           let compareA, compareB;

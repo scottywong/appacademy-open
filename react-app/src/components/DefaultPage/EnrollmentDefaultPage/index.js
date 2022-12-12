@@ -19,7 +19,7 @@ function EnrollmentDefaultPage(){
 
         if(enrollment.one_enrollment){
             setTitle(enrollment.one_enrollment.course_title)
-            setBody(enrollment.one_enrollment.notes)
+            setBody(enrollment.one_enrollment.course_body)
         }
     },[enrollment.one_enrollment])
 

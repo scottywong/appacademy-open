@@ -15,7 +15,7 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  console.log('')
+  // console.log('')
 
   const onSignUp = async (e) => {
     e.preventDefault();

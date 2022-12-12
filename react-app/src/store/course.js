@@ -89,7 +89,7 @@ export const fetchUpdateCourse = (course,courseId) => async (dispatch) => {
 
     if (res.ok){
         const course = await res.json();
-        console.log('course', course)
+        // console.log('course', course)
         dispatch(updateCourse(course));
        
         return course;

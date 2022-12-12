@@ -55,7 +55,7 @@ function CourseEditForm( ){
 
         return dispatch(fetchUpdateCourse(payload,id))
         .then(async (res) => {
-            console.log('its a res',res)
+            // console.log('its a res',res)
             if(res.ok === false) {
               const data = await res.json()
               if (data && data.errors) setErrors(data.errors)

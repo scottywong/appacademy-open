@@ -27,6 +27,10 @@ class Enrollment(db.Model):
         course = Course.query.filter(Course.id == self.courseId).first()
         return course.title
 
+    def get_coursebody(self):
+        course = Course.query.filter(Course.id == self.courseId).first()
+        return course.body
+        
     def get_assignments(self):
         assignments = Assignment.query.filter(Assignment.courseId == self.courseId).all()
         return assignments
@@ -38,6 +42,7 @@ class Enrollment(db.Model):
             'username': self.get_user().username,
             'courseId': self.courseId,
             'course_title': self.get_coursetitle(),
+            'course_body': self.get_coursebody(),
             'notes': self.notes,
             'created_on': self.created_on,
             'updated_on': self.updated_on,

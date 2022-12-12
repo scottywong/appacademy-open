@@ -20,7 +20,7 @@ function EnrollmentHomePage(){
 
         if(enrollment.one_enrollment){
             setTitle(enrollment.one_enrollment.course_title)
-            setBody(enrollment.one_enrollment.notes)
+            setBody(enrollment.one_enrollment.course_body)
         }
     },[enrollment.one_enrollment])
 
@@ -40,7 +40,7 @@ function EnrollmentHomePage(){
         <div className='EnrollmentHomePage-container page-container'>
 
                 <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
-                <p>{body}</p> 
+                <div dangerouslySetInnerHTML={{__html: body}}></div>
           
         </div>
     
