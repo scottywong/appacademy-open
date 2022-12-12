@@ -5,6 +5,7 @@ import {fetchCreateCourse} from '../../../../store/course';
 import QuillEditor from '../../../QuillEditor';
 import { isEmptyOrSpaces } from '../../Utils';
 import './CourseCreateForm.css';
+import { isEmptyOrSpaces } from '../../Utils';
 
 function CourseCreateForm({setShowCourseModal}){
 
@@ -14,7 +15,8 @@ function CourseCreateForm({setShowCourseModal}){
     const [title,setTitle] = useState('');
     const [body,setBody] = useState('');
     const [errors, setErrors] = useState([]);
-   
+    const byteSize = str => new Blob([str]).size;
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,8 +28,12 @@ function CourseCreateForm({setShowCourseModal}){
             return setErrors(frontEndValidation);
         }
             
-       
-        console.log('the errors: ', errors)
+        if(byteSize > 2000 ){
+            
+            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000.`)
+            return setErrors(frontEndValidation);
+        }
+
         const payload = {
             title,
             body
@@ -71,7 +77,8 @@ function CourseCreateForm({setShowCourseModal}){
             </ul>
 
             <QuillEditor value={body} setValue={setBody}/>
-        
+            <p>Length: {body.length}</p><span> Byte Size: {byteSize(body)} </span>
+
             <div className='modal-btn-container'>
                 <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>
                 <button

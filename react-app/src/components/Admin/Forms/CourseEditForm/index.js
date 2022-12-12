@@ -5,7 +5,7 @@ import {fetchGetCourseById, fetchUpdateCourse} from '../../../../store/course';
 import './CourseEditForm.css';
 import { useParams } from 'react-router';
 import QuillEditor from '../../../QuillEditor';
-
+import { isEmptyOrSpaces } from '../../Utils';
 
 function CourseEditForm( ){
 
@@ -18,6 +18,7 @@ function CourseEditForm( ){
     const [title,setTitle] = useState(false);
     const [body,setBody] = useState(false);
     const [errors, setErrors] = useState([]);
+    const byteSize = str => new Blob([str]).size;
 
     useEffect( ()=> {
         if(course.one_course){
@@ -34,6 +35,19 @@ function CourseEditForm( ){
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+         //Front End Validation
+         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(body)){
+            if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
+            if(isEmptyOrSpaces(body)) frontEndValidation.push(`body: This field is required.`)
+            return setErrors(frontEndValidation);
+        }
+
+        if(byteSize > 2000 ){
+            
+            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000.`)
+            return setErrors(frontEndValidation);
+        }
 
         const payload = {
             title,
@@ -79,8 +93,8 @@ function CourseEditForm( ){
             ))}
             </ul>
             
-            <p style={{color:'red'}}> Note: Copy/Paste is not currently supported in this editor.</p>
             <QuillEditor value={body} setValue={setBody}/>
+            <p>Length: {body.length}</p><span> Byte Size: {byteSize(body)} </span>
 
             <div className='CourseEditForm-btns'>
                 <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>

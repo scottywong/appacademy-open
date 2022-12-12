@@ -7,7 +7,7 @@ import './TaskEditForm.css';
 import { useParams } from 'react-router';
 import { fetchGetTaskById } from '../../../../store/task';
 import { useEffect } from 'react';
-
+import { isEmptyOrSpaces } from '../../Utils';
 
 function TaskEditForm(){
     
@@ -21,6 +21,8 @@ function TaskEditForm(){
     const [title,setTitle] = useState(false);
     const [task_detail,setTaskDetail] = useState(false);
     const [errors, setErrors] = useState([]);
+
+    const byteSize = str => new Blob([str]).size;
 
     useEffect( ()=> {
         if(task.one_task){
@@ -36,6 +38,20 @@ function TaskEditForm(){
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        //Front End Validation
+        if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
+            if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
+            if(isEmptyOrSpaces(task_detail)) frontEndValidation.push(`task_detail: This field is required.`)
+            return setErrors(frontEndValidation);
+        }
+
+        if(byteSize > 2000 ){
+            
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
+            return setErrors(frontEndValidation);
+        }
+
 
         const payload = {
             title,
@@ -81,7 +97,8 @@ function TaskEditForm(){
                 ))}
             </ul>
            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
-           
+           <p>Length: {task_detail.length}</p><span> Byte Size: {byteSize(task_detail)} </span>
+
            <div className='TaskEditForm-btns'>
                 <button className='modal-btn modal-submit-btn' onClick={onSubmit}>Save</button>
                 <button className='modal-btn modal-cancel-btn' onClick={onCancel}>Cancel</button>

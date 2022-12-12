@@ -23,8 +23,6 @@ function TaskCreateForm({setShowTaskModal}){
 
         let frontEndValidation = [];
 
-        console.log('byteSize', byteSize)
-
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
             if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
@@ -32,9 +30,9 @@ function TaskCreateForm({setShowTaskModal}){
             return setErrors(frontEndValidation);
         }
 
-        if(byteSize > 65535 ){
+        if(byteSize > 2000 ){
             
-            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000 and less than 65535 Bytes .`)
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
             return setErrors(frontEndValidation);
         }
         const payload = {
