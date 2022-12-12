@@ -54,7 +54,7 @@ function LearnNavBar({toggleSidebar}){
 
             <div className='LearnNavBar-links'>
                 <div className='LearnNavBar-linkitem'>
-                    <NavLink to='/'> Home </NavLink>
+                    <NavLink to='/learn/home'> Home </NavLink>
                 </div>
                 <div className='LearnNavBar-linkitem'>
                     <NavLink to='/learn/home'> Learn </NavLink>

@@ -8,10 +8,6 @@ const DemoLogin = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-
-
-
-
   const onLogin = async () => {
     const data = await dispatch(login('demo@aa.io', 'password'));
     if (data) {
