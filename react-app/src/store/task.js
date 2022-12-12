@@ -54,7 +54,8 @@ export const fetchGetTaskById = (taskId) => async (dispatch) => {
 };
 
 export const fetchCreateTask = (task) => async (dispatch) => {
-        
+    let responseClone; // 1
+    
     const res = await fetch(`/api/tasks/`,{
         method: 'POST',
         headers: {
@@ -62,14 +63,28 @@ export const fetchCreateTask = (task) => async (dispatch) => {
         },
         body : JSON.stringify(task)
       }
-    );
+    ).then(function (response) {
+    responseClone = response.clone(); // 2
+    return response.json();
+    })
+    .then(function (data) {
+        // const task = await res.json();
+        dispatch(createTask(data));
+        return data;
+}, function (rejectionReason) { // 3
+    console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
+    responseClone.text() // 5
+    .then(function (bodyText) {
+        console.log('Received the following instead of valid JSON:', bodyText); // 6
+    });
+});
           
-    if (res.ok){
-        const task = await res.json();
-        dispatch(createTask(task));
-        return task;
-    } 
-        return res;   
+    // if (res.ok){
+    //     const task = await res.json();
+    //     dispatch(createTask(task));
+    //     return task;
+    // } 
+        // return res;   
 }
 
 export const fetchUpdateTask = (task, taskId) => async (dispatch) => {

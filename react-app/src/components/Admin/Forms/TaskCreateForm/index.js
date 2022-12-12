@@ -34,14 +34,14 @@ function TaskCreateForm({setShowTaskModal}){
         };
 
         return dispatch(fetchCreateTask(payload))
-        .then(async (res) => {
-            if(res.ok === false) {
-              const data = await res.json()
-              if (data && data.errors) setErrors([data.errors])
-            } else {
-                return history.push(`/learn/admin/tasks/${res.id}`);
-            } 
-        })    
+        // .then(async (res) => {
+        //     if(res.ok === false) {
+        //       const data = await res.json()
+        //       if (data && data.errors) setErrors([data.errors])
+        //     } else {
+        //         return history.push(`/learn/admin/tasks/${res.id}`);
+        //     } 
+        // })    
     }
 
     return (
