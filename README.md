@@ -25,6 +25,8 @@ For this project, I used the following technologies:
     - React
     - React-Router
     - React-Redux
+    - React-Quill
+    - Highlight.js
     - CSS
 
 ## **To get started on your local environment**
