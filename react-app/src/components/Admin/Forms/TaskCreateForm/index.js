@@ -78,8 +78,8 @@ function TaskCreateForm({setShowTaskModal}){
                 ))}
             </ul>
 
-           <p>Length: {task_detail.length}</p>
             <QuillEditor value={task_detail} setValue={setTaskDetail}/>
+            <p>Length: {task_detail.length}</p>
 
         
         <div className='modal-btn-container'>
