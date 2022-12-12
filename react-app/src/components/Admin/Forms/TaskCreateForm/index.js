@@ -31,7 +31,7 @@ function TaskCreateForm({setShowTaskModal}){
             return setErrors(frontEndValidation);
         }
 
-        if(task_detail.length > 2000 || byteSize > 65535 ){
+        if(byteSize > 65535 ){
             
             frontEndValidation.push(`task_detail: This field is too long. Please reduce length.`)
             return setErrors(frontEndValidation);
@@ -78,6 +78,7 @@ function TaskCreateForm({setShowTaskModal}){
                 ))}
             </ul>
 
+           <p>Length: {task_detail.length}</p>
             <QuillEditor value={task_detail} setValue={setTaskDetail}/>
 
         
