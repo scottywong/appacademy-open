@@ -65,21 +65,23 @@ export const fetchCreateTask = (task) => async (dispatch) => {
       }
     ).then(response => response.text()) // Parse the response as text
   .then(text => {
-    try {
-      const data = JSON.parse(text); // Try to parse the response as JSON
-      // The response was a JSON object
-      // Do your JSON handling here
-      console.log('text: ', text)
-      console.log('data: ', data)
-    //   if (res.ok){
-            // const task = await res.json();
-            dispatch(createTask(data));
-            return data;
-    } catch(err) {
-      // The response wasn't a JSON object
-      // Do your text handling here
-      console.log('err: ', err)
-      return err;
+
+    console.log('what is this text:', text)
+    // try {
+    //   const data = JSON.parse(text); // Try to parse the response as JSON
+    //   // The response was a JSON object
+    //   // Do your JSON handling here
+    //   console.log('text: ', text)
+    //   console.log('data: ', data)
+    // //   if (res.ok){
+    //         // const task = await res.json();
+    //         dispatch(createTask(data));
+    //         return data;
+    // } catch(err) {
+    //   // The response wasn't a JSON object
+    //   // Do your text handling here
+    //   console.log('err: ', err)
+    //   return err;
     }
   });
     // .then(function (response) {
