@@ -39,7 +39,7 @@ function TaskEditForm(){
     const onSubmit = async (e) => {
         e.preventDefault();
         let frontEndValidation = [];
-        
+
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
             if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
@@ -47,9 +47,9 @@ function TaskEditForm(){
             return setErrors(frontEndValidation);
         }
 
-        if(byteSize > 2000 ){
+        if(byteSize > 10485760  || task_detail.length > 2000 ){
             
-            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000 or less than 10485760 bytes.`)
             return setErrors(frontEndValidation);
         }
 

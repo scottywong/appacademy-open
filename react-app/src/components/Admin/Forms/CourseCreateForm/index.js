@@ -5,7 +5,6 @@ import {fetchCreateCourse} from '../../../../store/course';
 import QuillEditor from '../../../QuillEditor';
 import { isEmptyOrSpaces } from '../../Utils';
 import './CourseCreateForm.css';
-import { isEmptyOrSpaces } from '../../Utils';
 
 function CourseCreateForm({setShowCourseModal}){
 
@@ -20,7 +19,7 @@ function CourseCreateForm({setShowCourseModal}){
     const onSubmit = async (e) => {
         e.preventDefault();
         let frontEndValidation = [];
-        
+
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(body)){
             let frontEndValidation = [];
@@ -29,9 +28,9 @@ function CourseCreateForm({setShowCourseModal}){
             return setErrors(frontEndValidation);
         }
             
-        if(byteSize > 2000 ){
+        if(byteSize > 10485760  || body.length > 2000 ){
             
-            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000.`)
+            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000 or less than 10485760 bytes.`)
             return setErrors(frontEndValidation);
         }
 
