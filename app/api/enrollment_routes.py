@@ -6,6 +6,12 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 enrollment_routes = Blueprint('enrollments', __name__)
 
+@enrollment_routes.route('/')
+@login_required
+def all_enrollments():
+    enrollments = Enrollment.query.all()
+    return {enrollment.to_dict() for enrollment in enrollments}
+
 @enrollment_routes.route('/<int:id>')
 @login_required
 def enrollments(id):
@@ -14,12 +20,6 @@ def enrollments(id):
     if enrollment is None:
         return {'error': ['Record not found']}, 404
     return enrollment.to_dict()
-
-@enrollment_routes.route('/')
-@login_required
-def all_enrollments():
-    enrollments = Enrollment.query.all()
-    return {enrollment.to_dict() for enrollment in enrollments}
 
 @enrollment_routes.route('/list',methods=['POST'])
 @login_required

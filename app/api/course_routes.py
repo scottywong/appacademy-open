@@ -13,6 +13,24 @@ def all_courses():
     courses = Course.query.all()
     return  {course.id: course.to_dict() for course in courses}
 
+@course_routes.route('/<int:id>')
+@login_required
+def course(id):
+    course = Course.query.get(id)
+    return course.to_dict()
+
+@course_routes.route('/<int:id>/enrollments')
+@login_required
+def enrollments(id):
+    enrollments = Enrollment.query.filter(Enrollment.courseId==id).all()
+    return {enrollment.id: enrollment.to_dict() for enrollment in enrollments}
+
+@course_routes.route('/<int:id>/assignments')
+@login_required
+def assignments(id):
+    assignments = Assignment.query.filter(Assignment.courseId==id).all()
+    return {assignment.id: assignment.to_dict() for assignment in assignments}
+
 
 @course_routes.route('/',methods=['POST'])
 @login_required
@@ -75,20 +93,3 @@ def delete_course(id):
 
     return {'Message': "You've successfully delete this course!"}, 200
 
-@course_routes.route('/<int:id>')
-@login_required
-def course(id):
-    course = Course.query.get(id)
-    return course.to_dict()
-
-@course_routes.route('/<int:id>/enrollments')
-@login_required
-def enrollments(id):
-    enrollments = Enrollment.query.filter(Enrollment.courseId==id).all()
-    return {enrollment.id: enrollment.to_dict() for enrollment in enrollments}
-
-@course_routes.route('/<int:id>/assignments')
-@login_required
-def assignments(id):
-    assignments = Assignment.query.filter(Assignment.courseId==id).all()
-    return {assignment.id: assignment.to_dict() for assignment in assignments}
