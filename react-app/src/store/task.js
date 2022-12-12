@@ -55,7 +55,7 @@ export const fetchGetTaskById = (taskId) => async (dispatch) => {
 
 export const fetchCreateTask = (task) => async (dispatch) => {
     let responseClone; // 1
-    
+
     const res = await fetch(`/api/tasks/`,{
         method: 'POST',
         headers: {
@@ -63,21 +63,41 @@ export const fetchCreateTask = (task) => async (dispatch) => {
         },
         body : JSON.stringify(task)
       }
-    ).then(function (response) {
-    responseClone = response.clone(); // 2
-    return response.json();
-    })
-    .then(function (data) {
-        // const task = await res.json();
-        dispatch(createTask(data));
-        return data;
-}, function (rejectionReason) { // 3
-    console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
-    responseClone.text() // 5
-    .then(function (bodyText) {
-        console.log('Received the following instead of valid JSON:', bodyText); // 6
-    });
-});
+    ).then(response => response.text()) // Parse the response as text
+  .then(text => {
+    try {
+      const data = JSON.parse(text); // Try to parse the response as JSON
+      // The response was a JSON object
+      // Do your JSON handling here
+      console.log('data: ', data)
+    //   if (res.ok){
+            // const task = await res.json();
+            dispatch(createTask(data));
+            return data;
+    } catch(err) {
+      // The response wasn't a JSON object
+      // Do your text handling here
+      console.log('err: ', err)
+      return [...err];
+    }
+  });
+    // .then(function (response) {
+//     responseClone = response.clone(); // 2
+//     console.log(response)
+//     return response.json();
+//     })
+//     .then(function (data) {
+//         // const task = await res.json();
+//         dispatch(createTask(data));
+//         return data;
+// }, function (rejectionReason) { // 3
+//     console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
+//     responseClone.text() // 5
+//     .then(function (bodyText) {
+//         return bodyText;
+//         console.log('Received the following instead of valid JSON:', bodyText); // 6
+//     });
+// });
           
     // if (res.ok){
     //     const task = await res.json();
