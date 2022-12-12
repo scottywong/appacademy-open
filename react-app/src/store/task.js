@@ -67,6 +67,7 @@ export const fetchCreateTask = (task) => async (dispatch) => {
   .then(text => {
 
     console.log('what is this text:', text)
+  })
     // try {
     //   const data = JSON.parse(text); // Try to parse the response as JSON
     //   // The response was a JSON object
@@ -82,8 +83,8 @@ export const fetchCreateTask = (task) => async (dispatch) => {
     //   // Do your text handling here
     //   console.log('err: ', err)
     //   return err;
-    }
-  });
+//     }
+//   });
     // .then(function (response) {
 //     responseClone = response.clone(); // 2
 //     console.log(response)
