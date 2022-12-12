@@ -69,6 +69,7 @@ export const fetchCreateTask = (task) => async (dispatch) => {
       const data = JSON.parse(text); // Try to parse the response as JSON
       // The response was a JSON object
       // Do your JSON handling here
+      console.log('text: ', text)
       console.log('data: ', data)
     //   if (res.ok){
             // const task = await res.json();
