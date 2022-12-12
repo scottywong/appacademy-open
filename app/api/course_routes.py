@@ -43,8 +43,8 @@ def update_course(id):
     course = Course.query.get(id)
     if course is None:
         return {'errors': ["This course cannot be found!"]}, 404
-    if course.userId != current_user.id:
-        return {'errors': ["This isn't your course!"]}, 401
+    # if course.userId != current_user.id:
+    #     return {'errors': ["This isn't your course!"]}, 401
 
     form = CourseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
