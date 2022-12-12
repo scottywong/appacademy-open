@@ -45,7 +45,7 @@ function CourseEditForm( ){
 
         if(byteSize > 10485760  || body.length > 2000 ){
             
-            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000 or less than 10485760 bytes.`)
+            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000.`)
             return setErrors(frontEndValidation);
         }
         const payload = {

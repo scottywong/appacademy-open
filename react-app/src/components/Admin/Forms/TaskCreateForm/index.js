@@ -32,7 +32,7 @@ function TaskCreateForm({setShowTaskModal}){
 
         if(byteSize > 10485760  || task_detail.length > 2000 ){
             
-            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000 or less than 10485760 bytes.`)
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
             return setErrors(frontEndValidation);
         }
         const payload = {
