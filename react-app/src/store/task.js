@@ -54,7 +54,7 @@ export const fetchGetTaskById = (taskId) => async (dispatch) => {
 };
 
 export const fetchCreateTask = (task) => async (dispatch) => {
-    let responseClone; // 1
+    // let responseClone; // 1
 
     const res = await fetch(`/api/tasks/`,{
         method: 'POST',
@@ -63,11 +63,12 @@ export const fetchCreateTask = (task) => async (dispatch) => {
         },
         body : JSON.stringify(task)
       }
-    ).then(response => response.text()) // Parse the response as text
-  .then(text => {
+    )
+//     .then(response => response.text()) // Parse the response as text
+//   .then(text => {
 
-    console.log('what is this text:', text)
-  })
+//     console.log('what is this text:', text)
+//   })
     // try {
     //   const data = JSON.parse(text); // Try to parse the response as JSON
     //   // The response was a JSON object
@@ -103,12 +104,12 @@ export const fetchCreateTask = (task) => async (dispatch) => {
 //     });
 // });
           
-    // if (res.ok){
-    //     const task = await res.json();
-    //     dispatch(createTask(task));
-    //     return task;
-    // } 
-        // return res;   
+    if (res.ok){
+        const task = await res.json();
+        dispatch(createTask(task));
+        return task;
+    } 
+        return res;   
 }
 
 export const fetchUpdateTask = (task, taskId) => async (dispatch) => {

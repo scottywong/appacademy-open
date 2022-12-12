@@ -20,14 +20,19 @@ function TaskCreateForm({setShowTaskModal}){
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        let frontEndValidation = [];
+
         //Front End Validation
         if(isEmptyOrSpaces(title) || isEmptyOrSpaces(task_detail)){
-            let frontEndValidation = [];
             if(isEmptyOrSpaces(title)) frontEndValidation.push(`title: This field is required.`)
             if(isEmptyOrSpaces(task_detail)) frontEndValidation.push(`task_detail: This field is required.`)
             return setErrors(frontEndValidation);
         }
 
+        if(task_detail.length > 2000){
+            frontEndValidation.push(`task_detail: This field is too long. Please reduce length.`)
+            return setErrors(frontEndValidation);
+        }
         const payload = {
             title,
             task_detail
