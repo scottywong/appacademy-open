@@ -13,7 +13,7 @@ function LearnHomePage(){
        
             {/* <LearnDefaultPage/> */}
             <div className='learnpage-title-container'><h1>Hello, {sessionUser.username} </h1></div>
-                <p>This is your home page.</p>
+                <p>This is your learning home page.</p>
         </div>
     )
 

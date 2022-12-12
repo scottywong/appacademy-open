@@ -23,7 +23,7 @@ function EnrollmentDeleteForm({  enrollmentId, setShowDeleteEnrollmentModal }) {
     <div className='modal-container'>
       <ul>{errors && errors.map((error) => <li className='errors' key={error}>{error}</li>)}</ul>
       <p className='modal-form-title'>Are you sure you want to delete this enrollment?</p>
-      <div>
+      <div className='modal-btn-container'>
         <button className='modal-btn modal-submit-btn' onClick={() => onDelete()}>Delete</button>
         <button className='modal-btn modal-cancel-btn' onClick={() => setShowDeleteEnrollmentModal(false)}>Cancel</button>
       </div>
