@@ -56,6 +56,8 @@ export const fetchGetTaskById = (taskId) => async (dispatch) => {
 export const fetchCreateTask = (task) => async (dispatch) => {
     // let responseClone; // 1
 
+    console.log('JSON.stringify(task)', JSON.stringify(task));
+    
     const res = await fetch(`/api/tasks/`,{
         method: 'POST',
         headers: {

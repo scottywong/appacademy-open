@@ -9,7 +9,7 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     title = db.Column(db.String(2000),nullable=False)
-    body = db.Column(db.String(), nullable=True)
+    body = db.Column(db.Text(), nullable=True)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

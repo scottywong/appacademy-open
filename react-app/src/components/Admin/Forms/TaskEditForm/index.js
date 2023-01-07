@@ -53,7 +53,6 @@ function TaskEditForm(){
         //     return setErrors(frontEndValidation);
         // }
 
-
         const payload = {
             title,
             task_detail
@@ -70,8 +69,6 @@ function TaskEditForm(){
             }
         );
     }    
-
-    // console.log('errors:' , errors)
 
     const onCancel = async (e) => {
         e.preventDefault();

@@ -10,8 +10,6 @@ function TaskCreateForm({setShowTaskModal}){
     
     const dispatch = useDispatch();
     const history = useHistory();
-
-
     const [title,setTitle] = useState('');
     const [task_detail,setTaskDetail] = useState('');
     const [errors, setErrors] = useState([]);
@@ -35,6 +33,7 @@ function TaskCreateForm({setShowTaskModal}){
         //     frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
         //     return setErrors(frontEndValidation);
         // }
+        
         const payload = {
             title,
             task_detail
