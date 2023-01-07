@@ -49,8 +49,7 @@ function AssignmentDetailStudent(){
           });
     }
     const styleObj = {
-        // height: '600px',
-        padding:'10px',
+        padding:'20px',
         width: '60vw'
       };
       

@@ -35,12 +35,17 @@ function EnrollmentHomePage(){
         }})
     },[dispatch])
 
+    const styleObj = {
+        padding:'20px',
+        width: '60vw'
+      };
+
     return loaded && (
     
         <div className='EnrollmentHomePage-container page-container'>
 
                 <div className='learnpage-title-container'><h1>Welcome to {title}</h1></div>
-                <div dangerouslySetInnerHTML={{__html: body}}></div>
+                <div style={styleObj} dangerouslySetInnerHTML={{__html: body}}></div>
           
         </div>
     
