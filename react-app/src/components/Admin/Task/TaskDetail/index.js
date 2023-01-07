@@ -22,20 +22,22 @@ function TaskDetail(){
     const [showDeleteTaskModal,setShowDeleteTaskModal] = useState(false);
     const [showAssignmentModal,setShowAssignmentModal] = useState(false);
     const [oneTask,setOneTask] = useState(false);
-   
+    const [loaded,setIsLoaded] = useState(false);
+
+    useEffect(()=> {
+        dispatch(fetchGetTaskById(taskId))
+        setIsLoaded(true);
+    },[dispatch]);
+
     useEffect(()=> {
         if(task?.one_task) setOneTask(task.one_task)
     },[task,task.one_task])
 
     useEffect(()=> {
-        dispatch(fetchGetTaskById(taskId))
-    },[dispatch]);
-
-    useEffect(()=> {
         dispatch(fetchGetAssignmentsByCourseId(oneTask?.courseId));
     },[oneTask])
 
-    return (oneTask && 
+    return loaded && (oneTask && 
     (
 
         <div className='TaskDetail-container'>

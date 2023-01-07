@@ -29,6 +29,8 @@ const modules = {
 
 const QuillEditor = ({value,setValue})=> {
 
+    console.log('value: ', value)
+
     return (
         <ReactQuill  defaultValue={value} onChange={setValue} modules={modules} theme="snow"/>
 

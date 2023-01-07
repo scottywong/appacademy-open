@@ -66,7 +66,7 @@ function LearnNavBar({toggleSidebar}){
                     <NavLink to='/learn/admin'> Admin </NavLink>
                 </div>}
                 <div className='LearnNavBar-linkitem'>
-                    <NavLink to="/forum">
+                    <NavLink to={{pathname: "https://forum.appacademy.io/"}} target="_blank">
                         <i className="fa-solid fa-question"></i>
                     </NavLink>
                 </div>

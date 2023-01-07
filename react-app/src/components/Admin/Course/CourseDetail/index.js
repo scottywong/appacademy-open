@@ -26,15 +26,17 @@ function CourseDetail(){
     const [showEnrollmentModal,setShowEnrollmentModal] = useState(false);
 
     const [loaded,setIsLoaded] = useState(false);
-    useEffect(()=> {
-        setIsLoaded(true);
-        if(course?.one_course) setOneCourse(course?.one_course)
-    },[course])
 
     useEffect(()=> {
        dispatch(fetchGetCourseById(courseId));
-     
     },[dispatch]);
+
+    useEffect(()=> {
+        setIsLoaded(true);
+        setOneCourse(course?.one_course)
+    },[course.one_course])
+
+    console.log('coursedetail: ', course.one_course)
 
     return loaded && (oneCourse && (
         <div className='CourseDetail-container'>

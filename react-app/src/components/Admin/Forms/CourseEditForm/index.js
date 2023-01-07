@@ -18,20 +18,21 @@ function CourseEditForm( ){
     const [title,setTitle] = useState(false);
     const [body,setBody] = useState(false);
     const [errors, setErrors] = useState([]);
-    const byteSize = str => new Blob([str]).size;
+    const [loaded,setIsLoaded] = useState(false);
+    
+    useEffect( ()=> {
+        dispatch(fetchGetCourseById(courseId))
+        setIsLoaded(true);
+    },[dispatch])
 
     useEffect( ()=> {
-        if(course.one_course){
+        
+        if(loaded && course.one_course){
             setId(course.one_course.id)
             setTitle(course.one_course.title);
             setBody(course.one_course.body);
         }
-    },[course])
-
-    useEffect( ()=> {
-        if(!course) dispatch(fetchGetCourseById(courseId))
-    },[dispatch])
-
+    },[course.one_course])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -43,11 +44,6 @@ function CourseEditForm( ){
             return setErrors(frontEndValidation);
         }
 
-        if(byteSize > 10485760  || body.length > 2000 ){
-            
-            frontEndValidation.push(`body: This field is too long. Please reduce length to smaller than 2000.`)
-            return setErrors(frontEndValidation);
-        }
         const payload = {
             title,
             body
@@ -71,7 +67,7 @@ function CourseEditForm( ){
         history.push(`/learn/admin/courses/${id}`)
     }
 
-    return id && (
+    return loaded && id && (
 
         <div className='courseEdit-container'>
 
@@ -93,7 +89,7 @@ function CourseEditForm( ){
             </ul>
             
             <QuillEditor value={body} setValue={setBody}/>
-            <p>Length: {body.length}</p><span> Byte Size: {byteSize(body)} </span>
+            <p>Length: {body.length}</p>
 
             <div className='CourseEditForm-btns'>
                 <button  onClick={onSubmit} className='modal-btn modal-submit-btn'>Submit</button>

@@ -21,20 +21,21 @@ function TaskEditForm(){
     const [title,setTitle] = useState(false);
     const [task_detail,setTaskDetail] = useState(false);
     const [errors, setErrors] = useState([]);
-
-    const byteSize = str => new Blob([str]).size;
+    const [loaded,setIsLoaded] = useState(false);
 
     useEffect( ()=> {
-        if(task.one_task){
+        dispatch(fetchGetTaskById(taskId));
+        setIsLoaded(true);
+    },[dispatch])
+
+    useEffect( ()=> {
+        if(loaded && task.one_task){
             setId(task.one_task.id);
             setTitle(task.one_task.title);
             setTaskDetail(task.one_task.detail);
         }
-    },[task,task.one_task])
+    },[task.one_task])
 
-    useEffect( ()=> {
-        dispatch(fetchGetTaskById(taskId));
-    },[dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -46,12 +47,6 @@ function TaskEditForm(){
             if(isEmptyOrSpaces(task_detail)) frontEndValidation.push(`task_detail: This field is required.`)
             return setErrors(frontEndValidation);
         }
-
-        // if(byteSize > 10485760  || task_detail.length > 2000 ){
-            
-        //     frontEndValidation.push(`task_detail: This field is too long. Please reduce length to smaller than 2000.`)
-        //     return setErrors(frontEndValidation);
-        // }
 
         const payload = {
             title,
@@ -75,7 +70,7 @@ function TaskEditForm(){
         history.push(`/learn/admin/tasks/${id}`)
     }
 
-    return id && ( 
+    return loaded && id && ( 
          <div className='TaskEditForm-container'>
            
 
@@ -95,7 +90,7 @@ function TaskEditForm(){
                 ))}
             </ul>
            <QuillEditor value={task_detail} setValue={setTaskDetail}/>
-           <p>Length: {task_detail.length}</p><span> Byte Size: {byteSize(task_detail)} </span>
+           <p>Length: {task_detail.length}</p>
 
            <div className='TaskEditForm-btns'>
                 <button className='modal-btn modal-submit-btn' onClick={onSubmit}>Save</button>
@@ -107,79 +102,3 @@ function TaskEditForm(){
 }
 
 export default TaskEditForm;
-
-
-// import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
-// import {fetchCreateTask} from '../../../../store/task';
-// import './TaskEditForm.css';
-
-// function TaskEditForm({setShowEditTaskModal}){
-    
-//     const dispatch = useDispatch();
-//     const history = useHistory();
-
-
-//     const [title,setTitle] = useState('');
-//     const [task_detail,setTaskDetail] = useState('');
-//     const [errors, setErrors] = useState([]);
-
-//     const onSubmit = async (e) => {
-//         e.preventDefault();
-
-//         const payload = {
-//             title,
-//             task_detail
-//         };
-
-//         return dispatch(fetchCreateTask(payload)).then(
-//             (res) => history.push(`/learn/admin/tasks/${res.id}`)
-//         );
-//     }    
-
-//     return (
-
-//         <form className='taskEdit-container' onSubmit={onSubmit}>
-//         <h2 className='taskEdit-form-title'>Add Task</h2>
-//         <input
-//         className='taskEdit-input-title'
-//         type='text'
-//         value={title}
-//         onChange={(e) => setTitle(e.target.value)}
-//         placeholder='Enter Title'
-//         required
-//         />
-//         <textarea
-//         className='taskEdit-input-title'
-//         type='text'
-//         value={task_detail}
-//         onChange={(e) => setTaskDetail(e.target.value)}
-//         placeholder='Enter Detail'
-//         required
-//         />
-
-//         <ul className='errorMsg'>
-//         {errors.map((error, idx) => (
-//             <li className='errors' key={idx}>
-//             {error}
-//             </li>
-//         ))}
-//         </ul>
-
-//         <div>
-//         <button className='taskEdit-btn taskEdit-submit-btn'>Submit</button>
-//         <button
-//         className='taskEdit-btn taskEdit-cancel-btn'
-//         onClick={() => setShowTaskModal(false)}
-//         >
-//         Cancel
-//         </button>
-//     </div>
-//     </form>
-
-
-//     )
-// }
-
-// export default TaskEditForm;
