@@ -1,4 +1,4 @@
-import aaLogo from "../../../assets/aa-logo.svg";
+import aaLogo from "../../../assets/buildacademy.png";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../../auth/LogoutButton";
 
@@ -10,7 +10,7 @@ function HomeNavigationBar(){
     
     <div className='HomeNavigationBar-container'>
      
-        <img className="app-academy-logo" src={aaLogo}></img>
+        <img className="build-academy-logo" src={aaLogo}></img>
 
         <div className='HomeNavigationBar-items'>
 

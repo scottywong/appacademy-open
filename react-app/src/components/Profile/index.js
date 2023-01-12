@@ -24,7 +24,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className='Profile-content'>
-                <h3>We are currently rebuilding App Academy Open. Please stay tuned and use the feedback button above if you have any comments about what you would like to see on the platform.</h3>
+                <h3>We are currently rebuilding Build Academy Open. Please stay tuned and use the feedback button above if you have any comments about what you would like to see on the platform.</h3>
             </div>
         </div>
     )

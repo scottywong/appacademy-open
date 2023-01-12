@@ -15,7 +15,7 @@ function HomePage(){
                 Learn to code online for <span class="text-span-7">free</span>
                 </div>
                 <div className='HomePage-cta-subheader'>
-                Get access to App Academy’s entire online full-stack curriculum for free. No catch, no strings attached.
+                Get access to Build Academy’s entire online full-stack curriculum for free. No catch, no strings attached.
                 </div>
                 <div className='HomePage-cta-btns'>
                 <a onClick={() => history.push('/sign-up')} className="button">

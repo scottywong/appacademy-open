@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css';
-import aaLogo from "../../assets/aa-logo.svg";
+import baLogo from "../../assets/buildacademy.png";
 
 import './LoginForm.css';
      
@@ -36,7 +36,7 @@ const LoginForm = () => {
 
   return (
     <form className="loginForm" onSubmit={onLogin}>
-      <img className="app-academy-logo-login" src={aaLogo}></img>
+      <img className="build-academy-logo-login" src={baLogo}></img>
 
       <div>
         {errors.map((error, ind) => (
