@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import aaLogo from "../../assets/aa-logo.svg";
+import aaLogo from "../../assets/buildacademy.png";
 import './SignUpForm.css';
 
 const SignUpForm = () => {
