@@ -1,6 +1,6 @@
-# **App Academy Open Clone**
+# **Build Academy**
 
-This is a prototype that clones the App Academy Open, a learning management system. In this prototype, there are two user personas.
+This is a prototype of a learning management system, inspired by App Academy Open. In this prototype, there are two user personas.
 
 As admins, one can create customized courses and enroll students into their courses.
 
