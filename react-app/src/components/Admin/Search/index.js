@@ -76,7 +76,7 @@ const Search = ({type,selector,selected, lookupId}) => {
       selected.delete(data.id)
       selector(selected);
       dataList.push(data)
-      // console.log(dataList)
+      
       setDataList([...dataList].sort(
         function compareFn(a,b){
           let compareA, compareB;
