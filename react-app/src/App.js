@@ -27,6 +27,7 @@ import CourseDetail from './components/Admin/Course/CourseDetail';
 import TaskDetail from './components/Admin/Task/TaskDetail';
 
 import LearnSideBar from './components/Sidebar/LearnSideBar';
+import ChatGPT from './components/ChatGPT';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -144,6 +145,9 @@ function App() {
             <ProtectedRouteAdmin >
               <TaskDetail />
             </ProtectedRouteAdmin>
+          </ProtectedRoute>
+          <ProtectedRoute path='/learn/ai' >
+            <ChatGPT/>
           </ProtectedRoute>
           <ProtectedRoute path='/' exact={true} >
           </ProtectedRoute>
