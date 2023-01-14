@@ -14,9 +14,9 @@ function AdminDetail(){
 
     return (
         <div className='AdminDetail-container'>
-            <div className='AdminDetail-header'>
+            {/* <div className='AdminDetail-header'>
                 <h1>Welcome {sessionUser.username}!</h1>
-            </div>
+            </div> */}
             <div className='AdminDetail-lists'>
                 <CourseList/>
                 <TaskList/>
