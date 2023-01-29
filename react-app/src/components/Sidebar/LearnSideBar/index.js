@@ -45,7 +45,7 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
         if(enrollment.one_enrollment)  setCurrentEnrollment(enrollment.one_enrollment);
         if(enrollment.one_enrollment.Assignments) setRelatedAssignments(Object.values(enrollment.one_enrollment?.Assignments));
         if(user.progresses) setRelatedProgresses(Object.values(user.progresses));
-        setLoaded(true)
+        if(userEnrollments && currentEnrollment ) setLoaded(true)
     },[user,enrollment,enrollment.one_enrollment.Assignments, user.progresses])
     
   return loaded && (
@@ -53,8 +53,8 @@ const LearnSideBar = ({isOpen,toggleSidebar}) => {
      
       {relatedAssignments && location.pathname.includes('/enrollments/') && <AssignmentSideBar assignments={relatedAssignments} enrollment={currentEnrollment}/>}
       {relatedAssignments?.length === 0 && location.pathname.includes('/enrollments/') && <p style={{textAlign:"center"}}> No assigned tasks</p>}
-      {userEnrollments && location.pathname === '/learn/home' && ( <EnrollmentSideBar enrollments={userEnrollments}/>)}
-      {userEnrollments?.length === 0 && location.pathname === '/learn/home' && <p style={{textAlign:"center"}}> No assigned courses</p>}
+      {userEnrollments?.length > 0 && location.pathname === '/learn/home' && <EnrollmentSideBar enrollments={userEnrollments}/>}
+      {userEnrollments?.length === 0 && location.pathname === '/learn/home' && <p style={{textAlign:"center",marginTop:"50vh"}}> No assigned courses</p>}
     </div>
   );
 };
