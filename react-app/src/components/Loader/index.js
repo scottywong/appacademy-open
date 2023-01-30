@@ -1,16 +1,16 @@
 import {TailSpin} from 'react-loader-spinner';
 
-function Loader(){
+function Loader({height,width,color}){
 
 return (
         <TailSpin
-        height="80"
-        width="80"
-        color="#4fa94d"
+        height={height}
+        width={width}
+        color={color}
         ariaLabel="tail-spin-loading"
         radius="1"
         wrapperStyle={{}}
-        wrapperClass=""
+        wrapperClass="loader"
         visible={true}
         />)
 }
