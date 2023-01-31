@@ -6,7 +6,7 @@ import Loader from '../../Loader';
 function EnrollmentSideBar({enrollments}){
 
     const [isLoading, setIsLoading] = useState(true);
-
+ 
     useEffect(() => {
         setTimeout(() => {
           setIsLoading(false);
