@@ -215,6 +215,16 @@ header {
   width: 100%;
   
 }
+.sidebar-active-content-title{
+    position: relative;
+    width: 80%;
+    margin-left: 20vw;
+}
+
+.sidebar-active-content-title > * {
+  position: relative;
+  right:10vw;
+}
 
 ul.errorMsg > li {
   list-style: none;
