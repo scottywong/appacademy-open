@@ -29,7 +29,11 @@ function AssignmentSideBar({assignments,enrollment}){
         <h3> Tasks </h3>
         <div className='AssignmentSideBar-Enrollment-header'>
             
-            <div className='asb-arrow'>
+            <div className='asb-arrow' onClick={() => 
+            location.pathname.startsWith(`/learn/enrollments/${enrollment?.id}/assignments`) ? 
+            history.push(`/learn/enrollments/${enrollment.id}/home`) :
+            history.push(`/learn/home`)
+            }>
             <i className="fa-solid fa-arrow-left"></i>
             </div>
             { location.pathname.startsWith(`/learn/enrollments/${enrollment?.id}/assignments`) && 

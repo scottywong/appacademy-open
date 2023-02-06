@@ -4,16 +4,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
  
 }
 
 .AssignmentListItem-name{
 
     text-overflow: ellipsis;
-    width: 400px;
     overflow:hidden;
     cursor: pointer;
-
+    width: 100%;
 
 }
 
@@ -25,7 +25,9 @@
 
     display:flex;
     flex-direction: row;
-    margin-left:20px;
+    justify-content: space-between;
+    
+
 }
 
 .ali-btns{

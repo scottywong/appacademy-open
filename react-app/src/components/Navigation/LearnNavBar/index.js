@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './LearnNavBar.css';
 import { useLocation ,useHistory} from "react-router";
 
-function LearnNavBar({toggleSidebar}){
+function LearnNavBar({toggleSidebar,autoShowMenu}){
 
     const sessionUserProfile = useSelector(state => state.session.user.profile);
     const location = useLocation();
@@ -16,6 +16,17 @@ function LearnNavBar({toggleSidebar}){
     const [showMenu,setShowMenu] = useState(true)
 
     const LearnNavBarClass= showToggle && showMenu ? 'LearnNavBar-container LearnNavBar-shortwidth' : 'LearnNavBar-container LearnNavBar-fullwidth';
+
+    useEffect( () => {
+
+       if(!autoShowMenu && showMenu){
+           setShowMenu(false);
+       } else if (autoShowMenu && !showMenu){
+           setShowMenu(true);
+       }
+
+    }    
+    ,[autoShowMenu])
 
     const handleViewSidebar = () => {
       
@@ -43,7 +54,7 @@ function LearnNavBar({toggleSidebar}){
                 <i class="fa-solid fa-house-flag fa-2xl"> </i>
                 </div>}
 
-                {!showMenu && showToggle &&  <div onClick={handleViewSidebar} className='LearnNavBar-menu'>
+                {!showMenu  && showToggle &&  <div onClick={handleViewSidebar} className='LearnNavBar-menu'>
                     <i className="fa-solid fa-bars fa-2xl"></i>
                 </div>}
 

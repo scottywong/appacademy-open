@@ -39,35 +39,47 @@ function CourseDetail(){
     console.log('coursedetail: ', course.one_course)
 
     return loaded && (oneCourse && (
+
+        
         <div className='CourseDetail-container'>
+            <div class="overlay">
+            <p>Sorry, this experience is not possible below 768px.</p>
+            </div>
+
               <div className='CourseDetail-left-container'>
                 <div className='CourseDetail-left'>
                 <h1 className='CourseDetail-title'> {oneCourse?.title} </h1>
                 <div className='CourseDetail-btns'>
 
+                <div className='CourseDetail-btns-column'>
+
                 {location.pathname.includes('/edit') && 
                         <a onClick={()=> history.push(`/learn/admin/courses/${courseId}`)} className="button green">
-                            <span className="button-inner">View Course</span>
+                            <span className="button-inner detail-btn-text ">View Course</span>
                             <span className="button-bg green"></span>
                         </a>
                 }
                 {!location.pathname.includes('/edit') &&
-                 <a onClick={()=> history.push(`/learn/admin/courses/${courseId}/edit`)} className="button green">
-                     <span className="button-inner">Edit Course</span>
-                     <span className="button-bg green"></span>
+                 <a onClick={()=> history.push(`/learn/admin/courses/${courseId}/edit`)} className="button green detail-btn">
+                     <span className="button-inner detail-btn-text">Edit Course</span>
+                     <span className="button-bg green "></span>
                  </a>
                 }
-                    <a onClick={()=> setShowDeleteCourseModal(true)} className="button green">
-                        <span className="button-inner">Delete Course</span>
+
+                <a onClick={()=> setShowDeleteCourseModal(true)} className="button green detail-btn">
+                        <span className="button-inner detail-btn-text ">Delete Course</span>
                         <span className="button-bg green"></span>
-                    </a>
-                    {showDeleteCourseModal && (
+                </a>
+                {showDeleteCourseModal && (
                         <Modal onClose={() => setShowDeleteCourseModal(false)}>
                             <CourseDeleteForm courseId={courseId} setShowDeleteCourseModal={setShowDeleteCourseModal} />
                         </Modal>
                         )}
-                    <a onClick={()=> setShowAssignmentModal(true)} className="button green">
-                        <span className="button-inner">Add Assignments</span>
+                </div>
+
+                <div className='CourseDetail-btns-column'>
+                    <a onClick={()=> setShowAssignmentModal(true)} className="button green detail-btn">
+                        <span className="button-inner detail-btn-text">Add Assignments</span>
                         <span className="button-bg green"></span>
                     </a>
                     {showAssignmentModal && (
@@ -75,15 +87,21 @@ function CourseDetail(){
                             <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} />
                         </Modal>
                         )}
-                    <a onClick={()=> setShowEnrollmentModal(true)} className="button green">
-                        <span className="button-inner"> Add Enrollments</span>
+                    <a onClick={()=> setShowEnrollmentModal(true)} className="button green detail-btn">
+                        <span className="button-inner detail-btn-text"> Add Enrollments</span>
                         <span className="button-bg green"></span>
                     </a>
                     {showEnrollmentModal && (
                         <Modal onClose={() => setShowEnrollmentModal(false)}>
                             <EnrollmentCreateForm courseId={courseId} setShowEnrollmentModal={setShowEnrollmentModal} />
                         </Modal>
-                        )}
+                        )}    
+
+                </div>
+
+                    
+                   
+                   
                 </div>
             </div>
             <div className='CourseDetail-lists'>

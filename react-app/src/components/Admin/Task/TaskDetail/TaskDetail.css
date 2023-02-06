@@ -28,9 +28,12 @@
 
 .TaskDetail-btns{
     display:flex;
-    flex-direction: row;
-    
+
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    width: 100%;
 }
+
 .TaskDetail-detail{
     max-width: 800px;
     margin: auto;
@@ -39,14 +42,10 @@
 }
 .TaskDetail-lists{
     margin:50px;
-    max-height: 600px;
+    height: 100%;
     overflow-y: scroll;
     padding-right: 50px;
-    /* border: 2px black solid; */
-    /* padding: 20px; */
-    min-width: 600px;
-    min-height: 600px;
-    /* box-shadow: rgb(0 0 0 / 10%) 2px 0px 10px 0px; */
+    width: 100%;
 }
 
 .TaskDetail-detail-container{

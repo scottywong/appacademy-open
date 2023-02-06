@@ -15,8 +15,8 @@ function EnrollmentListItem({enrollment}){
         <div className='EnrollmentListItem-name'>{enrollment?.username}</div>
             <div className='EnrollmentListItem-btns'>
                 
-                <a onClick={()=> setShowDeleteEnrollmentModal(true)} className="button green eli-btns">
-                    <span className="button-inner"> Delete Enrollment</span>
+                <a onClick={()=> setShowDeleteEnrollmentModal(true)} className="button green eli-btns detail-btn">
+                    <span className="button-inner detail-btn-text"> Delete Enrollment</span>
                     <span className="button-bg green"></span>
                 </a>
                 {showDeleteEnrollmentModal && (

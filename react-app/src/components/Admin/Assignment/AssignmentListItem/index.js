@@ -11,14 +11,16 @@ function AssignmentListItem({assignment}){
     const location = useLocation();
     const [showDeleteAssignmentModal,setShowDeleteAssignmentModal] = useState(false);
 
+    
+
     return (
         <div className='AssignmentListItem-container'>
              {location.pathname.includes('/courses') && <div onClick={()=> history.push(`/learn/admin/tasks/${assignment?.Task?.id}`)} className='AssignmentListItem-name'>{assignment?.Task?.title}</div>}
              {location.pathname.includes('/tasks') && <div onClick={()=> history.push(`/learn/admin/courses/${assignment?.courseId}`)} className='AssignmentListItem-name'>{assignment?.course_title}</div>}
             <div className='AssignmentListItem-btns'>
                 
-            <a onClick={()=> setShowDeleteAssignmentModal(true)} className="button green ali-btns">
-                <span className="button-inner"> Delete Assignment</span>
+            <a onClick={()=> setShowDeleteAssignmentModal(true)} className="button green ali-btns detail-btn">
+                <span className="button-inner detail-btn-text"> Delete Assignment</span>
                 <span className="button-bg green"></span>
             </a>
 

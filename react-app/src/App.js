@@ -31,10 +31,80 @@ import LearnSideBar from './components/Sidebar/LearnSideBar';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [sidebarOpen, setSideBarOpen] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.outerWidth);
+  const [autoShowMenu, setAutoShowMenu] = useState(true);
+
+  const handleSidebarOpen = () => {
+        const el = document.querySelector('[class*="page-container"]')
+        const el2 = document.querySelector('[class*="learnpage-title-container"]')
+        const el3 = document.querySelector('[class*="LearnNavBar-container"]')
+        setTimeout(function(){el?.classList.remove('sidebar-inactive-page')},1)
+        el?.classList.add('sidebar-active-page')
+        if(el2){
+          setTimeout(function(){el2.classList.remove('sidebar-inactive-content-title')},1)
+          el2.classList.add('sidebar-active-content-title')
+        }
+        if(el3){
+          setTimeout(function(){el3.classList.remove('LearnNavBar-fullwidth')},1)
+          el3.classList.add('LearnNavBar-shortwidth')
+        }
+  }
+
+  const handleSidebarClosed = () => {
+      const el = document.querySelector('[class*="page-container"]')
+      const el2 = document.querySelector('[class*="learnpage-title-container"]')
+      const el3 = document.querySelector('[class*="LearnNavBar-container"]')
+      
+      setTimeout(function(){el?.classList.remove('sidebar-active-page')},5)
+      el?.classList.add('sidebar-inactive-page')
+      if(el2){
+        setTimeout(function(){el2.classList.remove('sidebar-active-content-title')},1)
+        el2.classList.add('sidebar-inactive-content-title')
+      }
+      if(el3){
+        setTimeout(function(){el3.classList.remove('LearnNavBar-shortwidth')},1)
+        el3.classList.add('LearnNavBar-fullwidth')
+      }
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.outerWidth);
+
+      if (window.matchMedia('(max-width: 768px)').matches) {
+      
+        setSideBarOpen(false);
+        setAutoShowMenu(false);
+        // handleSidebarClosed();
+
+        const el = document.querySelector('[class*="page-container"]')
+        const el2 = document.querySelector('[class*="learnpage-title-container"]')
+        const el3 = document.querySelector('[class*="LearnNavBar-container"]')
+        
+        setTimeout(function(){el?.classList.remove('sidebar-active-page')},5)
+        el?.classList.add('sidebar-inactive-page')
+        if(el2){
+          setTimeout(function(){el2.classList.remove('sidebar-active-content-title')},1)
+          el2.classList.add('sidebar-inactive-content-title')
+        }
+        if(el3){
+          setTimeout(function(){el3.classList.remove('LearnNavBar-shortwidth')},1)
+          el3.classList.add('LearnNavBar-fullwidth')
+        
+        }
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [windowWidth]);
+
   
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
     if(sidebarOpen){
+      // handleSidebarOpen();
       const el = document.querySelector('[class*="page-container"]')
       const el2 = document.querySelector('[class*="learnpage-title-container"]')
       const el3 = document.querySelector('[class*="LearnNavBar-container"]')
@@ -51,6 +121,7 @@ function App() {
       }
 
     } else {
+      // handleSidebarClosed();
       const el = document.querySelector('[class*="page-container"]')
       const el2 = document.querySelector('[class*="learnpage-title-container"]')
       const el3 = document.querySelector('[class*="LearnNavBar-container"]')
@@ -83,12 +154,17 @@ function App() {
   return (
     <div>
       <div className="content-container">
+        
       <BrowserRouter>
         <ProtectedRoute path='/learn'>
-            <LearnNavBar toggleSidebar={handleViewSidebar}/> 
+            <LearnNavBar toggleSidebar={handleViewSidebar} autoShowMenu={autoShowMenu}/> 
+            {/* <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/> */}
         </ProtectedRoute>
         <ProtectedRoute path='/learn/enrollments/:enrollmentId/'>
-          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+            <div class="overlay">
+              <p>Sorry, this experience is not possible below 768px.</p>
+            </div>
+          <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} autoShowMenu={autoShowMenu}/>
         </ProtectedRoute>
         <Switch>
           <Route path='/' exact={true}>
@@ -117,7 +193,10 @@ function App() {
             <Redirect to='/learn/home' />
           </ProtectedRoute>
           <ProtectedRoute path='/learn/home'>
-            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+              <div class="overlay">
+                <p>Sorry, this experience is not possible below 768px.</p>
+              </div>
+            <LearnSideBar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar} autoShowMenu={autoShowMenu}/>
               <LearnHomePage/>
           </ProtectedRoute>
           <ProtectedRoute path='/learn/profile' exact={true} >
@@ -125,9 +204,15 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute path='/learn/enrollments/:enrollmentId/home' exact={true}>
+            <div class="overlay">
+              <p>Sorry, this experience is not possible below 768px.</p>
+            </div>
             <EnrollmentHomePage />
           </ProtectedRoute>
           <ProtectedRoute path='/learn/enrollments/:enrollmentId/assignments/:assignmentId'> 
+              <div class="overlay">
+                <p>Sorry, this experience is not possible below 768px.</p>
+                </div>
                 <EnrollmentDetailPage/>
           </ProtectedRoute>
           <ProtectedRoute path='/learn/admin' exact={true} >

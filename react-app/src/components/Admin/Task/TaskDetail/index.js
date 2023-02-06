@@ -41,25 +41,30 @@ function TaskDetail(){
     (
 
         <div className='TaskDetail-container'>
+            <div class="overlay">
+                <p>Sorry, this experience is not possible below 768px.</p>
+            </div>
             <div className='TaskDetail-left-container'>
                 <div className='TaskDetail-left'>
                     <h1 className='TaskDetail-title'> {oneTask?.title} </h1>
                     <div className='TaskDetail-btns'>
+
+
                     {location.pathname.includes('/edit') && 
-                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}`)} className="button green">
-                            <span className="button-inner">View Task</span>
+                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}`)} className="button green detail-btn">
+                            <span className="button-inner detail-btn-text">View Task</span>
                             <span className="button-bg green"></span>
                         </a>
                     }
                     {!location.pathname.includes('/edit') && 
-                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}/edit`)} className="button green">
-                            <span className="button-inner">Edit Task</span>
+                        <a onClick={()=> history.push(`/learn/admin/tasks/${taskId}/edit`)} className="button green detail-btn">
+                            <span className="button-inner detail-btn-text">Edit Task</span>
                             <span className="button-bg green"></span>
                         </a>
                     }
 
-                        <a onClick={() => setShowDeleteTaskModal(true)} className="button green">
-                            <span className="button-inner">Delete Task</span>
+                        <a onClick={() => setShowDeleteTaskModal(true)} className="button green detail-btn">
+                            <span className="button-inner detail-btn-text">Delete Task</span>
                             <span className="button-bg green"></span>
                         </a>
                         {showDeleteTaskModal && (
@@ -67,8 +72,10 @@ function TaskDetail(){
                             <TaskDeleteForm taskId={oneTask.id} setShowDeleteTaskModal={setShowDeleteTaskModal} />
                         </Modal>
                         )}
-                        <a onClick={()=>setShowAssignmentModal(true)} className="button green">
-                            <span className="button-inner">Add Assignment</span>
+
+            
+                        <a onClick={()=>setShowAssignmentModal(true)} className="button green detail-btn">
+                            <span className="button-inner detail-btn-text">Add Assignment</span>
                             <span className="button-bg green"></span>
                         </a>
                         {showAssignmentModal && (
@@ -76,6 +83,7 @@ function TaskDetail(){
                             <AssignmentCreateForm setShowAssignmentModal={setShowAssignmentModal} type="task"/>
                         </Modal>
                         )}
+                 
                     </div>
                 </div>
                 <div className='TaskDetail-lists'>
