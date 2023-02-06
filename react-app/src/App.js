@@ -67,38 +67,38 @@ function App() {
       }
   }
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.outerWidth);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setWindowWidth(window.outerWidth);
 
-      if (window.matchMedia('(max-width: 768px)').matches) {
+  //     if (window.matchMedia('(max-width: 768px)').matches) {
       
-        setSideBarOpen(false);
-        setAutoShowMenu(false);
-        // handleSidebarClosed();
+  //       setSideBarOpen(false);
+  //       setAutoShowMenu(false);
+  //       // handleSidebarClosed();
 
-        const el = document.querySelector('[class*="page-container"]')
-        const el2 = document.querySelector('[class*="learnpage-title-container"]')
-        const el3 = document.querySelector('[class*="LearnNavBar-container"]')
+  //       const el = document.querySelector('[class*="page-container"]')
+  //       const el2 = document.querySelector('[class*="learnpage-title-container"]')
+  //       const el3 = document.querySelector('[class*="LearnNavBar-container"]')
         
-        setTimeout(function(){el?.classList.remove('sidebar-active-page')},5)
-        el?.classList.add('sidebar-inactive-page')
-        if(el2){
-          setTimeout(function(){el2.classList.remove('sidebar-active-content-title')},1)
-          el2.classList.add('sidebar-inactive-content-title')
-        }
-        if(el3){
-          setTimeout(function(){el3.classList.remove('LearnNavBar-shortwidth')},1)
-          el3.classList.add('LearnNavBar-fullwidth')
+  //       setTimeout(function(){el?.classList.remove('sidebar-active-page')},5)
+  //       el?.classList.add('sidebar-inactive-page')
+  //       if(el2){
+  //         setTimeout(function(){el2.classList.remove('sidebar-active-content-title')},1)
+  //         el2.classList.add('sidebar-inactive-content-title')
+  //       }
+  //       if(el3){
+  //         setTimeout(function(){el3.classList.remove('LearnNavBar-shortwidth')},1)
+  //         el3.classList.add('LearnNavBar-fullwidth')
         
-        }
-      }
-    };
+  //       }
+  //     }
+  //   };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [windowWidth]);
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, [windowWidth]);
 
   
   const handleViewSidebar = () => {
